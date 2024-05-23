@@ -53,7 +53,7 @@ function IshaUpanishad() {
                             </div>
                         </div>
                     </div>
-                    <div className="flex-1 p-6">
+                    <div className="flex-1 p-6 lg:h-[80vh] overflow-y-auto">
                         <div className="mb-6 flex items-center justify-between">
                             <div className="space-y-1">
                                 <h2 className="text-2xl font-bold">Isha Upanishad</h2>
