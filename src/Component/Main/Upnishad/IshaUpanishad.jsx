@@ -16,6 +16,11 @@ function IshaUpanishad() {
     const handleLanguageSelect = (language) => {
         setSelectedLanguage(language);
     };
+    const [selectedLanguageCommentry, setselectedLanguageCommentry] = useState(null);
+
+    const handleLanguageCommentry = (language) => {
+        setselectedLanguageCommentry(language);
+    };
     return (
         <div>
             <div>
@@ -185,25 +190,25 @@ function IshaUpanishad() {
                                         <div className='flex items-center justify-center gap-3'>
                                             <button
                                                 className="w-full mb-2 p-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600"
-                                                onClick={() => handleLanguageSelect('hindi')}
+                                                onClick={() => handleLanguageCommentry('hindi')}
                                             >
                                                 Hindi Commentry
                                             </button>
                                             <button
                                                 className="w-full mb-2 p-2 bg-green-500 text-white rounded-lg hover:bg-green-600"
-                                                onClick={() => handleLanguageSelect('english')}
+                                                onClick={() => handleLanguageCommentry('english')}
                                             >
                                                 English Commentry
                                             </button>
                                         </div>
 
-                                        {selectedLanguage && (
+                                        {selectedLanguageCommentry && (
                                             <div className="mt-4">
                                                 <h3 className="text-lg font-semibold mb-2">
-                                                    {selectedLanguage === 'hindi' ? 'Hindi Text' : 'English Text'}
+                                                    {selectedLanguageCommentry === 'hindi' ? 'Hindi Text' : 'English Text'}
                                                 </h3>
                                                 <p>
-                                                    {selectedLanguage === 'hindi'
+                                                    {selectedLanguageCommentry === 'hindi'
                                                         ? 'Hindi '
                                                         : 'There are only 18 verses in the Isavasya Upanishad, which is part of the 40th chapter of the Yajurveda. Its 18 verses have been an important place like the 18 chapters of Shrimad Bhagavad Gita. Description of Brahma, description of worship, description of prayer, description of Brahma knowledge, description of self-knowledge, description of meaning knowledge, etc. have been given in this Upanis Ishavasyopanishad is named after the Ishavasya of the first mantra ‘Ishavasyamidam Sarvam’. In spite of being small in all the Upanishads, there is an introduction of amazing subtle vision in it. It is said in the first mantra, this whole world is the abode of God.'}
                                                 </p>
