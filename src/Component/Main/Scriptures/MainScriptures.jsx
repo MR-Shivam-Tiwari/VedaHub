@@ -1,4 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+
 const vedas = [
   {
     id: 1,
@@ -21,6 +23,7 @@ const vedas = [
     src: "https://nepalyogahome.com/wp-content/uploads/2021/05/Atharvaveda.jpg",
   },
 ];
+
 const Epics = [
   {
     id: 1,
@@ -43,6 +46,7 @@ const Epics = [
     src: "https://m.media-amazon.com/images/I/71s6IAl4QlL._AC_UF1000,1000_QL80_.jpg",
   },
 ];
+
 const Upanishads = [
   {
     id: 1,
@@ -114,23 +118,69 @@ const BhagvadGeeta = [
   },
 ];
 
-function MainScriptures() {
-  const [selectedCategory, setSelectedCategory] = useState("Vedas");
+const MainScriptures = () => {
+  const navigate = useNavigate();
+  const { category } = useParams();
+  const categories = {
+    Vedas: vedas,
+    Upanishad: Upanishads,
+    BhagvadGeeta: BhagvadGeeta,
+    Epics: Epics,
+  };
+
+  // Set the default category if none is selected
+  const defaultCategory = "Vedas";
+  const selectedCategory = category || defaultCategory;
+
+  useEffect(() => {
+    if (!category) {
+      navigate(`/scriptures/${defaultCategory}`, { replace: true });
+    }
+  }, [category, navigate, defaultCategory]);
+
+  const handleCategoryChange = (newCategory) => {
+    navigate(`/scriptures/${newCategory}`);
+  };
+
+
+
+  const handleBookClick = (book) => {
+    const path = `/scriptures/${selectedCategory}/${book.id}`;
+    navigate(path);
+  };
+  
+
   return (
     <div>
       <div className="flex flex-col sm:flex-row">
-        <div className="sm:relative sm:top-0 sm:left-0 sm:flex-none lg:h-[80vh]  bg-black w-full sm:w-[250px] p-8">
-          <div className="space-y-6">
-            <div className="flex items-center space-x-2">
-              <h2 class="text-lg font-semibold text-white">Scriptures</h2>
+        <div className="sm:relative sm:top-0 sm:left-0 sm:flex-none lg:h-[90vh] bg-black w-full sm:w-[250px] lg:p-8 p-4">
+          <div className="space-y-4">
+
+            <h2 className="text-lg font-semibold text-white">Scriptures</h2>
+            <div className="sm:hidden">
+              <select
+                onChange={(event) => handleCategoryChange(event.target.value)}
+                value={selectedCategory}
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"      >
+                {Object.keys(categories).map((cat) => (
+                  <option key={cat}
+                    value={cat}>
+                    {cat}
+                  </option>
+                ))}
+              </select>
+
+
+
             </div>
-            <div className=" flex items-start lg:flex-col sm:gap-4">
-              <div className="">
+            <div className="hidden sm:flex  flex-wrap lg:flex-row sm:flex-col  sm:gap-4">
+              {Object.keys(categories).map((cat) => (
                 <button
-                  onClick={() => setSelectedCategory("Vedas")}
-                  className={`inline-flex items-center mb-4 whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-accent hover:text-accent-foreground h-9 rounded-md px-3 justify-start w-full ${selectedCategory === "Vedas" ? "bg-accent" : ""
+                  key={cat}
+                  onClick={() => handleCategoryChange(cat)}
+
+                  className={`inline-flex items-center mb-4 whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-accent hover:text-accent-foreground h-9 rounded-md px-3 justify-start ${selectedCategory === cat ? "bg-accent" : ""
                     }`}
-                  class="inline-flex mb-4 items-center whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-accent hover:text-accent-foreground h-9 rounded-md px-3 justify-start w-full"
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -139,269 +189,51 @@ function MainScriptures() {
                     viewBox="0 0 24 24"
                     fill="none"
                     stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    class="h-6 w-6 text-gray-500 dark:text-gray-400"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className="h-6 w-6 text-gray-500 dark:text-gray-400"
                   >
                     <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"></path>
                   </svg>
-                  <span class="ml-2 text-white">Vedas</span>
+                  <span className="ml-2 text-white">{cat}</span>
                 </button>
-                <div>
-                  <button
-                    onClick={() => setSelectedCategory("Upanishad")}
-                    className={`inline-flex items-center whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-accent hover:text-accent-foreground h-9 rounded-md px-3 justify-start w-full ${selectedCategory === "Upanishad" ? "bg-accent" : ""
-                      }`}
-                    class="inline-flex items-center whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-accent hover:text-accent-foreground h-9 rounded-md px-3 justify-start w-full"
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="24"
-                      height="24"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="2"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      class="h-6 w-6 text-gray-500 dark:text-gray-400"
-                    >
-                      <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"></path>
-                    </svg>
-                    <span class="ml-2 text-white">Upanishads</span>
-                  </button>
-                </div>
-              </div>
-              <div>
-                <button
-                  onClick={() => setSelectedCategory("Bhagavad Gita")}
-                  className={`inline-flex mb-4 items-center whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-accent hover:text-accent-foreground h-9 rounded-md px-3 justify-start w-full ${selectedCategory === "Bhagavad Gita" ? "bg-accent" : ""
-                    }`}
-                  class="inline-flex mb-4 items-center whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-accent hover:text-accent-foreground h-9 rounded-md px-3 justify-start w-full"
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    class="h-6 w-6 text-gray-500 dark:text-gray-400"
-                  >
-                    <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"></path>
-                  </svg>
-                  <span class="ml-2 text-white">Bhagavad Gita</span>
-                </button>
-                <div>
-                  <button
-                    onClick={() => setSelectedCategory("Epics")}
-                    className={`inline-flex items-center whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-accent hover:text-accent-foreground h-9 rounded-md px-3 justify-start w-full ${selectedCategory === "Epics" ? "bg-accent" : ""
-                      }`}
-                    class="inline-flex items-center whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-accent hover:text-accent-foreground h-9 rounded-md px-3 justify-start w-full"
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="24"
-                      height="24"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="2"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      class="h-6 w-6 text-gray-500 dark:text-gray-400"
-                    >
-                      <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"></path>
-                    </svg>
-                    <span class="ml-2 text-white">Epics</span>
-                  </button>
-                </div>
-              </div>
+              ))}
             </div>
           </div>
         </div>
-        <div class="flex-1 p-6 lg:h-[80vh] overflow-y-auto ">
-          <div class="space-y-8">
-            {selectedCategory === "Vedas" && (
-              <div>
-                <h2 class="text-2xl font-bold">Vedas</h2>
-                <div class="mt-4 grid grid-cols-2  gap-4 sm:grid-cols-4">
-                  {vedas.map((veda) => (
-                    <div className="flex items-center justify-center">
-                      <div key={veda.id} class="relative  rounded-lg overflow-hidden w-[180px] shadow-xl hover:scale-105 hover:shadow-2xl transform duration-500 cursor-pointer " >
+        <div className="flex-1 p-6 lg:h-[90vh] overflow-y-auto ">
+          <div className="space-y-8">
+            <div>
+              <h2 className="text-2xl font-bold">{selectedCategory}</h2>
+              <div className="mt-4 grid grid-cols-2 gap-4 sm:grid-cols-4">
+                {categories[selectedCategory] && categories[selectedCategory].map((book) => (
+                  <div className="flex items-center justify-center gap-2" key={book.id}>
+                    <div onClick={() => handleBookClick(book)}>
+                      <div className="relative rounded-lg overflow-hidden w-[160px] shadow-xl hover:scale-105 hover:shadow-2xl transform duration-500 cursor-pointer">
                         <img
-                          src={veda.src}
-
-                          alt={veda.name}
+                          src={book.src}
+                          alt={book.name}
                           className="rounded-md"
-                          style={{ aspectRatio: "120/180", objectFit: "cover", width: "180px" }}
+                          style={{ aspectRatio: "90/140", objectFit: "cover", width: "160px" }}
+                          loading="lazy"
                         />
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/100 to-transparent"></div>
-                        <div class="absolute bottom-4 left-4 text-white">
-                          <h3 class="text-lg font-bold"> {veda.name}</h3>
-                          <button class="inline-flex text-xs h-6  transform hover:scale-105 hover:shadow-2xl  text-black items-center bg-white justify-center whitespace-nowrap rounded-[3px] ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-10 px-4 py-2 text-lg font-semibold">
-                            Read  <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              width="24"
-                              height="24"
-                              viewBox="0 0 24 24"
-                              fill="none"
-                              stroke="currentColor"
-                              stroke-width="2"
-                              stroke-linecap="round"
-                              stroke-linejoin="round"
-                              class="ml-1 h-4 w-4"
-                            >
-                              <path d="M5 12h14"></path>
-                              <path d="m12 5 7 7-7 7"></path>
-                            </svg>
-                          </button>
-
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/100 to-transparent"></div>
+                        <div className="absolute bottom-0 left-0 p-2 text-white text-sm font-semibold">
+                          {book.name}
                         </div>
                       </div>
                     </div>
-                  ))}
-                </div>
-              </div>
-
-            )}
-            {selectedCategory === "Upanishad" && (
-              <div>
-                <h2 class="text-2xl font-bold">Upanishads</h2>
-                <div class="mt-4 grid grid-cols-2 gap-4  sm:grid-cols-5">
-                  {Upanishads.map((veda) => (
-                    <div className="flex items-center justify-center">
-                      <div key={veda.id} class="relative  rounded-lg overflow-hidden w-[180px] shadow-xl hover:scale-105 hover:shadow-2xl transform duration-500 cursor-pointer " >
-                        <img
-                          src={veda.src}
-
-                          alt={veda.name}
-                          className="rounded-md"
-                          style={{ aspectRatio: "120/180", objectFit: "cover", width: "180px" }}
-                        />
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/100 to-transparent"></div>
-                        <div class="absolute bottom-4 left-4 text-white">
-                          <h3 class="text-lg font-bold"> {veda.name}</h3>
-                          <button class="inline-flex text-xs h-6  transform hover:scale-105 hover:shadow-2xl  text-black items-center bg-white justify-center whitespace-nowrap rounded-[3px] ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-10 px-4 py-2 text-lg font-semibold">
-                            Read  <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              width="24"
-                              height="24"
-                              viewBox="0 0 24 24"
-                              fill="none"
-                              stroke="currentColor"
-                              stroke-width="2"
-                              stroke-linecap="round"
-                              stroke-linejoin="round"
-                              class="ml-1 h-4 w-4"
-                            >
-                              <path d="M5 12h14"></path>
-                              <path d="m12 5 7 7-7 7"></path>
-                            </svg>
-                          </button>
-
-                        </div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            )}
-            {selectedCategory === "Bhagavad Gita" && (
-              <div className="">
-                <h2 class="text-2xl font-bold">Bhagavad Gita</h2>
-                <div className="">
-                  <div class="mt-4 grid grid-cols-2 gap-4 sm:grid-cols-3">
-                    {BhagvadGeeta.map((veda) => (
-                      <div className="flex items-center justify-center">
-                        <div key={veda.id} class="relative  rounded-lg overflow-hidden w-[180px] shadow-xl hover:scale-105 hover:shadow-2xl transform duration-500 cursor-pointer " >
-                          <img
-                            src={veda.src}
-
-                            alt={veda.name}
-                            className="rounded-md"
-                            style={{ aspectRatio: "120/180", objectFit: "cover", width: "180px" }}
-                          />
-                          <div class="absolute inset-0 bg-gradient-to-t from-black/100 to-transparent"></div>
-                          <div class="absolute bottom-4 left-4 text-white">
-                            <h3 class="text-lg font-bold"> {veda.name}</h3>
-                            <button class="inline-flex text-xs h-6  transform hover:scale-105 hover:shadow-2xl  text-black items-center bg-white justify-center whitespace-nowrap rounded-[3px] ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-10 px-4 py-2 text-lg font-semibold">
-                              Read  <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                width="24"
-                                height="24"
-                                viewBox="0 0 24 24"
-                                fill="none"
-                                stroke="currentColor"
-                                stroke-width="2"
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                class="ml-1 h-4 w-4"
-                              >
-                                <path d="M5 12h14"></path>
-                                <path d="m12 5 7 7-7 7"></path>
-                              </svg>
-                            </button>
-
-                          </div>
-                        </div>
-                      </div>
-                    ))}
-
                   </div>
-                </div>
-              </div>
-            )}
-            {selectedCategory === "Epics" && (
-              <div>
-                <h2 class="text-2xl font-bold">Epics</h2>
-                <div class="mt-4 grid grid-cols-2 gap-4 sm:grid-cols-4">
-                  {Epics.map((veda) => (
-                    <div className="flex items-center justify-center">
-                      <div key={veda.id} class="relative  rounded-lg overflow-hidden w-[180px] shadow-xl hover:scale-105 hover:shadow-2xl transform duration-500 cursor-pointer " >
-                        <img
-                          src={veda.src}
+                ))}
 
-                          alt={veda.name}
-                          className="rounded-md"
-                          style={{ aspectRatio: "120/180", objectFit: "cover", width: "180px" }}
-                        />
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/100 to-transparent"></div>
-                        <div class="absolute bottom-4 left-4 text-white">
-                          <h3 class="text-lg font-bold"> {veda.name}</h3>
-                          <button class="inline-flex text-xs h-6  transform hover:scale-105 hover:shadow-2xl  text-black items-center duration-500 bg-white justify-center whitespace-nowrap rounded-[3px] ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-10 px-4 py-2 text-lg font-semibold">
-                            Read  <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              width="24"
-                              height="24"
-                              viewBox="0 0 24 24"
-                              fill="none"
-                              stroke="currentColor"
-                              stroke-width="2"
-                              stroke-linecap="round"
-                              stroke-linejoin="round"
-                              class="ml-1 h-4 w-4"
-                            >
-                              <path d="M5 12h14"></path>
-                              <path d="m12 5 7 7-7 7"></path>
-                            </svg>
-                          </button>
-
-                        </div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
               </div>
-            )}
+            </div>
           </div>
         </div>
       </div>
     </div>
+
   );
 }
 

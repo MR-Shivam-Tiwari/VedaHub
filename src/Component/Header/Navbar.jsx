@@ -46,7 +46,7 @@ function Navbar() {
                             <a
                                 class="group inline-flex h-9 w-max items-center bg-gray-300 justify-center rounded-md px-4 py-2 text-sm font-medium transition-colors hover:bg-[#e0e0e0] hover:text-[#8b4513] focus:bg-[#e0e0e0] focus:text-[#8b4513] focus:outline-none disabled:pointer-events-none disabled:opacity-50 "
                                 data-radix-collection-item=""
-                                href="/scriptures"
+                                href="/scriptures/Vedas"
                             >
                                 Scriptures
                             </a>

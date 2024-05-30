@@ -287,11 +287,11 @@ const Vedas = [
         "युयोध्य् अस्मज् जुहुराणम् एनो भूयिष्ठां ते नम उक्तिं विधेम ॥ १८ ॥      ",
     },
     translationHindi:
-      "हे अग्ने! हमें कर्मफलभोगके लिये सन्मार्गसे ले चल। हे देव! तू समस्त ज्ञान और कर्मोंको जाननेवाला है। हमारे पाखण्डपूर्ण पापोंको नष्ट कर। हम तेरे लिये अनेकों नमस्कार करते हैं॥ १८ ॥",
+      "हे अग्ने! हमें कर्मफलभोगके लिये सन्मार्गसे ले चल हे देव! तू समस्त ज्ञान और कर्मोंको जाननेवाला है। हमारे पाखण्डपूर्ण पापोंको नष्ट कर हम तेरे लिये अनेकों नमस्कार करते हैं॥ १८ ॥",
     translationEnglish:
       "o Fire! o god ! Knowing, as thou do, all our deeds, lead us by the good path for the enjoyment of the fruits of our deeds; remove from us all  crooked sins. We offer thee many words of salutation.",
     commentaryHindi:
-      "हे अग्ने! मुझे सुपथ अर्थात् सुन्दर मार्गसे ले चल। यहाँ ‘सुपथा’ यह विशेषण दक्षिणमार्गकी निवृत्तिके लिये है। मैं आवागमनरूप दक्षिणमार्गसे ऊब गया हूँ, अतः तुझसे प्रार्थना करता हूँ कि यथोक्त कर्मफलविशिष्ट हमलोगोंको हमारे सम्पूर्ण कर्म अथवा ज्ञानोंको जाननेवाले हे देव! तू ‘राये’—धनके लिये अर्थात् कर्मफलभोगके निमित्त पुनः-पुनः आने-जानेसे रहित शुभमार्गसे ले चल। तथा तू हमसे कुटिल अर्थात् वञ्चनात्मक पापोंको ‘युयोधि’—वियुक्त कर दे यानी उनका नाश कर दे। तब हम विशुद्ध होकर अपना इष्ट प्राप्त कर लेंगे—यह इसका अभिप्राय है। किन्तु इस समय हम तेरी परिचर्या (सेवा) करनेमें समर्थ नहीं हैं। अतः हम तेरे लिये बहुत-सी ‘नमः’ उक्ति यानी नमस्कार-वचन विधान करते हैं अर्थात् नमस्कारसे ही तेरी परिचर्या करते हैं। ‘अविद्या (कर्म)-से मृत्युको पारकर विद्या (देवताज्ञान)-से अमृत प्राप्त करता है।’ विनाश (कार्यब्रह्मकी उपासना)-से मृत्युको पारकर सम्भूति (अव्यक्तकी उपासना)-से अमृत लाभ करता है’— ऐसा सुनकर कुछ लोगोंको संशय हो जाता है। अतः उसकी निवृत्तिके लिये हम संक्षेपसे विचार करते हैं— अच्छा तो, यहाँ किस निमित्तको लेकर संशय होता है? इसपर कहते हैं— पूर्व०—यहाँ ‘विद्या’ शब्दसे मुख्य परमार्थविद्या तथा ‘अमृत’ शब्दसे अमृतत्व ही क्यों नहीं लिया जाता? सिद्धान्ती—ऊपर बतलायी हुई परमार्थविद्या और कर्मका परस्पर विरोध होनेके कारण उनका समुच्चय नहीं हो सकता। पूर्व०—ठीक है, परन्तु इनका विरोध या अविरोध तो शास्त्रप्रमाणसे ही सिद्ध हो सकता है; अतः (यहाँ शास्त्रविधि होनेके कारण) इनका विरोध नहीं जान पड़ता। जिस प्रकार अविद्याका अनुष्ठान और विद्याकी उपासना शास्त्रप्रमाणसे सिद्ध है, उसी प्रकार उनके विरोध और अविरोध भी हैं। जैसे ‘सभी प्राणियोंकी हिंसा न करे’ यह बात शास्त्रसे जानी जाती है और फिर ‘यज्ञमें पशुकी हिंसा करे’ इस शास्त्रविधिसे ही बाधित भी हो जाती है, वैसे ही विद्या और अविद्याके सम्बन्धमें भी हो सकता है और इस प्रकार विद्या तथा कर्मका समुच्चय हो जायगा। सिद्धान्ती—नहीं, क्योंकि श्रुति कहती है—“जिनकी गति भिन्न-भिन्न हैं, वे विद्या और कर्म सर्वथा विपरीत हैं।” पूर्व०—किन्तु ‘विद्यां चाविद्यां च’ इस वाक्यके अनुसार इन दोनोंका अविरोध है न? सिद्धान्ती—नहीं, क्योंकि उनके हेतु, स्वरूप और फलोंमें विरोध है। पूर्व०—विद्या और अविद्या तथा विरोध और अविरोध इनमें विकल्प तो हो नहीं सकता* तथा इनके समुच्चयका विधान किया गया है, इसलिये इनका अविरोध ही है—ऐसा मानें तो? सिद्धान्ती—नहीं, क्योंकि इन दोनोंका साथ रहना सम्भव नहीं है। पूर्व०—यदि ऐसा मानें कि विद्या और अविद्या क्रमसे एक आश्रयमें रहनेवाली हैं, तो? सिद्धान्ती—नहीं, क्योंकि विद्याके उत्पन्न हो जानेपर अविद्याका नाश हो जाता है और फिर उसी आश्रयमें अविद्याकी उत्पत्ति नहीं हो सकती। ‘अग्नि उष्ण और प्रकाशस्वरूप है’ इस ज्ञानके उत्पन्न होनेपर जिस [अग्निरूप] आश्रयमें यह उत्पन्न हुआ है उसीमें अग्नि शीतल और अप्रकाशमय है—ऐसा अज्ञान नहीं हो सकता; अधिक क्या इस विषयमें उस पुरुषको कोई संदेह अथवा भ्रम भी नहीं हो सकता। ज्ञानीके लिये शोक-मोहादिको असम्भव बतलानेवाली ‘यस्मिन् सर्वाणि भूतान्यात्मैवाभूद्विजानतः। तत्र को मोहः कः शोक एकत्वमनुपश्यतः’ इस श्रुतिसे भी यही सिद्ध होता है। इस प्रकार अविद्याके असम्भव हो जानेपर उसके आश्रयसे होनेवाले कर्म भी नहीं हो सकते—यह बात हम पहले ही कह चुके हैं। यहाँ जो कहा गया है कि अमृतको प्राप्त होता है सो आपेक्षिक अमृत समझना चाहिये। यदि ‘विद्या’ शब्दसे परमात्मविद्या ली जाय तो ‘हिरण्मयेन’ इत्यादि मन्त्रोंसे मार्गादिकी याचना नहीं बन सकती। इसलिये यहाँ उपासनाके साथ ही (कर्मका) समुच्चय किया गया है, परमात्मज्ञानके साथ नहीं। इस प्रकार इन मन्त्रोंका वही अर्थ है, जैसा कि हमने व्याख्यान किया है। ऐसा कहकर हम विराम लेते हैं॥ १८ ॥   ",
+      "हे अग्ने! मुझे सुपथ  अर्थात् सुन्दर मार्गसे ले चल। यहाँ ‘सुपथा’ यह विशेषण दक्षिणमार्गकी निवृत्तिके लिये है। मैं आवागमनरूप दक्षिणमार्गसे ऊब गया हूँ, अतः तुझसे प्रार्थना करता हूँ कि यथोक्त कर्मफलविशिष्ट हमलोगोंको हमारे सम्पूर्ण कर्म अथवा ज्ञानोंको जाननेवाले हे देव! तू ‘राये’—धनके लिये अर्थात् कर्मफलभोगके निमित्त पुनः-पुनः आने-जानेसे रहित शुभमार्गसे ले चल। तथा तू हमसे कुटिल अर्थात् वञ्चनात्मक पापोंको ‘युयोधि’—वियुक्त कर दे यानी उनका नाश कर दे। तब हम विशुद्ध होकर अपना इष्ट प्राप्त कर लेंगे—यह इसका अभिप्राय है। किन्तु इस समय हम तेरी परिचर्या (सेवा) करनेमें समर्थ नहीं हैं। अतः हम तेरे लिये बहुत-सी ‘नमः’ उक्ति यानी नमस्कार-वचन विधान करते हैं अर्थात् नमस्कारसे ही तेरी परिचर्या करते हैं। ‘अविद्या (कर्म)-से मृत्युको पारकर विद्या (देवताज्ञान)-से अमृत प्राप्त करता है।’ विनाश (कार्यब्रह्मकी उपासना)-से मृत्युको पारकर सम्भूति (अव्यक्तकी उपासना)-से अमृत लाभ करता है’— ऐसा सुनकर कुछ लोगोंको संशय हो जाता है। अतः उसकी निवृत्तिके लिये हम संक्षेपसे विचार करते हैं— अच्छा तो, यहाँ किस निमित्तको लेकर संशय होता है? इसपर कहते हैं— पूर्व०—यहाँ ‘विद्या’ शब्दसे मुख्य परमार्थविद्या तथा ‘अमृत’ शब्दसे अमृतत्व ही क्यों नहीं लिया जाता? सिद्धान्ती—ऊपर बतलायी हुई परमार्थविद्या और कर्मका परस्पर विरोध होनेके कारण उनका समुच्चय नहीं हो सकता। पूर्व०—ठीक है, परन्तु इनका विरोध या अविरोध तो शास्त्रप्रमाणसे ही सिद्ध हो सकता है; अतः (यहाँ शास्त्रविधि होनेके कारण) इनका विरोध नहीं जान पड़ता। जिस प्रकार अविद्याका अनुष्ठान और विद्याकी उपासना शास्त्रप्रमाणसे सिद्ध है, उसी प्रकार उनके विरोध और अविरोध भी हैं। जैसे ‘सभी प्राणियोंकी हिंसा न करे’ यह बात शास्त्रसे जानी जाती है और फिर ‘यज्ञमें पशुकी हिंसा करे’ इस शास्त्रविधिसे ही बाधित भी हो जाती है, वैसे ही विद्या और अविद्याके सम्बन्धमें भी हो सकता है और इस प्रकार विद्या तथा कर्मका समुच्चय हो जायगा। सिद्धान्ती—नहीं, क्योंकि श्रुति कहती है—“जिनकी गति भिन्न-भिन्न हैं, वे विद्या और कर्म सर्वथा विपरीत हैं।” पूर्व०—किन्तु ‘विद्यां चाविद्यां च’ इस वाक्यके अनुसार इन दोनोंका अविरोध है न? सिद्धान्ती—नहीं, क्योंकि उनके हेतु, स्वरूप और फलोंमें विरोध है। पूर्व०—विद्या और अविद्या तथा विरोध और अविरोध इनमें विकल्प तो हो नहीं सकता* तथा इनके समुच्चयका विधान किया गया है, इसलिये इनका अविरोध ही है—ऐसा मानें तो? सिद्धान्ती—नहीं, क्योंकि इन दोनोंका साथ रहना सम्भव नहीं है। पूर्व०—यदि ऐसा मानें कि विद्या और अविद्या क्रमसे एक आश्रयमें रहनेवाली हैं, तो? सिद्धान्ती—नहीं, क्योंकि विद्याके उत्पन्न हो जानेपर अविद्याका नाश हो जाता है और फिर उसी आश्रयमें अविद्याकी उत्पत्ति नहीं हो सकती। ‘अग्नि उष्ण और प्रकाशस्वरूप है’ इस ज्ञानके उत्पन्न होनेपर जिस [अग्निरूप] आश्रयमें यह उत्पन्न हुआ है उसीमें अग्नि शीतल और अप्रकाशमय है—ऐसा अज्ञान नहीं हो सकता; अधिक क्या इस विषयमें उस पुरुषको कोई संदेह अथवा भ्रम भी नहीं हो सकता। ज्ञानीके लिये शोक-मोहादिको असम्भव बतलानेवाली ‘यस्मिन् सर्वाणि भूतान्यात्मैवाभूद्विजानतः। तत्र को मोहः कः शोक एकत्वमनुपश्यतः’ इस श्रुतिसे भी यही सिद्ध होता है। इस प्रकार अविद्याके असम्भव हो जानेपर उसके आश्रयसे होनेवाले कर्म भी नहीं हो सकते—यह बात हम पहले ही कह चुके हैं। यहाँ जो कहा गया है कि अमृतको प्राप्त होता है सो आपेक्षिक अमृत समझना चाहिये। यदि ‘विद्या’ शब्दसे परमात्मविद्या ली जाय तो ‘हिरण्मयेन’ इत्यादि मन्त्रोंसे मार्गादिकी याचना नहीं बन सकती। इसलिये यहाँ उपासनाके साथ ही (कर्मका) समुच्चय किया गया है, परमात्मज्ञानके साथ नहीं। इस प्रकार इन मन्त्रोंका वही अर्थ है, जैसा कि हमने व्याख्यान किया है। ऐसा कहकर हम विराम लेते हैं॥ १८ ॥   ",
     commentaryEnglish:
       "Agne, 0 Fire; deva, 0 god; vidvan, knowing; visvani vayunani, all deeds  or meditations; naya, lead; asman, us-who are endowed with the aforesaid  fruits of virtue; supatha, by the good path. The attribute `good path' is used  for eschewing the Southern Path (Pit ryana). I am disgusted with the  Southern Path which is characterized by going and coming; hence I entreat thee again and again, `Lead by the good path which is free from going and  coming.' Raye means, for the sake of wealth, i.e. for the enjoyment of the fruits of deeds. Moreover, yuyodhi, remove, destroy; asmat, (i.e.) asmattah, from us; juhuranam, crooked, deceitful; enah, sin. The idea is this: Becoming purified thereby we shall achieve our desired object. But (as) at  present we cannot render any service to thee, (so) It, to thee; bhuyistham,  many; namah uktim, words of salutation; vidhema, we offer-i.e. we serve  thee with salutations.  (A doubt) : Some people are filled with doubt at hearing the texts: `Crossing over death through avidya, attains immortality through vidya'  (11), and 'Crossing death through Destruction, attains immortality through  the Unmanifested' (14). Hence to remove that doubt, we shall discuss (the  topic) in brief. Now, then, the reason why the doubt arises is being stated:  `By the word vidya, why should not the knowledge of the supreme Self itself, in the primary sense, be understood; and so also (why should not)  immortality (be taken in the primary sense) ?' Answer: Is it not a fact that by reason of the opposition between the aforesaid knowledge of the supreme Self and karma, there is no possibility of combination? Objection: True. But the opposition is not comprehended, because  opposition or agreement rests on the authority of scriptures. Just as the  performance of yd (karma) and the pursuit of knowledge rest on avid the  authority of the scriptures, so also do their opposition and agreement. Just  as the prohibition, `Do not kill any living thing', learnt from scripture, is  over ridden by the injunction, `One should kill an animal in a sacrifice', so  also it is possible in the case of avidya (karma) and knowledge that karma  and knowledge are to be combined.  Answer: No (they cannot be combined), because of the Vedic text: `What  are known as vidyd (knowledge) and avidyd (karma) are entirely different, and they follow different courses' (Ka. I. ii. 4). Objection: Suppose we say that, on the authority of the text, `He who  knows vidya and avidya together' (11), there is no antagonism. Answer: No, because of the opposition involved in (their) causes,natures, and results. Objection: Since (on the one hand) the opposition or non-opposition between vidya (knowledge) and avidya (karma) cannot stand as alternatives, and since (on the other hand) their combination is enjoined (here), may we not argue that there is (really) no contradiction (between them) ?Answer: No, since their co-existence is absurd.Objection: Suppose we say that vidya (knowledge) and avidya (karma) may cohere in the same person successively. Answer: No.1 For when vidyd (knowledge) arises, avidyd (karma) vanishes, since in the person in whom there is knowledge, avidyd (karma) cannot remain. Indeed, it is a fact that when the knowledge, `Fire is hot and effulgent', has arisen in a person, then in that very person, in whom that knowledge has dawned, cannot arise the ignorance or doubt or error (of the form), `Fire is cold or non-illuminating'. On the authority of the text, `When to the man of realization all beings become the very Self, then what delusion and what sorrow can there be for that seer of oneness' (7), which declares sorrow, delusion, etc., as impossible (for a man of knowledge), we have said that since avidya (ignorance) is impossible (for such a man),karma which originates from ignorance is also impossible. As for the text, `He attains immortality', (14) the immortality is a relative thing. If the knowledge of the supreme Self is understood by the word vidya, the prayer for the path etc. in the text, `The face of Truth (Brahman) is covered,' etc. (15) becomes irreconcilable. I Accordingly, the combination (of avidya, karma) is with meditation and not with the knowledge of the supreme Self. Thus, we conclude by remarking that the meaning of the verses is just as we have interpreted.",
   },
@@ -357,7 +357,7 @@ function IshaUpanishad() {
                   aria-autocomplete="none"
                   dir="ltr"
                   data-state="closed"
-                  className="flex h-10 items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 w-full"
+                  className="flex h-10 items-center justify-between bg-gray-300 rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 w-full"
                 >
                   <span style={{ pointerEvents: "none" }}>
                     Mantra {currentMantra.mantraNumber}
@@ -444,8 +444,9 @@ function IshaUpanishad() {
                     strokeWidth="2"
                     strokeLinecap="round"
                     strokeLinejoin="round"
-                    className={`h-5 w-5 transition-transform ${isOpen ? "rotate-180" : ""
-                      }`}
+                    className={`h-5 w-5 transition-transform ${
+                      isOpen ? "rotate-180" : ""
+                    }`}
                   >
                     <path d="m6 9 6 6 6-6"></path>
                   </svg>
@@ -477,6 +478,13 @@ function IshaUpanishad() {
                         <p>
                           {selectedLanguage === "hindi"
                             ? currentMantra.translationHindi
+                                .split("\n")
+                                .map((line, index) => (
+                                  <React.Fragment key={index}>
+                                    {line}
+                                    <br />
+                                  </React.Fragment>
+                                ))
                             : currentMantra.translationEnglish}
                         </p>
                       </div>
@@ -504,8 +512,9 @@ function IshaUpanishad() {
                     strokeWidth="2"
                     strokeLinecap="round"
                     strokeLinejoin="round"
-                    className={`h-5 w-5 transition-transform ${commentryopen ? "rotate-180" : ""
-                      }`}
+                    className={`h-5 w-5 transition-transform ${
+                      commentryopen ? "rotate-180" : ""
+                    }`}
                   >
                     <path d="m6 9 6 6 6-6"></path>
                   </svg>
@@ -527,6 +536,8 @@ function IshaUpanishad() {
                       </button>
                     </div>
 
+                    
+
                     {selectedLanguageCommentry && (
                       <div className="mt-4">
                         <h3 className="text-lg font-semibold mb-2">
@@ -537,6 +548,13 @@ function IshaUpanishad() {
                         <p>
                           {selectedLanguageCommentry === "hindi"
                             ? currentMantra.commentaryHindi
+                                .split("\n")
+                                .map((line, index) => (
+                                  <React.Fragment key={index}>
+                                    {line}
+                                    <br />
+                                  </React.Fragment>
+                                ))
                             : currentMantra.commentaryEnglish}
                         </p>
                       </div>
