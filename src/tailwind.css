@@ -24,3 +24,113 @@
 ::-webkit-scrollbar-thumb:hover {
     background: #555; /* Color of the scrollbar handle on hover */
 }
+
+
+
+
+  
+  /* index.css */
+
+.martel-extralight {
+    font-family: "Martel", serif;
+    font-weight: 200;
+    font-style: normal;
+  }
+  
+  .martel-light {
+    font-family: "Martel", serif;
+    font-weight: 300;
+    font-style: normal;
+  }
+  
+  .martel-regular {
+    font-family: "Martel", serif;
+    font-weight: 400;
+    font-style: normal;
+  }
+  
+  .martel-semibold {
+    font-family: "Martel", serif;
+    font-weight: 600;
+    font-style: normal;
+  }
+  
+  .martel-bold {
+    font-family: "Martel", serif;
+    font-weight: 700;
+    font-style: normal;
+  }
+  
+  .martel-extrabold {
+    font-family: "Martel", serif;
+    font-weight: 800;
+    font-style: normal;
+  }
+  
+  .martel-black {
+    font-family: "Martel", serif;
+    font-weight: 900;
+    font-style: normal;
+  }
+  
+  .yatra-one-regular {
+    font-family: "Yatra One", system-ui;
+    font-weight: 400;
+    font-style: normal;
+  }
+  
+  .martel-sans-extralight {
+    font-family: "Martel Sans", sans-serif;
+    font-weight: 200;
+    font-style: normal;
+  }
+  
+  .martel-sans-light {
+    font-family: "Martel Sans", sans-serif;
+    font-weight: 300;
+    font-style: normal;
+  }
+  
+  .martel-sans-regular {
+    font-family: "Martel Sans", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+  }
+  
+  .martel-sans-semibold {
+    font-family: "Martel Sans", sans-serif;
+    font-weight: 600;
+    font-style: normal;
+  }
+  
+  .martel-sans-bold {
+    font-family: "Martel Sans", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+  }
+  
+  .martel-sans-extrabold {
+    font-family: "Martel Sans", sans-serif;
+    font-weight: 800;
+    font-style: normal;
+  }
+  
+  .martel-sans-black {
+    font-family: "Martel Sans", sans-serif;
+    font-weight: 900;
+    font-style: normal;
+  }
+  
+  .annapurna-sil-regular {
+    font-family: "Annapurna SIL", serif;
+    font-weight: 400;
+    font-style: normal;
+  }
+  
+  .annapurna-sil-bold {
+    font-family: "Annapurna SIL", serif;
+    font-weight: 700;
+    font-style: normal;
+  }
+  
+  

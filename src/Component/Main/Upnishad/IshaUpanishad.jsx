@@ -89,7 +89,7 @@ function IshaUpanishad() {
           <div className="flex-1 p-6 lg:h-[90vh] overflow-y-auto">
             <div className="mb-6 flex items-center justify-between">
               <div className="space-y-1">
-                <h2 className="text-2xl font-bold">Isha Upanishad</h2>
+                <h2 className="text-2xl font-bold yatra-one-regular">Isha Upanishad</h2>
               </div>
               <div className="flex items-center space-x-4">
                 <input
@@ -124,8 +124,8 @@ function IshaUpanishad() {
                     <div className="mb-2 text-sm font-medium">
                       Mantra {currentMantra.mantraNumber}
                     </div>
-                    <div>{currentMantra.shlok.line1}</div>
-                    <div>{currentMantra.shlok.line2}</div>
+                    <div className="font-bold martel-black">{currentMantra.shlok.line1}</div>
+                    <div className="font-bold martel-black ">{currentMantra.shlok.line2}</div>
                   </div>
                 </div>
               </div>
@@ -159,13 +159,15 @@ function IshaUpanishad() {
                   <div className="bg-white border-2 border-gray-300 rounded-lg p-4 shadow-md">
                     <div className="flex items-center justify-center gap-3">
                       <button
-                        className="w-full mb-2 p-2 bg-white text-black border-2 shadow-sm   rounded-lg hover:bg-gray-200"
+                        className="w-full mb-2 p-2 bg-white text-black border-2 annapurna-sil-regular shadow-sm   rounded-lg hover:bg-gray-200"
                         onClick={() => handleLanguageSelect("hindi")}
+                       
+                        
                       >
                         Hindi
                       </button>
                       <button
-                        className="w-full mb-2 p-2 bg-white text-black border-2 shadow-sm   rounded-lg hover:bg-gray-200"
+                        className="w-full mb-2 p-2 bg-white text-black border-2 annapurna-sil-regular shadow-sm   rounded-lg hover:bg-gray-200"
                         onClick={() => handleLanguageSelect("english")}
                       >
                         English
@@ -174,12 +176,12 @@ function IshaUpanishad() {
 
                     {selectedLanguage && (
                       <div className="mt-4">
-                        <h3 className="text-lg font-semibold mb-2">
+                        <h3 className="text-lg annapurna-sil-regular font-semibold mb-2">
                           {selectedLanguage === "hindi"
                             ? "Hindi Translation"
                             : "English Translation"}
                         </h3>
-                        <p>
+                        <div className="annapurna-sil-bold " >
                           {selectedLanguage === "hindi"
                             ? currentMantra.translationHindi
                               .split("\n")
@@ -190,7 +192,7 @@ function IshaUpanishad() {
                                 </React.Fragment>
                               ))
                             : currentMantra.translationEnglish}
-                        </p>
+                        </div>
                       </div>
                     )}
                   </div>
@@ -203,7 +205,7 @@ function IshaUpanishad() {
                   aria-expanded={commentryopen}
                   data-state={commentryopen ? "open" : "closed"}
                   onClick={handlecommentry}
-                  className="flex w-full text-white items-center justify-between rounded-lg px-4 py-3 font-medium transition-colors bg-gray-800 hover:bg-gray-700"
+                  className="flex w-full text-white  items-center justify-between rounded-lg px-4 py-3 font-medium transition-colors bg-gray-800 hover:bg-gray-700"
                 >
                   Commentary
                   <svg
@@ -226,13 +228,13 @@ function IshaUpanishad() {
                   <div className="bg-white border-2 border-gray-300 rounded-lg p-4 shadow-md">
                     <div className="flex items-center justify-center gap-3">
                       <button
-                        className="w-full mb-2 p-2 bg-white text-black border-2 shadow-sm   rounded-lg hover:bg-gray-200"
+                        className="w-full mb-2 p-2 bg-white text-black border-2 shadow-sm  annapurna-sil-regular  rounded-lg hover:bg-gray-200"
                         onClick={() => handleLanguageCommentry("hindi")}
                       >
                         Hindi
                       </button>
                       <button
-                        className="w-full mb-2 p-2 bg-white text-black border-2 shadow-sm   rounded-lg hover:bg-gray-200"
+                        className="w-full mb-2 p-2 bg-white text-black border-2 shadow-sm annapurna-sil-regular   rounded-lg hover:bg-gray-200"
                         onClick={() => handleLanguageCommentry("english")}
                       >
                         English
@@ -243,12 +245,12 @@ function IshaUpanishad() {
 
                     {selectedLanguageCommentry && (
                       <div className="mt-4">
-                        <h3 className="text-lg font-semibold mb-2">
+                        <h3 className="text-lg annapurna-sil-regular font-semibold mb-2">
                           {selectedLanguageCommentry === "hindi"
                             ? "Hindi Commentary"
                             : "English Commentary"}
                         </h3>
-                        <p>
+                        <p className="martel-bold">
                           {selectedLanguageCommentry === "hindi"
                             ? currentMantra.commentaryHindi
                               .split("\n")
@@ -272,7 +274,7 @@ function IshaUpanishad() {
                   disabled={currentMantraIndex === 0}
                 >
                   <span style={{ userSelect: 'none' }}>Previous</span>
-                  
+
                 </button>
                 <button
                   onClick={handleNext}

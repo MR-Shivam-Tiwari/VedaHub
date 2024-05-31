@@ -30,7 +30,7 @@ import ShvetashvataraUpanishad from './Component/Main/Upnishad/ShvetashvataraUpa
 
 function App() {
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="flex flex-col min-h-screen ">
       <Router>
         <Navbar />
         <div className="flex-grow">
