@@ -1,8 +1,6 @@
 import React from 'react'
-import { useNavigate } from 'react-router-dom'
 
 function Navbar() {
-    const navigate = useNavigate();
     return (
         <div>
             <header class="flex h-20 w-full shrink-0 items-center px-4 md:px-6 bg-gray-300">
