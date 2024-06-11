@@ -44,12 +44,12 @@ function Home() {
                   scriptures.
                 </p>
                 <div class="mt-8 flex gap-2">
-                  <a class="inline-flex items-center px-4 text-sm py-2 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" onClick={()=>"/scriptures/BhagvadGeeta"} >
+                  <div onClick={() => navigate("/scriptures/BhagvadGeeta")} class="inline-flex items-center cursor-pointer px-4 text-sm py-2 border border-transparent  font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"  >
                     Explore Scriptures
-                  </a>
-                  <a class="inline-flex items-center px-4 py-2 border text-sm border-gray-300 text-base font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                  </div>
+                  <div class="inline-flex items-center cursor-pointer px-4 py-2 border text-sm border-gray-300  font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" onClick={()=> navigate("/donation")}>
                     Support The Developer
-                  </a>
+                  </div>
                 </div>
               </div>
               <div class="grid grid-cols-2 gap-4">
@@ -63,7 +63,7 @@ function Home() {
                   <div class="absolute bottom-4 left-4 text-white">
                     <h3 class="text-lg font-bold">Bhagavad Gita</h3>
                     <p class="text-sm">Explore the timeless wisdom</p>
-                    <a
+                    <div
                       class="inline-flex items-center mt-2  cursor-pointer text-indigo-400 hover:text-indigo-500"
                       onClick={()=>navigate("/scriptures/BhagvadGeeta")}
                     >
@@ -83,7 +83,7 @@ function Home() {
                         <path d="M5 12h14"></path>
                         <path d="m12 5 7 7-7 7"></path>
                       </svg>
-                    </a>
+                    </div>
                   </div>
                 </div>
                 <div class="relative h-64 rounded-lg overflow-hidden">
@@ -96,7 +96,7 @@ function Home() {
                   <div class="absolute bottom-4 left-4 text-white">
                     <h3 class="text-lg font-bold">Upanishads</h3>
                     <p class="text-sm">Uncover the secrets of the universe</p>
-                    <a
+                    <div
                       class="inline-flex items-center mt-2 cursor-pointer text-indigo-400 hover:text-indigo-500"
                       onClick={()=>navigate("/scriptures/Upanishad")}
                     >
@@ -116,7 +116,7 @@ function Home() {
                         <path d="M5 12h14"></path>
                         <path d="m12 5 7 7-7 7"></path>
                       </svg>
-                    </a>
+                    </div>
                   </div>
                 </div>
                 <div class="relative h-64 rounded-lg overflow-hidden">
@@ -129,7 +129,7 @@ function Home() {
                   <div class="absolute bottom-4 left-4 text-white">
                     <h3 class="text-lg font-bold">Vedas</h3>
                     <p class="text-sm">Explore the foundational texts</p>
-                    <a
+                    <div
                       class="inline-flex items-center mt-2 cursor-pointer text-indigo-400 hover:text-indigo-500"
                         onClick={()=>navigate("/scriptures/Vedas")}
                     >
@@ -149,7 +149,7 @@ function Home() {
                         <path d="M5 12h14"></path>
                         <path d="m12 5 7 7-7 7"></path>
                       </svg>
-                    </a>
+                    </div>
                   </div>
                 </div>
                 <div class="relative h-64 rounded-lg overflow-hidden">
@@ -162,7 +162,7 @@ function Home() {
                   <div class="absolute bottom-4 left-4 text-white">
                     <h3 class="text-lg font-bold">Epics</h3>
                     <p class="text-sm">Discover the ancient stories</p>
-                    <a
+                    <div
                       class="inline-flex items-center mt-2 text-indigo-400 hover:text-indigo-500"
                         onClick={()=> navigate("/scriptures/Epics")}
                     >
@@ -182,7 +182,7 @@ function Home() {
                         <path d="M5 12h14"></path>
                         <path d="m12 5 7 7-7 7"></path>
                       </svg>
-                    </a>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -216,7 +216,7 @@ function Home() {
                     Easily find and explore specific verses, passages, and
                     teachings from the Hindu scriptures.
                   </p>
-                  <a
+                  <div
                     class="inline-flex items-center mt-4 text-indigo-600 hover:text-indigo-700"
                     
                   >
@@ -236,7 +236,7 @@ function Home() {
                       <path d="M5 12h14"></path>
                       <path d="m12 5 7 7-7 7"></path>
                     </svg>
-                  </a>
+                  </div>
                 </div>
               </div>
               <div class="bg-white rounded-lg shadow-sm overflow-hidden">
@@ -254,7 +254,7 @@ function Home() {
                     Connect with like-minded individuals, share insights, and
                     engage in thought-provoking discussions.
                   </p>
-                  <a
+                  <div
                     class="inline-flex items-center mt-4 text-indigo-600 hover:text-indigo-700"
                     
                   >
@@ -274,7 +274,7 @@ function Home() {
                       <path d="M5 12h14"></path>
                       <path d="m12 5 7 7-7 7"></path>
                     </svg>
-                  </a>
+                  </div>
                 </div>
               </div>
               <div class="bg-white rounded-lg shadow-sm overflow-hidden">
@@ -292,7 +292,7 @@ function Home() {
                     Explore guided meditations and techniques to deepen your
                     spiritual practice and find inner peace.
                   </p>
-                  <a
+                  <div
                     class="inline-flex items-center mt-4 text-indigo-600 hover:text-indigo-700"
                     
                   >
@@ -312,7 +312,7 @@ function Home() {
                       <path d="M5 12h14"></path>
                       <path d="m12 5 7 7-7 7"></path>
                     </svg>
-                  </a>
+                  </div>
                 </div>
               </div>
             </div>

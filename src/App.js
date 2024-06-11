@@ -27,6 +27,7 @@ import AitareyaUpanishad from './Component/Main/Upnishad/AitareyaUpanishad';
 import ChandogyaUpanishad from './Component/Main/Upnishad/ChandogyaUpanishad';
 import BrihadaranyakaUpanishad from './Component/Main/Upnishad/BrihadaranyakaUpanishad';
 import ShvetashvataraUpanishad from './Component/Main/Upnishad/ShvetashvataraUpanishad';
+import Donation from './Component/Donation/Donation';
 
 function App() {
   return (
@@ -36,9 +37,10 @@ function App() {
         <div className="flex-grow">
           <Routes>
             <Route path="/" element={<Home />} />
-           
+
             <Route path="/scriptures/:category" element={<MainScriptures />} />
             <Route path="/about" element={<AboutUs />} />
+            <Route path="/donation" element={<Donation />} />
             <Route path="/contact" element={<ContactUs />} />
             {/* Route for displaying book details */}
             <Route path="/scriptures/:category/:id" element={<BookDetail />} />
@@ -69,7 +71,7 @@ function App() {
             <Route path="/scriptures/:category/:id/Bhagavad Gita English" element={<BhagavadGitaEnglish />} />
 
           </Routes>
-        </div> 
+        </div>
         <Footer />
       </Router>
     </div>
