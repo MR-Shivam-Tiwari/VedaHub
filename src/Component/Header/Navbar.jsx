@@ -3,19 +3,48 @@ import { useNavigate } from "react-router-dom";
 function Navbar() {
   const navigate = useNavigate();
   const [showModal, setShowModal] = useState(false);
+  const [showslidebar, setslidebarl] = useState(false);
 
   const toggleModal = () => {
     setShowModal(!showModal);
   };
+  const togglesidebar = () => {
+    setslidebarl(!showslidebar);
+  };
+
+  const [activePage, setActivePage] = useState("/scriptures/BhagvadGeeta");
+
+  const handleNavigate = (path) => {
+    setActivePage(path);
+    navigate(path);
+  };
+
   return (
     <div>
       <header class="flex josefin-sans-bold  h-20 w-full shrink-0 items-center px-4 md:px-6 bg-gray-300">
+        <div className="lg:hidden mb-1 " onClick={togglesidebar}>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="40"
+            height="40"
+            fill="currentColor"
+            class="bi bi-list"
+            viewBox="0 0 16 16"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5"
+            />
+          </svg>
+        </div>
         <div
-          class="mr-6 gap-1  lg:flex flex  items-center cursor-pointer"
+          class="mr-3 ml-2 gap-1   lg:flex flex  items-center cursor-pointer"
           onClick={() => navigate("/")}
         >
           {/* <img src={logo} alt="" className='h-9 w-9 mb-2 border-gray-300 rounded-full' /> */}
-          <span class="text-[#8b4513] font-bold text-xl">ShastraSangrah</span>
+          <span class="text-[#8b4513] font-bold lg:text-[30px] md:text-xl text-xl">
+            ShastraSangrah
+          </span>
         </div>
         <nav
           aria-label="Main"
@@ -69,16 +98,13 @@ function Navbar() {
           </div>
           <div class="absolute left-0 top-full flex justify-center"></div>
         </nav>
-        <div class="ml-auto flex gap-2">
+        <div class="ml-auto flex items-center">
           <button
             onClick={toggleModal}
-            class="inline-flex items-center bg-white justify-center whitespace-nowrap rounded-md ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-10 px-4 py-2 text-lg font-semibold"
+            class="inline-flex items-center bg-white  justify-center whitespace-nowrap rounded-[4px] md:rounded-md lg:rounded-md  ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-6 lg:h-10 md:h-10  px-2 md:px-4 lg:px-4  py-3 text-md lg:text-lg md:text-lg font-semibold"
           >
             Report Bug
           </button>
-          {/* <button class="inline-flex items-center bg-black text-white justify-center whitespace-nowrap rounded-md ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2 text-lg font-semibold">
-                        Sign Up
-                    </button> */}
         </div>
       </header>
       {showModal && (
@@ -244,6 +270,100 @@ function Navbar() {
                       </button>
                     </div>
                   </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+      {showslidebar && (
+        <div className="fixed inset-0 z-50  w-full h-full bg-black bg-opacity-500">
+          <div className=" p-4 w-full  ">
+            <div className="relative bg-white rounded-lg shadow h-[600px] dark:bg-gray-700">
+              <div className="flex items-center justify-end p-4 md:p-5">
+                <button
+                  type="button"
+                  className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
+                  onClick={togglesidebar}
+                >
+                  <svg
+                    className="w-5 h-5"
+                    aria-hidden="true"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 14 14"
+                  >
+                    <path
+                      stroke="currentColor"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="M1 1l6 6m0 0l6 6M7 7l6-6M7 7l-6 6"
+                    />
+                  </svg>
+                  <span className="sr-only">Close modal</span>
+                </button>
+              </div>
+              <div className="w-full  px-4">
+                <div>
+                  <ul
+                    data-orientation="horizontal"
+                    className="group list-none space-y-5"
+                    dir="ltr"
+                  >
+                    <div
+                      className={`group h-9 w-max cursor-pointer rounded-md px-4 py-2 text-lg font-medium transition-colors ${
+                        activePage === "/" ? "bg-[#e0e0e0] text-[#8b4513]" : ""
+                      } hover:bg-[#e0e0e0] hover:text-[#8b4513] focus:bg-[#e0e0e0] focus:text-[#8b4513] focus:outline-none disabled:pointer-events-none disabled:opacity-50`}
+                      onClick={() => { handleNavigate("/"); togglesidebar(); }}
+                    >
+                      Home
+                    </div>
+
+                    <div
+                      className={`group h-9 w-max cursor-pointer rounded-md px-4 py-2 text-lg font-medium transition-colors ${
+                        activePage === "/scriptures/BhagvadGeeta"
+                          ? "bg-[#e0e0e0] text-[#8b4513]"
+                          : "bg-white-300"
+                      } hover:bg-[#e0e0e0] hover:text-[#8b4513] focus:bg-[#e0e0e0] focus:text-[#8b4513] focus:outline-none disabled:pointer-events-none disabled:opacity-50`}
+                      onClick={() => {handleNavigate("/scriptures/BhagvadGeeta"); togglesidebar();}}
+                    >
+                      Scriptures
+                    </div>
+
+                    <div
+                      className={`group h-9 w-max cursor-pointer rounded-md px-4 py-2 text-lg font-medium transition-colors ${
+                        activePage === "/about"
+                          ? "bg-[#e0e0e0] text-[#8b4513]"
+                          : ""
+                      } hover:bg-[#e0e0e0] hover:text-[#8b4513] focus:bg-[#e0e0e0] focus:text-[#8b4513] focus:outline-none disabled:pointer-events-none disabled:opacity-50`}
+                      onClick={() => {handleNavigate("/about"); togglesidebar();}}
+                    >
+                      About Us
+                    </div>
+
+                    <div
+                      className={`group h-9 w-max cursor-pointer rounded-md px-4 py-2 text-lg font-medium transition-colors ${
+                        activePage === "/contact"
+                          ? "bg-[#e0e0e0] text-[#8b4513]"
+                          : ""
+                      } hover:bg-[#e0e0e0] hover:text-[#8b4513] focus:bg-[#e0e0e0] focus:text-[#8b4513] focus:outline-none disabled:pointer-events-none disabled:opacity-50`}
+                      onClick={() => {handleNavigate("/contact"); togglesidebar();}}
+                    >
+                      Contact Us
+                    </div>
+
+                    <div
+                      className={`group h-9 w-max cursor-pointer rounded-md px-4 py-2 text-lg font-medium transition-colors ${
+                        activePage === "/donation"
+                          ? "bg-[#e0e0e0] text-[#8b4513]"
+                          : ""
+                      } hover:bg-[#e0e0e0] hover:text-[#8b4513] focus:bg-[#e0e0e0] focus:text-[#8b4513] focus:outline-none disabled:pointer-events-none disabled:opacity-50`}
+                      onClick={() => {handleNavigate("/donation"); togglesidebar();}}
+                    >
+                      Donation
+                    </div>
+                  </ul>
                 </div>
               </div>
             </div>
