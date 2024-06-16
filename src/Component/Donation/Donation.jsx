@@ -1,7 +1,9 @@
 import React from "react";
-import Donate from '../Image/donate.jpg'
-import Imaginate from '../Image/imagination.jpg'
+import Donate from "../Image/donate.jpg";
+import Imaginate from "../Image/imagination.jpg";
+import { useNavigate } from "react-router-dom";
 function Donation() {
+  const navigate = useNavigate();
   return (
     <div>
       <div class="w-full">
@@ -24,16 +26,15 @@ function Donation() {
                   Your generosity helps us maintain and expand our library of
                   sacred texts.
                 </p>
-                <a
-                  class="inline-flex items-center justify-center rounded-md bg-[#f39c12] px-6 py-3 text-base font-medium text-gray-900 transition-colors hover:bg-[#e08e0b] focus:outline-none focus:ring-2 focus:ring-[#f39c12] focus:ring-offset-2"
-                  href="#"
+                <div
+                  class="inline-flex items-center justify-center cursor-pointer rounded-md bg-[#f39c12] px-6 py-3 text-base font-medium text-gray-900 transition-colors hover:bg-[#e08e0b] focus:outline-none focus:ring-2 focus:ring-[#f39c12] focus:ring-offset-2"
                   rel="ugc"
+                  onClick={()=> navigate("/donation/donate")}
                 >
                   Donate Now
-                </a>
+                </div>
               </div>
             </div>
-          
           </div>
         </div>
         <section class="py-12 md:py-16 lg:py-20">
@@ -136,9 +137,7 @@ function Donation() {
               our mission to provide free access to Hindu scriptures. Help us
               continue this important work.
             </p>
-            <div
-              class="inline-flex items-center text-black font-bold justify-center rounded-md bg-white px-6 py-3 text-lg  shadow-sm transition-colors hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2"
-            >
+            <div onClick={()=> navigate("/donation/donate")} class="inline-flex items-center cursor-pointer text-black font-bold justify-center rounded-md bg-white px-6 py-3 text-lg  shadow-sm transition-colors hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2">
               Donate Now
             </div>
           </div>

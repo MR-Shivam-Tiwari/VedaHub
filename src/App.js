@@ -28,6 +28,7 @@ import ChandogyaUpanishad from './Component/Main/Upnishad/ChandogyaUpanishad';
 import BrihadaranyakaUpanishad from './Component/Main/Upnishad/BrihadaranyakaUpanishad';
 import ShvetashvataraUpanishad from './Component/Main/Upnishad/ShvetashvataraUpanishad';
 import Donation from './Component/Donation/Donation';
+import Donate from './Component/Donation/Donate';
 
 function App() {
   return (
@@ -41,6 +42,7 @@ function App() {
             <Route path="/scriptures/:category" element={<MainScriptures />} />
             <Route path="/about" element={<AboutUs />} />
             <Route path="/donation" element={<Donation />} />
+            <Route path="/donation/donate" element={<Donate />} />
             <Route path="/contact" element={<ContactUs />} />
             {/* Route for displaying book details */}
             <Route path="/scriptures/:category/:id" element={<BookDetail />} />

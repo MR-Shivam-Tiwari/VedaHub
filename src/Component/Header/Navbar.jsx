@@ -12,7 +12,7 @@ function Navbar() {
     setslidebarl(!showslidebar);
   };
 
-  const [activePage, setActivePage] = useState("/scriptures/BhagvadGeeta");
+  const [activePage, setActivePage] = useState("");
 
   const handleNavigate = (path) => {
     setActivePage(path);
@@ -115,19 +115,19 @@ function Navbar() {
           className="fixed inset-0 z-50 flex items-center justify-center w-full h-full bg-black bg-opacity-50"
         >
           <div className="relative p-4 w-full max-w-2xl max-h-full">
-            <div className="relative bg-white rounded-lg shadow dark:bg-gray-700">
-              <div className="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
+            <div className="relative bg-white rounded-lg shadow ">
+              <div className="flex items-center justify-between p-4 md:p-5 border-b rounded-t ">
                 <div>
-                  <h1 class="text-3xl font-bold text-gray-900 dark:text-gray-100">
+                  <h1 class="text-3xl font-bold text-gray-900 ">
                     Report a Bug
                   </h1>
-                  <p class="mt-2 text-gray-500 dark:text-gray-400">
+                  <p class="mt-2 text-gray-500 ">
                     Help us improve by reporting any issues you encounter.
                   </p>
                 </div>
                 <button
                   type="button"
-                  className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
+                  className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 inline-flex justify-center items-center "
                   onClick={toggleModal}
                 >
                   <svg
@@ -155,7 +155,7 @@ function Navbar() {
                       <div>
                         <label
                           for="name"
-                          class="block text-sm font-medium text-gray-700 dark:text-gray-300"
+                          class="block text-sm font-medium text-gray-700 "
                         >
                           Name
                         </label>
@@ -171,7 +171,7 @@ function Navbar() {
                       <div>
                         <label
                           for="email"
-                          class="block text-sm font-medium text-gray-700 dark:text-gray-300"
+                          class="block text-sm font-medium text-gray-700 "
                         >
                           Email (optional)
                         </label>
@@ -187,7 +187,7 @@ function Navbar() {
                       <div>
                         <label
                           for="phone"
-                          class="block text-sm font-medium text-gray-700 dark:text-gray-300"
+                          class="block text-sm font-medium text-gray-700 "
                         >
                           Phone Number (optional)
                         </label>
@@ -204,7 +204,7 @@ function Navbar() {
                     <div>
                       <label
                         for="description"
-                        class="block text-sm font-medium text-gray-700 dark:text-gray-300"
+                        class="block text-sm font-medium text-gray-700 "
                       >
                         Bug Description
                       </label>
@@ -220,7 +220,7 @@ function Navbar() {
                     <div>
                       <label
                         for="screenshot"
-                        class="block text-sm font-medium text-gray-700 dark:text-gray-300"
+                        class="block text-sm font-medium text-gray-700 "
                       >
                         Upload a Screenshot (optional)
                       </label>
@@ -240,7 +240,7 @@ function Navbar() {
                               stroke-linejoin="round"
                             ></path>
                           </svg>
-                          <div class="flex text-sm text-gray-600 dark:text-gray-400">
+                          <div class="flex text-sm text-gray-600 ">
                             <label
                               for="screenshot"
                               class="relative cursor-pointer bg-white rounded-md font-medium text-indigo-600 hover:text-indigo-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500"
@@ -255,7 +255,7 @@ function Navbar() {
                             </label>
                             <p class="pl-1">or drag and drop</p>
                           </div>
-                          <p class="text-xs text-gray-500 dark:text-gray-400">
+                          <p class="text-xs text-gray-500 ">
                             PNG, JPG, GIF up to 10MB
                           </p>
                         </div>
@@ -279,11 +279,11 @@ function Navbar() {
       {showslidebar && (
         <div className="fixed inset-0 z-50  w-full h-full bg-black bg-opacity-500">
           <div className=" p-4 w-full  ">
-            <div className="relative bg-white rounded-lg shadow h-[600px] dark:bg-gray-700">
+            <div className="relative bg-white rounded-lg shadow h-[600px] ">
               <div className="flex items-center justify-end p-4 md:p-5">
                 <button
                   type="button"
-                  className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
+                  className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 inline-flex justify-center items-center  "
                   onClick={togglesidebar}
                 >
                   <svg
@@ -324,7 +324,7 @@ function Navbar() {
                       className={`group h-9 w-max cursor-pointer rounded-md px-4 py-2 text-lg font-medium transition-colors ${
                         activePage === "/scriptures/BhagvadGeeta"
                           ? "bg-[#e0e0e0] text-[#8b4513]"
-                          : "bg-white-300"
+                          : ""
                       } hover:bg-[#e0e0e0] hover:text-[#8b4513] focus:bg-[#e0e0e0] focus:text-[#8b4513] focus:outline-none disabled:pointer-events-none disabled:opacity-50`}
                       onClick={() => {handleNavigate("/scriptures/BhagvadGeeta"); togglesidebar();}}
                     >
