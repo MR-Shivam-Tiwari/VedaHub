@@ -44,10 +44,10 @@ function Home() {
                   scriptures.
                 </p>
                 <div class="mt-8 flex gap-2">
-                  <div onClick={() => navigate("/scriptures/BhagvadGeeta")} class="inline-flex items-center cursor-pointer px-4 text-sm py-2 border border-transparent  font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"  >
+                  <div onClick={() => navigate("/scriptures/BhagvadGeeta")} class="inline-flex items-center cursor-pointer px-2.5 text-sm py-2 border border-transparent  font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"  >
                     Explore Scriptures
                   </div>
-                  <div class="inline-flex items-center cursor-pointer px-4 py-2 border text-sm border-gray-300  font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" onClick={()=> navigate("/donation")}>
+                  <div class="inline-flex items-center cursor-pointer px-2.5 py-2 border text-sm border-gray-300  font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" onClick={()=> navigate("/donation")}>
                     Support The Developer
                   </div>
                 </div>
@@ -319,11 +319,11 @@ function Home() {
           </div>
         </section>
         <section class="container mx-auto py-12 px-4 md:px-6 lg:px-8">
-          <h2 class="mb-8 text-3xl font-serif text-[#333] dark:text-[#f5f5f5]">
+          <h2 class="mb-8 text-3xl font-serif text-[#333] ">
             Testimonials
           </h2>
           <div class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
-            <div class="rounded-lg bg-[#f5f5f5] dark:bg-[#1a1a1a] p-6 shadow-lg">
+            <div class="rounded-lg bg-[#f5f5f5]  p-6 shadow-lg">
               <img
                 src="https://img.freepik.com/free-photo/young-girl-with-short-hair-wearing-polo-shirt-looking-camera-with-smile-face_141793-46444.jpg?t=st=1716402440~exp=1716406040~hmac=33accbe4f5587804b36c60a49063dbb49d65f0fa572718f55e4b5e2907241b2b&w=1380"
                 alt="Testimonial 1"
@@ -332,15 +332,15 @@ function Home() {
                 class="rounded-full"
                 style={{ aspectRatio: "80/80", objectFit: "cover" }}
               />
-              <blockquote class="mt-4 text-[#333] dark:text-[#f5f5f5]">
+              <blockquote class="mt-4 text-[#333] ">
                 "The insights I've gained from studying the Upanishads have
                 truly transformed my understanding of life and spirituality."
-                <cite class="mt-4 block text-[#666] dark:text-[#999]">
+                <cite class="mt-4 block text-[#666] ">
                   - Anita, Spiritual Seeker
                 </cite>
               </blockquote>
             </div>
-            <div class="rounded-lg bg-[#f5f5f5] dark:bg-[#1a1a1a] p-6 shadow-lg">
+            <div class="rounded-lg bg-[#f5f5f5]  p-6 shadow-lg">
               <img
                 alt="Testimonial 2"
                 class="rounded-full"
@@ -349,15 +349,15 @@ function Home() {
                 width="80"
                 style={{ aspectRatio: "80/80", objectFit: "cover" }}
               />
-              <blockquote class="mt-4 text-[#333] dark:text-[#f5f5f5]">
+              <blockquote class="mt-4 text-[#333] ">
                 "The Bhagavad Gita has become a constant companion, guiding me
                 through the complexities of life with its timeless wisdom."
-                <cite class="mt-4 block text-[#666] dark:text-[#999]">
+                <cite class="mt-4 block text-[#666] ">
                   - Raj, Philosopher
                 </cite>
               </blockquote>
             </div>
-            <div class="rounded-lg bg-[#f5f5f5] dark:bg-[#1a1a1a] p-6 shadow-lg">
+            <div class="rounded-lg bg-[#f5f5f5]  p-6 shadow-lg">
               <img
                 alt="Testimonial 3"
                 class="rounded-full"
@@ -366,11 +366,11 @@ function Home() {
                 width="80"
                 style={{ aspectRatio: "80/80", objectFit: "cover" }}
               />
-              <blockquote class="mt-4 text-[#333] dark:text-[#f5f5f5]">
+              <blockquote class="mt-4 text-[#333] ">
                 "Studying the Vedas has been a profound and life-changing
                 experience. The depth of knowledge and insight is truly
                 remarkable."
-                <cite class="mt-4 block text-[#666] dark:text-[#999]">
+                <cite class="mt-4 block text-[#666] ">
                   - Priya, Scholar
                 </cite>
               </blockquote>

@@ -161,7 +161,7 @@ const MainScriptures = () => {
               <select
                 onChange={(event) => handleCategoryChange(event.target.value)}
                 value={selectedCategory}
-                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"      >
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5      "      >
                 {Object.keys(categories).map((cat) => (
                   <option key={cat}
                     value={cat}>
@@ -192,7 +192,7 @@ const MainScriptures = () => {
                     strokeWidth="2"
                     strokeLinecap="round"
                     strokeLinejoin="round"
-                    className="h-6 w-6 text-gray-500 dark:text-gray-400"
+                    className="h-6 w-6 text-gray-500"
                   >
                     <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"></path>
                   </svg>

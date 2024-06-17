@@ -44,7 +44,7 @@ function Donation() {
                 <h2 class="text-2xl md:text-3xl lg:text-4xl font-bold mb-4">
                   Our Mission
                 </h2>
-                <p class="text-gray-600 dark:text-gray-400 leading-relaxed">
+                <p class="text-gray-600  leading-relaxed">
                   Our website is dedicated to providing free and open access to
                   a vast library of Hindu scriptures, including the Vedas,
                   Upanishads, Epics, and other sacred texts. We believe that
@@ -54,7 +54,7 @@ function Donation() {
                   Epics, and other sacred texts. We believe that these ancient
                   teachings hold
                 </p>
-                <p class="text-gray-600 dark:text-gray-400 leading-relaxed mt-4">
+                <p class="text-gray-600  leading-relaxed mt-4">
                   Your donations help us maintain and expand our digital
                   library, ensuring that these invaluable resources remain
                   accessible to all. By supporting our mission, you are
@@ -77,15 +77,15 @@ function Donation() {
           </div>
         </section>
 
-        {/* <section class="bg-gray-100 dark:bg-gray-800 py-12 md:py-16 lg:py-20">
+        {/* <section class="bg-gray-100  py-12 md:py-16 lg:py-20">
           <div class="container px-4 md:px-6 lg:px-8">
             <h2 class="text-2xl md:text-3xl lg:text-4xl font-bold mb-8 text-center">
               Donation Tiers
             </h2>
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-              <div class="bg-white dark:bg-gray-950 rounded-lg shadow-md p-6 space-y-4">
+              <div class="bg-white rounded-lg shadow-md p-6 space-y-4">
                 <h3 class="text-xl font-bold">$10</h3>
-                <p class="text-gray-600 dark:text-gray-400">
+                <p class="text-gray-600 ">
                   Your $10 donation helps us maintain our website and server
                   infrastructure, ensuring the continued availability of our
                   digital library.
@@ -97,9 +97,9 @@ function Donation() {
                   Donate $10
                 </a>
               </div>
-              <div class="bg-white dark:bg-gray-950 rounded-lg shadow-md p-6 space-y-4">
+              <div class="bg-white  rounded-lg shadow-md p-6 space-y-4">
                 <h3 class="text-xl font-bold">$25</h3>
-                <p class="text-gray-600 dark:text-gray-400">
+                <p class="text-gray-600 ">
                   Your $25 donation helps us expand our digital library by
                   adding new scriptures and improving the user experience.
                 </p>
@@ -110,9 +110,9 @@ function Donation() {
                   Donate $25
                 </a>
               </div>
-              <div class="bg-white dark:bg-gray-950 rounded-lg shadow-md p-6 space-y-4">
+              <div class="bg-white  rounded-lg shadow-md p-6 space-y-4">
                 <h3 class="text-xl font-bold">$50</h3>
-                <p class="text-gray-600 dark:text-gray-400">
+                <p class="text-gray-600 ">
                   Your $50 donation supports our efforts to translate and
                   transcribe scriptures, making them accessible to a wider
                   audience.
@@ -143,13 +143,13 @@ function Donation() {
           </div>
         </section>
 
-        <section class="bg-gray-100 dark:bg-gray-800 py-12 md:py-16 lg:py-20">
+        <section class="bg-gray-100  py-12 md:py-16 lg:py-20">
           <div class="container mx-auto px-4 md:px-6 lg:px-8">
             <h2 class="text-2xl md:text-3xl lg:text-4xl font-bold mb-8 text-center">
               Our Generous Donors
             </h2>
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 animate-fade-in mx-auto text-center">
-              <div class="bg-white dark:bg-gray-950 rounded-lg shadow-md p-6 space-y-4 flex flex-col items-center">
+              <div class="bg-white  rounded-lg shadow-md p-6 space-y-4 flex flex-col items-center">
                 <span class="relative flex shrink-0 overflow-hidden rounded-full w-16 h-16 border-4 border-[#e63946]">
                   <span class="flex h-full w-full items-center justify-center rounded-full bg-muted">
                     D1
@@ -157,10 +157,10 @@ function Donation() {
                 </span>
                 <div class="text-center">
                   <h3 class="text-xl font-bold">John Doe</h3>
-                  <p class="text-gray-600 dark:text-gray-400">Donated $100</p>
+                  <p class="text-gray-600 ">Donated $100</p>
                 </div>
               </div>
-              <div class="bg-white dark:bg-gray-950 rounded-lg shadow-md p-6 space-y-4 flex flex-col items-center">
+              <div class="bg-white  rounded-lg shadow-md p-6 space-y-4 flex flex-col items-center">
                 <span class="relative flex shrink-0 overflow-hidden rounded-full w-16 h-16 border-4 border-[#e63946]">
                   <span class="flex h-full w-full items-center justify-center rounded-full bg-muted">
                     D2
@@ -168,10 +168,10 @@ function Donation() {
                 </span>
                 <div class="text-center">
                   <h3 class="text-xl font-bold">Jane Smith</h3>
-                  <p class="text-gray-600 dark:text-gray-400">Donated $50</p>
+                  <p class="text-gray-600 ">Donated $50</p>
                 </div>
               </div>
-              <div class="bg-white dark:bg-gray-950 rounded-lg shadow-md p-6 space-y-4 flex flex-col items-center">
+              <div class="bg-white  rounded-lg shadow-md p-6 space-y-4 flex flex-col items-center">
                 <span class="relative flex shrink-0 overflow-hidden rounded-full w-16 h-16 border-4 border-[#e63946]">
                   <span class="flex h-full w-full items-center justify-center rounded-full bg-muted">
                     D3
@@ -179,10 +179,10 @@ function Donation() {
                 </span>
                 <div class="text-center">
                   <h3 class="text-xl font-bold">Michael Johnson</h3>
-                  <p class="text-gray-600 dark:text-gray-400">Donated $75</p>
+                  <p class="text-gray-600 ">Donated $75</p>
                 </div>
               </div>
-              <div class="bg-white dark:bg-gray-950 rounded-lg shadow-md p-6 space-y-4 flex flex-col items-center">
+              <div class="bg-white  rounded-lg shadow-md p-6 space-y-4 flex flex-col items-center">
                 <span class="relative flex shrink-0 overflow-hidden rounded-full w-16 h-16 border-4 border-[#e63946]">
                   <span class="flex h-full w-full items-center justify-center rounded-full bg-muted">
                     D4

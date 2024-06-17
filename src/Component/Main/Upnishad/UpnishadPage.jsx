@@ -4,7 +4,7 @@ function UpnishadPage() {
     return (
         <div>
             <div className="flex flex-col sm:flex-row ">
-                <div className="  bg-gray-100 p-6 dark:bg-gray-800 sm:relative sm:top-0 sm:left-0 sm:flex-none lg:h-[80vh]  bg-black w-full sm:w-[250px] p-8">
+                <div className="   p-6  sm:relative sm:top-0 sm:left-0 sm:flex-none lg:h-[80vh]  bg-black w-full sm:w-[250px] ">
                     <div className="space-y-4">
                         <div>
                             <button
@@ -41,7 +41,7 @@ function UpnishadPage() {
                     <div className="mb-6 flex items-center justify-between">
                         <div className="space-y-1">
                             <h2 className="text-2xl font-bold">Rigveda Mantra</h2>
-                            <p className="text-gray-500 dark:text-gray-400">
+                            <p className="text-gray-500 ">
                                 Mantra 1
                             </p>
                         </div>
@@ -72,7 +72,7 @@ function UpnishadPage() {
                         </div>
                     </div>
                     <div className="space-y-6">
-                        <div className="rounded-lg border-2 bg-white p-6 shadow-lg dark:border-gray-300 ">
+                        <div className="rounded-lg border-2 bg-white p-6 shadow-lg  ">
                             <div className="space-y-4">
 
                                 <div>
@@ -91,7 +91,7 @@ function UpnishadPage() {
                                 aria-controls="radix-:r2c:"
                                 aria-expanded="false"
                                 data-state="closed"
-                                className="flex w-full items-center justify-between rounded-lg bg-gray-100 px-4 py-3 font-medium transition-colors hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                                className="flex w-full items-center justify-between rounded-lg bg-gray-100 px-4 py-3 font-medium transition-colors hover:bg-gray-200 "
                             >
                                 Translations
                                 <svg
@@ -117,7 +117,7 @@ function UpnishadPage() {
                                 aria-controls="radix-:r2c:"
                                 aria-expanded="false"
                                 data-state="closed"
-                                className="flex w-full items-center justify-between rounded-lg bg-gray-100 px-4 py-3 font-medium transition-colors hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                                className="flex w-full items-center justify-between rounded-lg bg-gray-100 px-4 py-3 font-medium transition-colors hover:bg-gray-200 "
                             >
                                 Commentry
                                 <svg

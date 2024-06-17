@@ -3,19 +3,19 @@ import React from "react";
 function Donate() {
   return (
     <div>
-      <div class="bg-gray-100 dark:bg-gray-900 min-h-screen flex flex-col">
+      <div class="bg-gray-100  min-h-screen flex flex-col">
         <main class="flex-1 container mx-auto py-20 px-6 md:px-12">
           <div class="grid  gap-12">
             <div>
               <h1 class="text-4xl font-bold mb-5">
                 Donate and Make a Difference
               </h1>
-              <p class="text-gray-600 dark:text-gray-400 mb-5 text-lg">
+              <p class="text-gray-600  mb-5 text-lg">
                 Your donations help us maintain and expand our digital library,
                 ensuring that these invaluable resources remain accessible to
                 all.
               </p>
-              <form class="bg-white dark:bg-[#1F2937] rounded-lg shadow-md p-10 space-y-8">
+              <form class="bg-white  rounded-lg shadow-md p-10 space-y-8">
                 <div>
                   <label
                     class="font-medium peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-lg"
