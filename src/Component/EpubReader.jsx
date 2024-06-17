@@ -1,6 +1,7 @@
 import React, { useState, useRef, useCallback, useEffect } from "react";
 import { EpubView } from "react-reader";
-function MahabharataHindi() {
+
+const EpubReader = () => {
   const [epubFile, setEpubFile] = useState(null);
   const [location, setLocation] = useState(null);
   const [books, setBooks] = useState([]);
@@ -39,7 +40,7 @@ function MahabharataHindi() {
   const closeButtonStyle = {
     bottom: "20px",
     width: "100%",
-    marginTop: "10px",
+    marginTop:"10px",
     left: "20px",
     padding: "10px",
     border: "none",
@@ -235,6 +236,7 @@ function MahabharataHindi() {
         className="z-20 lg:flex lg:static lg:z-auto bg-gray-200"
         style={drawerStyle}
       >
+        
         <div
           className="flex-shrink-0 mt-6 lg:block"
           style={{
@@ -496,6 +498,6 @@ function MahabharataHindi() {
       )}
     </div>
   );
-}
+};
 
-export default MahabharataHindi;
+export default EpubReader;

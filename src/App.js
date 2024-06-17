@@ -29,6 +29,7 @@ import BrihadaranyakaUpanishad from './Component/Main/Upnishad/BrihadaranyakaUpa
 import ShvetashvataraUpanishad from './Component/Main/Upnishad/ShvetashvataraUpanishad';
 import Donation from './Component/Donation/Donation';
 import Donate from './Component/Donation/Donate';
+import EpubReader from './Component/EpubReader';
 
 function App() {
   return (
@@ -43,6 +44,7 @@ function App() {
             <Route path="/about" element={<AboutUs />} />
             <Route path="/donation" element={<Donation />} />
             <Route path="/donation/donate" element={<Donate />} />
+            <Route path="/epub" element={<EpubReader />} />
             <Route path="/contact" element={<ContactUs />} />
             {/* Route for displaying book details */}
             <Route path="/scriptures/:category/:id" element={<BookDetail />} />
