@@ -1,7 +1,8 @@
 import React, { useState, useRef, useCallback, useEffect } from "react";
 import { EpubView } from "react-reader";
+import mahabharataEpub from "./mb.epub";
 function MahabharataHindi() {
-  const [epubFile, setEpubFile] = useState(null);
+  const [epubFile, setEpubFile] = useState(mahabharataEpub);
   const [location, setLocation] = useState(null);
   const [books, setBooks] = useState([]);
   const [selectedBook, setSelectedBook] = useState(null);
@@ -13,6 +14,8 @@ function MahabharataHindi() {
   const [selectedChapter, setSelectedChapter] = useState(null);
   const renditionRef = useRef(null);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+
+  
 
   const toggleDrawer = () => {
     setIsDrawerOpen(!isDrawerOpen);
