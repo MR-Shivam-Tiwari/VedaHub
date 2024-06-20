@@ -15,12 +15,13 @@ function MahabharataHindi() {
   const renditionRef = useRef(null);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [pageNumberFilter, setPageNumberFilter] = useState(null);
+  const [loading, setLoading] = useState(true);
+
   const goToPage = (pageNumber) => {
     if (renditionRef.current && pageNumber) {
       renditionRef.current.display(pageNumber);
     }
   };
-
 
   const toggleDrawer = () => {
     setIsDrawerOpen(!isDrawerOpen);
@@ -98,6 +99,9 @@ function MahabharataHindi() {
     });
     renditionRef.current.on("displayError", (error) => {
       console.error("Display Error:", error);
+    });
+    renditionRef.current.on("rendered", () => {
+      setLoading(false); // EPUB file is rendered, stop loading
     });
   }, []);
 
@@ -205,10 +209,10 @@ function MahabharataHindi() {
   return (
     <div className="bg-[#f0d1a2]">
       <div className="hidden bg-gray-200 lg:block">
-
-
         <div className="flex gap-5  p-2 px-6 justify-end items-center   ">
-          <div className="flex items-center"> {/* Updated: Added items-center class */}
+          <div className="flex items-center">
+            {" "}
+            {/* Updated: Added items-center class */}
             {/* <input
     type="text"
     placeholder="Search by text"
@@ -225,7 +229,9 @@ function MahabharataHindi() {
   </button> */}
           </div>
 
-          <div className="flex gap-4 items-center"> {/* Updated: Added items-center class */}
+          <div className="flex gap-4 items-center">
+            {" "}
+            {/* Updated: Added items-center class */}
             <input
               type="number"
               placeholder="Enter page number"
@@ -234,7 +240,6 @@ function MahabharataHindi() {
               id="first_name"
               className="bg-gray-50 h-10 border border-gray-300 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
             />
-
             <button
               onClick={() => goToPage(pageNumberFilter)}
               style={{ cursor: "pointer" }}
@@ -252,7 +257,6 @@ function MahabharataHindi() {
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
-
         }}
       >
         <div className="flex justify-start items-center gap-2 lg:hidden">
@@ -287,12 +291,18 @@ function MahabharataHindi() {
           style={drawerStyle}
         >
           <div className="flex justify-end pt-2 px-2 ">
-
             <button
               className="lg:hidden  font-bold p-2 text-white text-lg  bg-gray-400 rounded "
               onClick={toggleDrawer}
             >
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                fill="currentColor"
+                class="bi bi-x-lg"
+                viewBox="0 0 16 16"
+              >
                 <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z" />
               </svg>
             </button>
@@ -394,6 +404,14 @@ function MahabharataHindi() {
 
         {epubFile ? (
           <>
+            {loading && (
+              <div className="w-full h-1 bg-gray-200">
+                <div
+                  className="h-full bg-blue-500"
+                  style={{ width: "100%", transition: "width 1s" }}
+                >Loading...</div>
+              </div>
+            )}
             <div style={{ flex: "1", display: "flex", width: "100%" }}>
               <div
                 className="hidden lg:block"
@@ -444,7 +462,11 @@ function MahabharataHindi() {
                       className="mb-3 border-2 rounded border-gray-400"
                       value={selectedParv ? selectedParv.href : ""}
                       onChange={selectParv}
-                      style={{ width: "100%", padding: "5px", fontSize: "14px" }}
+                      style={{
+                        width: "100%",
+                        padding: "5px",
+                        fontSize: "14px",
+                      }}
                     >
                       <option value="" disabled>
                         Select Parva
@@ -464,7 +486,11 @@ function MahabharataHindi() {
                       className="mb-2 border-2 rounded border-gray-400"
                       value={selectedUparv ? selectedUparv.href : ""}
                       onChange={selectUparv}
-                      style={{ width: "100%", padding: "5px", fontSize: "14px" }}
+                      style={{
+                        width: "100%",
+                        padding: "5px",
+                        fontSize: "14px",
+                      }}
                     >
                       <option value="" disabled>
                         Select UpParva
@@ -490,7 +516,6 @@ function MahabharataHindi() {
                   background: "#f0d1a2",
                 }}
               >
-
                 <div
                   className=""
                   style={{
@@ -511,18 +536,23 @@ function MahabharataHindi() {
                     epubOptions={{ flow: "scrolled" }} // Ensure content is scrollable
                     ref={renditionRef}
                     getRendition={handleRendition}
-                    style={{ width: "100%", height: "100%", overflowX: "hidden" }} // Ensure EpubView fills the container and hides horizontal overflow
+                    style={{
+                      width: "100%",
+                      height: "100%",
+                      overflowX: "hidden",
+                    }} // Ensure EpubView fills the container and hides horizontal overflow
                   />
-
                 </div>
               </div>
-
             </div>
             <div
               className="w-[100%] justify-center lg:gap-[30%] lg:ml-40 items-center flex h-[50px] gap-4   lg:mt-[10px] "
               style={{}}
             >
-              <button className="bg-gray-700 p-2 font-bold text-white px-4  rounded" onClick={prevPage}>
+              <button
+                className="bg-gray-700 p-2 font-bold text-white px-4  rounded"
+                onClick={prevPage}
+              >
                 Previous Page
               </button>
               <button
@@ -560,7 +590,6 @@ function MahabharataHindi() {
         )}
       </div>
     </div>
-
   );
 }
 

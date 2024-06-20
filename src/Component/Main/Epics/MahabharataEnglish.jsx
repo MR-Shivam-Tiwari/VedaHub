@@ -8,18 +8,20 @@ function MahabharataEnglish() {
   const [books, setBooks] = useState([]);
   const [selectedBookIndex, setSelectedBookIndex] = useState(0);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+  const [loading, setLoading] = useState(true);
   const renditionRef = useRef(null);
   const drawerRef = useRef(null);
   const [pageNumberFilter, setPageNumberFilter] = useState(null);
+
   const toggleDrawer = () => {
     setIsDrawerOpen(!isDrawerOpen);
   };
+
   const goToPage = (pageNumber) => {
     if (renditionRef.current && pageNumber) {
       renditionRef.current.display(pageNumber);
     }
   };
-
 
   const drawerStyle = {
     position: "fixed",
@@ -77,6 +79,9 @@ function MahabharataEnglish() {
     renditionRef.current.on("displayError", (error) => {
       console.error("Display Error:", error);
     });
+    renditionRef.current.on("rendered", () => {
+      setLoading(false); // EPUB file is rendered, stop loading
+    });
   }, []);
 
   const nextPage = () => {
@@ -118,27 +123,12 @@ function MahabharataEnglish() {
   return (
     <>
       <div className="hidden bg-gray-200 lg:block">
-
-
-        <div className="flex gap-5  p-2 px- justify-end items-center   ">
-          <div className="flex items-center"> {/* Updated: Added items-center class */}
-            {/* <input
-    type="text"
-    placeholder="Search by text"
-    value={textSearchFilter}
-    onChange={(e) => setTextSearchFilter(e.target.value)}
-    id="first_name"
-    className="bg-gray-50 h-10 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-  />
-
-  <button
-    className="bg-blue-500 text-white font-bold px-4 h-10 flex items-center rounded"
-  >
-    Search
-  </button> */}
+        <div className="flex gap-5 p-2 px- justify-end items-center">
+          <div className="flex items-center">
+            {/* Text search input and button commented out */}
           </div>
 
-          <div className="flex gap-4 items-center"> {/* Updated: Added items-center class */}
+          <div className="flex gap-4 items-center">
             <input
               type="number"
               placeholder="Enter page number"
@@ -147,17 +137,17 @@ function MahabharataEnglish() {
               id="first_name"
               className="bg-gray-50 h-10 border border-gray-300 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
             />
-
             <button
               onClick={() => goToPage(pageNumberFilter)}
               style={{ cursor: "pointer" }}
-              className="bg-[#8b4513] font-bold text-white  px-4  p-2 rounded"
+              className="bg-[#8b4513] font-bold text-white px-4 p-2 rounded"
             >
               Search
             </button>
           </div>
         </div>
       </div>
+
       <div
         className="bg-gray-200 h-[100%] lg:px-[20px]"
         style={{
@@ -198,22 +188,28 @@ function MahabharataEnglish() {
           className="z-20 lg:flex lg:static lg:hidden lg:z-auto bg-gray-200"
           style={drawerStyle}
         >
-          <div className="flex  pt-2 px-2 justify-end">
+          <div className="flex pt-2 px-2 justify-end">
             <button
-              className="lg:hidden  font-bold p-2 text-white text-lg  bg-gray-400 rounded "
+              className="lg:hidden font-bold p-2 text-white text-lg bg-gray-400 rounded"
               onClick={toggleDrawer}
             >
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                fill="currentColor"
+                className="bi bi-x-lg"
+                viewBox="0 0 16 16"
+              >
                 <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z" />
               </svg>
             </button>
           </div>
           <h3 className="font-bold mb-1">Select Parva</h3>
           <div
-            className="flex-shrink-0 px-5 lg:px-0  lg:block"
+            className="flex-shrink-0 px-5 lg:px-0 lg:block"
             style={{
               flex: "0 0 250px",
-              // borderRight: "1px solid gray",
               textAlign: "left",
               maxHeight: "calc(100vh - 100px)",
               overflowY: "auto",
@@ -258,6 +254,12 @@ function MahabharataEnglish() {
 
         {epubFile ? (
           <>
+            {loading && (
+              <div className="w-full h-1 bg-gray-200">
+                <div className="h-full bg-blue-500" style={{ width: "100%", transition: "width 1s" }}></div>
+              </div>
+            )}
+
             <div style={{ flex: "1", display: "flex", width: "100%" }}>
               <div
                 className="hidden lg:block"
@@ -308,7 +310,7 @@ function MahabharataEnglish() {
               </div>
 
               <div
-                className="w-[100%] h-[75vh] lg:h-[80vh] rounded "
+                className="w-[100%] h-[75vh] lg:h-[80vh] rounded"
                 style={{
                   flex: "1",
                   overflowY: "auto",
@@ -322,22 +324,24 @@ function MahabharataEnglish() {
                   location={location}
                   locationChanged={onLocationChanged}
                   tocChanged={onTocLoaded}
-                  epubOptions={{ flow: "scrolled" }} // Ensure content is scrollable
+                  epubOptions={{ flow: "scrolled" }}
                   ref={renditionRef}
                   getRendition={handleRendition}
-                  style={{ flex: "1", overflowX: "hidden" }} // Add this if EpubView accepts style props
+                  style={{ flex: "1", overflowX: "hidden" }}
                 />
               </div>
             </div>
             <div
-              className="w-[100%] justify-center lg:gap-[30%] lg:ml-40 items-center flex h-[50px] gap-4   lg:mt-[-30px] "
-              style={{}}
+              className="w-[100%] justify-center lg:gap-[30%] lg:ml-40 items-center flex h-[50px] gap-4 lg:mt-[-30px]"
             >
-              <button className="bg-gray-700 p-2 font-bold text-white px-4 lg:mb-4 rounded" onClick={prevPage}>
+              <button
+                className="bg-gray-700 p-2 font-bold text-white px-4 lg:mb-4 rounded"
+                onClick={prevPage}
+              >
                 Previous Page
               </button>
               <button
-                className="bg-[#8b4513] font-bold text-white lg:mb-4 px-4  p-2 rounded"
+                className="bg-[#8b4513] font-bold text-white lg:mb-4 px-4 p-2 rounded"
                 onClick={nextPage}
               >
                 Next Page
@@ -352,7 +356,6 @@ function MahabharataEnglish() {
         )}
       </div>
     </>
-
   );
 }
 

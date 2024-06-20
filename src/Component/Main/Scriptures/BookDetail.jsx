@@ -174,7 +174,7 @@ function BookDetail() {
   };
 
   return (
-    <div>
+    <div className="bg-gray-200">
       <div className="flex flex-col md:flex-row items-start justify-center gap-8 p-6 md:p-12 bg-gray-200 ">
         <div className="flex-1 max-w-md">
           <img
