@@ -30,6 +30,7 @@ import ShvetashvataraUpanishad from './Component/Main/Upnishad/ShvetashvataraUpa
 import Donation from './Component/Donation/Donation';
 import Donate from './Component/Donation/Donate';
 import EpubReader from './Component/EpubReader';
+import MahabharatBoriCe from './Component/Main/Epics/MahabharatBoriCe';
 
 function App() {
   return (
@@ -69,6 +70,7 @@ function App() {
             <Route path="/scriptures/:category/:id/Ramayana English" element={<RamayanaEnglish />} />
             <Route path="/scriptures/:category/:id/Mahabharata Hindi" element={<MahabharataHindi />} />
             <Route path="/scriptures/:category/:id/Mahabharata English" element={<MahabharataEnglish />} />
+            <Route path="/scriptures/:category/:id/Mahabharata Bori-CE" element={<MahabharatBoriCe />} />
 
             {/* Route for Geeta book details */}
             <Route path="/scriptures/:category/:id/Bhagavad Gita Hindi" element={<BhagavadGitaHindi />} />

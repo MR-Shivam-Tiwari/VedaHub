@@ -1,6 +1,6 @@
 import React, { useState, useRef, useCallback, useEffect } from "react";
 import { EpubView } from "react-reader";
-import mahabharataEpub from "./mb.epub";
+import mahabharataEpub from "./EpubFile/MB.epub";
 function MahabharataHindi() {
   const [epubFile, setEpubFile] = useState(mahabharataEpub);
   const [location, setLocation] = useState(null);
@@ -205,6 +205,7 @@ function MahabharataHindi() {
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
+        
       }}
     >
       <div className="flex justify-start items-center gap-2 lg:hidden">
@@ -436,8 +437,9 @@ function MahabharataHindi() {
                 style={{
                   overflow: "hidden",
                   margin: "0 auto",
+                  background:"#f0d1a2"
                 }}
-                className="rounded shadow-lg bg-white lg:w-[600px] h-[520px] w-[340px] lg:h-[750px]"
+                className="rounded shadow-lg  lg:w-[1220px] h-[520px] w-[340px] lg:h-[750px]"
               >
                 <EpubView
                   url={epubFile}

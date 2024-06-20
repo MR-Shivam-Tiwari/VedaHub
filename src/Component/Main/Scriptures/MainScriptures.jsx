@@ -45,6 +45,11 @@ const Epics = [
     name: "Mahabharata English",
     src: "https://m.media-amazon.com/images/I/71s6IAl4QlL._AC_UF1000,1000_QL80_.jpg",
   },
+  {
+    id: 5,
+    name: "Mahabharata Bori-CE",
+    src: "https://m.media-amazon.com/images/I/71s6IAl4QlL._AC_UF1000,1000_QL80_.jpg",
+  },
 ];
 
 const Upanishads = [
