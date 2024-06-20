@@ -2,6 +2,7 @@ import React from "react";
 import Donate from "../Image/donate.jpg";
 import Imaginate from "../Image/imagination.jpg";
 import { useNavigate } from "react-router-dom";
+import Footer from "../Footer/Footer";
 function Donation() {
   const navigate = useNavigate();
   return (
@@ -196,6 +197,8 @@ function Donation() {
           </div>
         </section>
       </div>
+      <Footer />
+
     </div>
   );
 }

@@ -8,6 +8,7 @@ import epic from "../Image/epic.jpeg";
 import scripture from "../Image/ScriptureSearch.jpg";
 import discussion from "../Image/Discussion.jpg";
 import {  useNavigate } from "react-router-dom";
+import Footer from "../Footer/Footer";
 function Home() {
   const navigate = useNavigate();
   return (
@@ -607,6 +608,7 @@ function Home() {
           </div>
         </section>
       </main>
+      <Footer />
     </div>
   );
 }

@@ -10,10 +10,16 @@ function MahabharataEnglish() {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const renditionRef = useRef(null);
   const drawerRef = useRef(null);
-
+  const [pageNumberFilter, setPageNumberFilter] = useState(null);
   const toggleDrawer = () => {
     setIsDrawerOpen(!isDrawerOpen);
   };
+  const goToPage = (pageNumber) => {
+    if (renditionRef.current && pageNumber) {
+      renditionRef.current.display(pageNumber);
+    }
+  };
+
 
   const drawerStyle = {
     position: "fixed",
@@ -110,200 +116,243 @@ function MahabharataEnglish() {
   }, [isDrawerOpen]);
 
   return (
-    <div
-      className="bg-gray-200 h-[100%] lg:p-[20px]"
-      style={{
-        textAlign: "center",
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-      }}
-    >
-      <div className="flex justify-start items-center gap-2 lg:hidden">
-        <button
-          className="flex w-[340px] bg-gray-400 h-9 my-2 items-center font-bold"
-          onClick={toggleDrawer}
-          style={menuButtonStyle}
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="20"
-            height="20"
-            fill="currentColor"
-            style={{ color: "black", fontWeight: "bold" }}
-            className="bi bi-list-ul"
-            viewBox="0 0 16 16"
-          >
-            <path
-              fillRule="evenodd"
-              d="M5 11.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5m-3 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2m0 4a1 1 0 1 0 0-2 1 1 0 0 0 0 2m0 4a1 1 0 1 0 0-2 1 1 0 0 0 0 2"
-            />
-          </svg>
-          <span className="mb-1" style={{ marginLeft: "5px" }}>
-            Menu
-          </span>
-        </button>
-      </div>
+    <>
+      <div className="hidden bg-gray-200 lg:block">
 
+
+        <div className="flex gap-5  p-2 px- justify-end items-center   ">
+          <div className="flex items-center"> {/* Updated: Added items-center class */}
+            {/* <input
+    type="text"
+    placeholder="Search by text"
+    value={textSearchFilter}
+    onChange={(e) => setTextSearchFilter(e.target.value)}
+    id="first_name"
+    className="bg-gray-50 h-10 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+  />
+
+  <button
+    className="bg-blue-500 text-white font-bold px-4 h-10 flex items-center rounded"
+  >
+    Search
+  </button> */}
+          </div>
+
+          <div className="flex gap-4 items-center"> {/* Updated: Added items-center class */}
+            <input
+              type="number"
+              placeholder="Enter page number"
+              value={pageNumberFilter || ""}
+              onChange={(e) => setPageNumberFilter(e.target.value)}
+              id="first_name"
+              className="bg-gray-50 h-10 border border-gray-300 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+            />
+
+            <button
+              onClick={() => goToPage(pageNumberFilter)}
+              style={{ cursor: "pointer" }}
+              className="bg-[#8b4513] font-bold text-white  px-4  p-2 rounded"
+            >
+              Search
+            </button>
+          </div>
+        </div>
+      </div>
       <div
-        ref={drawerRef}
-        className="z-20 lg:flex lg:static lg:z-auto bg-gray-200"
-        style={drawerStyle}
+        className="bg-gray-200 h-[100%] lg:px-[20px]"
+        style={{
+          textAlign: "center",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+        }}
       >
-        <div className="flex  justify-end">
+        <div className="flex justify-start items-center gap-2 lg:hidden">
           <button
-            className="lg:hidden  px-2 font-bold text-white text-lg bg-gray-500  m-2 rounded "
+            className="flex w-[340px] bg-gray-400 h-9 my-2 items-center font-bold"
             onClick={toggleDrawer}
-            // style={closeButtonStyle}
+            style={menuButtonStyle}
           >
-            Close
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="20"
+              height="20"
+              fill="currentColor"
+              style={{ color: "black", fontWeight: "bold" }}
+              className="bi bi-list-ul"
+              viewBox="0 0 16 16"
+            >
+              <path
+                fillRule="evenodd"
+                d="M5 11.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5m-3 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2m0 4a1 1 0 1 0 0-2 1 1 0 0 0 0 2m0 4a1 1 0 1 0 0-2 1 1 0 0 0 0 2"
+              />
+            </svg>
+            <span className="mb-1" style={{ marginLeft: "5px" }}>
+              Menu
+            </span>
           </button>
         </div>
-        <h3 className="font-bold mb-1">Select Parva</h3>
+
         <div
-          className="flex-shrink-0 mt-1 lg:block"
-          style={{
-            flex: "0 0 250px",
-            // borderRight: "1px solid gray",
-            padding: "10px",
-            textAlign: "left",
-            maxHeight: "calc(100vh - 100px)",
-            overflowY: "auto",
-          }}
+          ref={drawerRef}
+          className="z-20 lg:flex lg:static lg:hidden lg:z-auto bg-gray-200"
+          style={drawerStyle}
         >
-          <ul className="mb-3">
-            {books.map((book, index) => (
-              <button
-                key={index}
-                onClick={() => {
-                  setSelectedBookIndex(index);
-                  goToBook(index);
-                }}
-                style={{
-                  cursor: "pointer",
-                  fontWeight: index === selectedBookIndex ? "bold" : "normal",
-                  background: index === selectedBookIndex ? "black" : "",
-                  color: index === selectedBookIndex ? "white" : "black",
-                }}
-                className="inline-flex items-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 h-10 px-4 py-2 justify-start gap-2 text-black"
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  className="w-5 h-5"
-                >
-                  <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"></path>
-                </svg>
-                {book.label}
-              </button>
-            ))}
-          </ul>
-        </div>
-      </div>
-
-      {epubFile ? (
-        <>
-          <div style={{ flex: "1", display: "flex", width: "100%" }}>
-            <div
-              className="hidden lg:block"
-              style={{
-                flex: "0 0 250px",
-                borderRight: "1px solid gray",
-                padding: "10px",
-                textAlign: "left",
-                maxHeight: "calc(100vh - 100px)",
-                overflowY: "auto",
-              }}
-            >
-              <h3 className="font-bold mb-1"> Select Book</h3>
-              <ul className="mb-3">
-                {books.map((book, index) => (
-                  <button
-                    key={index}
-                    onClick={() => {
-                      setSelectedBookIndex(index);
-                      goToBook(index);
-                    }}
-                    style={{
-                      cursor: "pointer",
-                      fontWeight:
-                        index === selectedBookIndex ? "bold" : "normal",
-                      background: index === selectedBookIndex ? "black" : "",
-                      color: index === selectedBookIndex ? "white" : "black",
-                    }}
-                    className="inline-flex items-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 h-10 px-4 py-2 justify-start gap-2 text-black"
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="24"
-                      height="24"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      className="w-5 h-5"
-                    >
-                      <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"></path>
-                    </svg>
-                    {book.label}
-                  </button>
-                ))}
-              </ul>
-            </div>
-
-            <div
-              className="w-[100%] h-[75vh] lg:h-[80vh] rounded mx-1"
-              style={{
-                flex: "1",
-                overflowY: "auto",
-                overflowX: "hidden",
-                display: "flex",
-                background: "#f0d1a2",
-              }}
-            >
-              <EpubView
-                url={epubFile}
-                location={location}
-                locationChanged={onLocationChanged}
-                tocChanged={onTocLoaded}
-                epubOptions={{ flow: "scrolled" }} // Ensure content is scrollable
-                ref={renditionRef}
-                getRendition={handleRendition}
-                style={{ flex: "1", overflowX: "hidden" }} // Add this if EpubView accepts style props
-              />
-            </div>
-          </div>
-          <div
-            className="w-[100%] justify-center lg:gap-[30%] lg:ml-40 items-center flex h-[50px] gap-4 mt-2  lg:mt-[-30px] "
-            style={{}}
-          >
-            <button className="bg-gray-400 p-2  rounded" onClick={prevPage}>
-              Previous Page
-            </button>
+          <div className="flex  pt-2 px-2 justify-end">
             <button
-              className="bg-blue-600 font-bold text-white  p-2 rounded"
-              onClick={nextPage}
+              className="lg:hidden  font-bold p-2 text-white text-lg  bg-gray-400 rounded "
+              onClick={toggleDrawer}
             >
-              Next Page
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
+                <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z" />
+              </svg>
             </button>
           </div>
-        </>
-      ) : (
-        <div>
-          <h3>Upload an EPUB file to read</h3>
-          <input type="file" accept=".epub" onChange={handleFileUpload} />
+          <h3 className="font-bold mb-1">Select Parva</h3>
+          <div
+            className="flex-shrink-0 px-5 lg:px-0  lg:block"
+            style={{
+              flex: "0 0 250px",
+              // borderRight: "1px solid gray",
+              textAlign: "left",
+              maxHeight: "calc(100vh - 100px)",
+              overflowY: "auto",
+            }}
+          >
+            <ul className="mb-3">
+              {books.map((book, index) => (
+                <button
+                  key={index}
+                  onClick={() => {
+                    setSelectedBookIndex(index);
+                    goToBook(index);
+                  }}
+                  style={{
+                    cursor: "pointer",
+                    fontWeight: index === selectedBookIndex ? "bold" : "normal",
+                    background: index === selectedBookIndex ? "black" : "",
+                    color: index === selectedBookIndex ? "white" : "black",
+                  }}
+                  className="inline-flex items-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 h-10 px-4 py-2 justify-start gap-2 text-black"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className="w-5 h-5"
+                  >
+                    <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"></path>
+                  </svg>
+                  {book.label}
+                </button>
+              ))}
+            </ul>
+          </div>
         </div>
-      )}
-    </div>
+
+        {epubFile ? (
+          <>
+            <div style={{ flex: "1", display: "flex", width: "100%" }}>
+              <div
+                className="hidden lg:block"
+                style={{
+                  flex: "0 0 250px",
+                  padding: "10px",
+                  textAlign: "left",
+                  maxHeight: "calc(100vh - 100px)",
+                  overflowY: "auto",
+                }}
+              >
+                <h3 className="font-bold mb-1"> Select Book</h3>
+                <ul className="mb-3">
+                  {books.map((book, index) => (
+                    <button
+                      key={index}
+                      onClick={() => {
+                        setSelectedBookIndex(index);
+                        goToBook(index);
+                      }}
+                      style={{
+                        cursor: "pointer",
+                        fontWeight:
+                          index === selectedBookIndex ? "bold" : "normal",
+                        background: index === selectedBookIndex ? "black" : "",
+                        color: index === selectedBookIndex ? "white" : "black",
+                      }}
+                      className="inline-flex items-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 h-10 px-4 py-2 justify-start gap-2 text-black"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        className="w-5 h-5"
+                      >
+                        <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"></path>
+                      </svg>
+                      {book.label}
+                    </button>
+                  ))}
+                </ul>
+              </div>
+
+              <div
+                className="w-[100%] h-[75vh] lg:h-[80vh] rounded "
+                style={{
+                  flex: "1",
+                  overflowY: "auto",
+                  overflowX: "hidden",
+                  display: "flex",
+                  background: "#f0d1a2",
+                }}
+              >
+                <EpubView
+                  url={epubFile}
+                  location={location}
+                  locationChanged={onLocationChanged}
+                  tocChanged={onTocLoaded}
+                  epubOptions={{ flow: "scrolled" }} // Ensure content is scrollable
+                  ref={renditionRef}
+                  getRendition={handleRendition}
+                  style={{ flex: "1", overflowX: "hidden" }} // Add this if EpubView accepts style props
+                />
+              </div>
+            </div>
+            <div
+              className="w-[100%] justify-center lg:gap-[30%] lg:ml-40 items-center flex h-[50px] gap-4   lg:mt-[-30px] "
+              style={{}}
+            >
+              <button className="bg-gray-700 p-2 font-bold text-white px-4 lg:mb-4 rounded" onClick={prevPage}>
+                Previous Page
+              </button>
+              <button
+                className="bg-[#8b4513] font-bold text-white lg:mb-4 px-4  p-2 rounded"
+                onClick={nextPage}
+              >
+                Next Page
+              </button>
+            </div>
+          </>
+        ) : (
+          <div>
+            <h3>Upload an EPUB file to read</h3>
+            <input type="file" accept=".epub" onChange={handleFileUpload} />
+          </div>
+        )}
+      </div>
+    </>
+
   );
 }
 
