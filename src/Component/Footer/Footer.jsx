@@ -34,7 +34,7 @@ function Footer() {
                             </div>
                         </li>
                         <li>
-                            <div class="hover:text-indigo-500 cursor-pointer" onClick={() => navigate('/scriptures/BhagvadGeeta')} >
+                            <div class="hover:text-indigo-500 cursor-pointer" onClick={() => navigate('/scriptures/Geeta')} >
                                 Bhagavad Gita
                             </div>
                         </li>

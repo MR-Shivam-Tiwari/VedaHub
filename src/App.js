@@ -31,6 +31,7 @@ import Donation from './Component/Donation/Donation';
 import Donate from './Component/Donation/Donate';
 import EpubReader from './Component/EpubReader';
 import MahabharatBoriCe from './Component/Main/Epics/MahabharatBoriCe';
+import AstavakraGeetaEnglish from './Component/Main/Geeta/AstavakraGeeta/AstavakraGeetaEnglish';
 
 function App() {
   return (
@@ -75,6 +76,7 @@ function App() {
             {/* Route for Geeta book details */}
             <Route path="/scriptures/:category/:id/Bhagavad Gita Hindi" element={<BhagavadGitaHindi />} />
             <Route path="/scriptures/:category/:id/Bhagavad Gita English" element={<BhagavadGitaEnglish />} />
+            <Route path="/scriptures/:category/:id/Astavakra Geeta English" element={<AstavakraGeetaEnglish />} />
 
           </Routes>
         </div>

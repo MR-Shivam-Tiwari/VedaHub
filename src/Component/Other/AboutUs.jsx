@@ -26,7 +26,7 @@ function AboutUs() {
                       </p>
                     </div>
                     <div class="flex flex-col gap-2 min-[400px]:flex-row">
-                      <div onClick={() => navigate("/scriptures/BhagvadGeeta")} class="inline-flex cursor-pointer h-10 items-center justify-center rounded-md bg-gray-900 px-8 text-sm font-medium text-gray-50 shadow transition-colors hover:bg-gray-900/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:pointer-events-none disabled:opacity-50 ">
+                      <div onClick={() => navigate("/scriptures/Geeta")} class="inline-flex cursor-pointer h-10 items-center justify-center rounded-md bg-gray-900 px-8 text-sm font-medium text-gray-50 shadow transition-colors hover:bg-gray-900/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:pointer-events-none disabled:opacity-50 ">
                         Explore Scriptures
                       </div>
                       <div

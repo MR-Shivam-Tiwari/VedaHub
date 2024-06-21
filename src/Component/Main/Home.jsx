@@ -45,7 +45,7 @@ function Home() {
                   scriptures.
                 </p>
                 <div class="mt-8 flex gap-2">
-                  <div onClick={() => navigate("/scriptures/BhagvadGeeta")} class="inline-flex items-center cursor-pointer px-2.5 text-sm py-2 border border-transparent  font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"  >
+                  <div onClick={() => navigate("/scriptures/Geeta")} class="inline-flex items-center cursor-pointer px-2.5 text-sm py-2 border border-transparent  font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"  >
                     Explore Scriptures
                   </div>
                   <div class="inline-flex items-center cursor-pointer px-2.5 py-2 border text-sm border-gray-300  font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" onClick={()=> navigate("/donation")}>
@@ -66,7 +66,7 @@ function Home() {
                     <p class="text-sm">Explore the timeless wisdom</p>
                     <div
                       class="inline-flex items-center mt-2  cursor-pointer text-indigo-400 hover:text-indigo-500"
-                      onClick={()=>navigate("/scriptures/BhagvadGeeta")}
+                      onClick={()=>navigate("/scriptures/Geeta")}
                     >
                       Read More
                       <svg

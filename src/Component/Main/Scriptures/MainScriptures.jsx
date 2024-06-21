@@ -1,6 +1,6 @@
-import React, {  useEffect } from "react";
+import React, { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-
+import Astvakra from '../Geeta/Atavakra.jpg'
 const vedas = [
   {
     id: 1,
@@ -24,33 +24,37 @@ const vedas = [
   },
 ];
 
-const Epics = [
-  {
-    id: 1,
-    name: "Ramayana Hindi",
-    src: "https://admin.gitapress.org/assets/uploads/media-uploader/624e855656449.webp",
-  },
-  {
-    id: 2,
-    name: "Ramayana English",
-    src: "https://admin.gitapress.org/assets/uploads/media-uploader/624e84e4cbfce.webp",
-  },
-  {
-    id: 3,
-    name: "Mahabharata Hindi",
-    src: "https://admin.gitapress.org/assets/uploads/media-uploader/624e855e7085d.webp",
-  },
-  {
-    id: 4,
-    name: "Mahabharata English",
-    src: "https://m.media-amazon.com/images/I/71s6IAl4QlL._AC_UF1000,1000_QL80_.jpg",
-  },
-  {
-    id: 5,
-    name: "Mahabharata Bori-CE",
-    src: "https://m.media-amazon.com/images/I/71s6IAl4QlL._AC_UF1000,1000_QL80_.jpg",
-  },
-];
+const Epics = {
+  Ramayana: [
+    {
+      id: 1,
+      name: "Ramayana Hindi",
+      src: "https://admin.gitapress.org/assets/uploads/media-uploader/624e855656449.webp",
+    },
+    {
+      id: 2,
+      name: "Ramayana English",
+      src: "https://admin.gitapress.org/assets/uploads/media-uploader/624e84e4cbfce.webp",
+    },
+  ],
+  Mahabharata: [
+    {
+      id: 3,
+      name: "Mahabharata Hindi",
+      src: "https://admin.gitapress.org/assets/uploads/media-uploader/624e855e7085d.webp",
+    },
+    {
+      id: 4,
+      name: "Mahabharata English",
+      src: "https://m.media-amazon.com/images/I/71s6IAl4QlL._AC_UF1000,1000_QL80_.jpg",
+    },
+    {
+      id: 5,
+      name: "Mahabharata Bori-CE",
+      src: "https://m.media-amazon.com/images/I/71s6IAl4QlL._AC_UF1000,1000_QL80_.jpg",
+    },
+  ],
+};
 
 const Upanishads = [
   {
@@ -110,24 +114,63 @@ const Upanishads = [
   },
 ];
 
-const BhagvadGeeta = [
-  {
-    id: 1,
-    name: "Bhagavad Gita Hindi",
-    src: "https://admin.gitapress.org/assets/uploads/media-uploader/tatavavavacana-vashashhata-sasakaranae1644392839.webp",
-  },
-  {
-    id: 2,
-    name: "Bhagavad Gita English",
-    src: "https://admin.gitapress.org/assets/uploads/media-uploader/624e84e26cea0.webp",
-  },
-];
+const Geeta = {
+  BhagavadGita: [
+    {
+      id: 1,
+      name: "Bhagavad Gita Hindi",
+      src: "https://admin.gitapress.org/assets/uploads/media-uploader/tatavavavacana-vashashhata-sasakaranae1644392839.webp",
+    },
+    {
+      id: 2,
+      name: "Bhagavad Gita English",
+      src: "https://admin.gitapress.org/assets/uploads/media-uploader/624e84e26cea0.webp",
+    },
+  ],
+  AstavakraGeeta: [
+    {
+      id: 7,
+      name: "Astavakra Geeta Hindi",
+      src: "https://m.media-amazon.com/images/I/71Ieu2PglwL._AC_UF1000,1000_QL80_.jpg",
+    },
+    {
+      id: 8,
+      name: "Astavakra Geeta English",
+      src: "https://m.media-amazon.com/images/I/71Ieu2PglwL._AC_UF1000,1000_QL80_.jpg",
+    },
+  ],
+  AnuGeeta: [
+    {
+      id: 3,
+      name: "Anu Gita Hindi",
+      src: "https://example.com/anu-gita-hindi.jpg",
+    },
+    {
+      id: 4,
+      name: "Anu Gita English",
+      src: "https://example.com/anu-gita-english.jpg",
+    },
+  ],
+  IshvarGeeta: [
+    {
+      id: 5,
+      name: "Ishvar Geeta Hindi",
+      src: "https://example.com/ishvar-geeta-hindi.jpg",
+    },
+    {
+      id: 6,
+      name: "Ishvar Geeta English",
+      src: "https://example.com/ishvar-geeta-english.jpg",
+    },
+  ]
+  
+};
 
 const MainScriptures = () => {
   const navigate = useNavigate();
   const { category } = useParams();
   const categories = {
-    BhagvadGeeta: BhagvadGeeta,
+    Geeta: Geeta,
     Upanishad: Upanishads,
     Vedas: vedas,
     Epics: Epics,
@@ -147,43 +190,35 @@ const MainScriptures = () => {
     navigate(`/scriptures/${newCategory}`);
   };
 
-
-
   const handleBookClick = (book) => {
     const path = `/scriptures/${selectedCategory}/${book.id}`;
     navigate(path);
   };
-  
 
   return (
     <div>
       <div className="flex josefin-sans-bold flex-col sm:flex-row">
         <div className="sm:relative sm:top-0 sm:left-0 sm:flex-none lg:h-[90vh] bg-black w-full sm:w-[250px] lg:p-8 p-4">
           <div className="space-y-4">
-
             <h2 className="text-lg font-semibold text-white">Scriptures</h2>
             <div className="sm:hidden">
               <select
                 onChange={(event) => handleCategoryChange(event.target.value)}
                 value={selectedCategory}
-                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5      "      >
+                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+              >
                 {Object.keys(categories).map((cat) => (
-                  <option key={cat}
-                    value={cat}>
+                  <option key={cat} value={cat}>
                     {cat}
                   </option>
                 ))}
               </select>
-
-
-
             </div>
-            <div className="hidden sm:flex  flex-wrap lg:flex-row sm:flex-col  sm:gap-4">
+            <div className="hidden sm:flex flex-wrap lg:flex-row sm:flex-col sm:gap-4">
               {Object.keys(categories).map((cat) => (
                 <button
                   key={cat}
                   onClick={() => handleCategoryChange(cat)}
-
                   className={`inline-flex items-center mb-4 whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-accent hover:text-accent-foreground h-9 rounded-md px-3 justify-start ${selectedCategory === cat ? "bg-accent" : ""
                     }`}
                 >
@@ -207,39 +242,70 @@ const MainScriptures = () => {
             </div>
           </div>
         </div>
-        <div className="flex-1 p-6 lg:h-[90vh] overflow-y-auto ">
+        <div className="flex-1 p-6 lg:h-[90vh] overflow-y-auto">
           <div className="space-y-8">
             <div>
               <h2 className="text-2xl font-bold">{selectedCategory}</h2>
-              <div className="mt-4 grid grid-cols-2 gap-4 sm:grid-cols-4">
-                {categories[selectedCategory] && categories[selectedCategory].map((book) => (
-                  <div className="flex items-center justify-center gap-2" key={book.id}>
-                    <div onClick={() => handleBookClick(book)}>
-                      <div className="relative rounded-lg overflow-hidden w-[160px] shadow-xl hover:scale-105 hover:shadow-2xl transform duration-500 cursor-pointer">
-                        <img
-                          src={book.src}
-                          alt={book.name}
-                          className="rounded-md"
-                          style={{ aspectRatio: "90/140", objectFit: "cover", width: "160px" }}
-                          loading="lazy"
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/100 to-transparent"></div>
-                        <div className="absolute bottom-0 left-0 p-2 text-white text-sm font-semibold">
-                          {book.name}
-                        </div>
+              <div className="mt-4">
+                {selectedCategory === "Epics" || selectedCategory === "Geeta" ? (
+                  Object.keys(categories[selectedCategory]).map((subCategory) => (
+                    <div className="py-1" key={subCategory}>
+                      <div className="flex ">
+                      <h3 className="text-xl mb-3 pt-1 bg-orange-300  px-2 rounded font-bold">{subCategory}</h3>
+                      </div>
+                      <div className="grid border py-10 rounded bg-orange-100 grid-cols-2 gap-4 sm:grid-cols-4">
+                        {categories[selectedCategory][subCategory].map((book) => (
+                          <div className="flex items-center justify-center gap-2" key={book.id}>
+                            <div onClick={() => handleBookClick(book)}>
+                              <div className="relative rounded-lg overflow-hidden w-[160px] shadow-xl hover:scale-105 hover:shadow-2xl transform duration-500 cursor-pointer">
+                                <img
+                                  src={book.src}
+                                  alt={book.name}
+                                  className="rounded-md"
+                                  style={{ aspectRatio: "90/140", objectFit: "cover", width: "160px" }}
+                                  loading="lazy"
+                                />
+                                <div className="absolute inset-0 bg-gradient-to-t from-black/100 to-transparent"></div>
+                                <div className="absolute bottom-0 left-0 p-2 text-white text-sm font-semibold">
+                                  {book.name}
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        ))}
                       </div>
                     </div>
+                  ))
+                ) : (
+                  <div className="grid bg-orange-200 py-10 rounded grid-cols-2 gap-4 sm:grid-cols-4">
+                    {categories[selectedCategory].map((book) => (
+                      <div className="flex items-center justify-center gap-2" key={book.id}>
+                        <div onClick={() => handleBookClick(book)}>
+                          <div className="relative rounded-lg overflow-hidden w-[160px] shadow-xl hover:scale-105 hover:shadow-2xl transform duration-500 cursor-pointer">
+                            <img
+                              src={book.src}
+                              alt={book.name}
+                              className="rounded-md"
+                              style={{ aspectRatio: "90/140", objectFit: "cover", width: "160px" }}
+                              loading="lazy"
+                            />
+                            <div className="absolute inset-0 bg-gradient-to-t from-black/100 to-transparent"></div>
+                            <div className="absolute bottom-0 left-0 p-2 text-white text-sm font-semibold">
+                              {book.name}
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    ))}
                   </div>
-                ))}
-
+                )}
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-
   );
-}
+};
 
 export default MainScriptures;
