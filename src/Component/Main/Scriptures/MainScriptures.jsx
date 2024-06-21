@@ -196,7 +196,7 @@ const MainScriptures = () => {
   };
 
   return (
-    <div>
+    <div className="bg-white">
       <div className="flex josefin-sans-bold flex-col sm:flex-row">
         <div className="sm:relative sm:top-0 sm:left-0 sm:flex-none lg:h-[90vh] bg-black w-full sm:w-[250px] lg:p-8 p-4">
           <div className="space-y-4">
@@ -242,7 +242,7 @@ const MainScriptures = () => {
             </div>
           </div>
         </div>
-        <div className="flex-1 p-6 lg:h-[90vh] overflow-y-auto">
+        <div className="flex-1 lg:p-6 p-1 lg:h-[90vh] overflow-y-auto">
           <div className="space-y-8">
             <div>
               <h2 className="text-2xl font-bold">{selectedCategory}</h2>
@@ -253,7 +253,7 @@ const MainScriptures = () => {
                       <div className="flex ">
                       <h3 className="text-xl mb-3 pt-1 bg-orange-300  px-2 rounded font-bold">{subCategory}</h3>
                       </div>
-                      <div className="grid border py-10 rounded bg-orange-100 grid-cols-2 gap-4 sm:grid-cols-4">
+                      <div className="grid border py-10 mb-3 rounded bg-orange-100 grid-cols-2 gap-4 sm:grid-cols-4">
                         {categories[selectedCategory][subCategory].map((book) => (
                           <div className="flex items-center justify-center gap-2" key={book.id}>
                             <div onClick={() => handleBookClick(book)}>

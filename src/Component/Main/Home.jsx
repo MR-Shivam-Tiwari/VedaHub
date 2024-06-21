@@ -12,7 +12,7 @@ import Footer from "../Footer/Footer";
 function Home() {
   const navigate = useNavigate();
   return (
-    <div className="josefin-sans-bold">
+    <div className="josefin-sans-bold bg-white">
       <header class="relative h-[500px] w-full overflow-hidden">
         <img
           src={ExportEmage}

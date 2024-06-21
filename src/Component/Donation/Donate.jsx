@@ -2,8 +2,8 @@ import React from "react";
 
 function Donate() {
   return (
-    <div>
-      <div class="bg-gray-100  min-h-screen flex flex-col">
+    <div >
+      <div class="bg-white  min-h-screen flex flex-col">
         <main class="flex-1 container mx-auto py-20 px-6 md:px-12">
           <div class="grid  gap-12">
             <div>

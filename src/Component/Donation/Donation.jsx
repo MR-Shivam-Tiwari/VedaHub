@@ -7,7 +7,7 @@ function Donation() {
   const navigate = useNavigate();
   return (
     <div>
-      <div class="w-full">
+      <div class="w-full bg-white">
         <div class="w-full">
           <div class="relative w-full">
             <img

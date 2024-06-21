@@ -7,7 +7,7 @@ function AboutUs() {
   const navigate = useNavigate();
   return (
     <>
-      <div className=" flex justify-center">
+      <div className=" flex justify-center bg-white">
         <div class="flex flex-col min-h-[100dvh]">
           <main class="flex-1">
             <section class="w-full py-12 md:py-24 lg:py-32 xl:py-48">

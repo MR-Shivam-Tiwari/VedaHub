@@ -1,6 +1,6 @@
 import React, { useState, useRef, useCallback, useEffect } from "react";
 import { EpubView } from "react-reader";
-import mahabharataEpub from "../AstvakraGita.epub";
+import mahabharataEpub from "../GitaData/Astavakra-Gita.epub";
 
 function AstavakraGeetaEnglish() {
   const [epubFile, setEpubFile] = useState(mahabharataEpub);
@@ -122,34 +122,10 @@ function AstavakraGeetaEnglish() {
 
   return (
     <>
-      <div className="hidden bg-gray-200 lg:block">
-        <div className="flex gap-5 p-2 px- justify-end items-center">
-          <div className="flex items-center">
-            {/* Text search input and button commented out */}
-          </div>
 
-          <div className="flex gap-4 items-center">
-            <input
-              type="number"
-              placeholder="Enter page number"
-              value={pageNumberFilter || ""}
-              onChange={(e) => setPageNumberFilter(e.target.value)}
-              id="first_name"
-              className="bg-gray-50 h-10 border border-gray-300 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-            />
-            <button
-              onClick={() => goToPage(pageNumberFilter)}
-              style={{ cursor: "pointer" }}
-              className="bg-[#8b4513] font-bold text-white px-4 p-2 rounded"
-            >
-              Search
-            </button>
-          </div>
-        </div>
-      </div>
 
       <div
-        className="bg-gray-200 h-[92vh] lg:h-[95vh]  lg:px-[20px]"
+        className="bg-gray-200 h-full "
         style={{
           textAlign: "center",
           display: "flex",
@@ -157,28 +133,15 @@ function AstavakraGeetaEnglish() {
           alignItems: "center",
         }}
       >
-        <div className="flex justify-start items-center gap-2 lg:hidden">
+        <div className="flex justify-center items-center gap-2 lg:hidden">
           <button
-            className="flex w-[340px] bg-gray-400 h-9 my-2 items-center font-bold"
+            className="flex w-[170px] text-center bg-orange-200 h-8 shadow border-1.5 border-orange-300 my-2 items-center justify-center font-bold"
             onClick={toggleDrawer}
             style={menuButtonStyle}
           >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="20"
-              height="20"
-              fill="currentColor"
-              style={{ color: "black", fontWeight: "bold" }}
-              className="bi bi-list-ul"
-              viewBox="0 0 16 16"
-            >
-              <path
-                fillRule="evenodd"
-                d="M5 11.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5m-3 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2m0 4a1 1 0 1 0 0-2 1 1 0 0 0 0 2m0 4a1 1 0 1 0 0-2 1 1 0 0 0 0 2"
-              />
-            </svg>
+
             <span className="mb-1" style={{ marginLeft: "5px" }}>
-              Menu
+              Select Chapter
             </span>
           </button>
         </div>
@@ -205,7 +168,6 @@ function AstavakraGeetaEnglish() {
               </svg>
             </button>
           </div>
-          <h3 className="font-bold mb-1">Select Parva</h3>
           <div
             className="flex-shrink-0 px-5 lg:px-0 lg:block"
             style={{
@@ -229,19 +191,10 @@ function AstavakraGeetaEnglish() {
                     background: index === selectedBookIndex ? "#8b4513" : "",
                     color: index === selectedBookIndex ? "white" : "black",
                   }}
-                  className="inline-flex items-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 h-10 px-4 py-2 justify-start gap-2 text-black"
+                  className="inline-flex items-center whitespace-nowrap rounded-md bg-orange-100 mb-2 ml-2 shadow border text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 h-10 px-4 py-2 justify-start gap-2 text-black"
                 >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="16"
-                    height="16"
-                    fill="currentColor"
-                    class="bi bi-file-earmark"
-                    viewBox="0 0 16 16"
-                  >
-                    <path d="M14 4.5V14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h5.5zm-3 0A1.5 1.5 0 0 1 9.5 3V1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V4.5z" />
-                  </svg>
-                  {book.label}
+
+                  {book.label.replace(/General | Alphabetical /g, '')}
                 </button>
               ))}
             </ul>
@@ -268,33 +221,66 @@ function AstavakraGeetaEnglish() {
                   overflowY: "auto",
                 }}
               >
-                <h3 className="font-bold mb-1"> Select Chapter</h3>
-                <ul className="mb-3 flex justify-center">
-                  {books.map((book, index) => (
-                    <button
-                      key={index}
-                      onClick={() => {
-                        setSelectedBookIndex(index);
-                        goToBook(index);
-                      }}
-                      style={{
-                        cursor: "pointer",
-                        fontWeight:
-                          index === selectedBookIndex ? "bold" : "normal",
-                        background:
-                          index === selectedBookIndex ? "#8b4513" : "",
-                        color: index === selectedBookIndex ? "white" : "black",
-                      }}
-                      className="inline-flex items-center  rounded-md text-sm  h-10 px-4 border gap-4  bg-orange-100 py-2 mx-1 shadow  text-black"
-                    >
-                     {book.label.replace(/Chapter|- | – /g, '')}
-                    </button>
-                  ))}
-                </ul>
+                <div className="flex items-center justify-between  py-3 px-5 ">
+
+                  <h3 className="font-bold  border-2  bg-gray-100 shadow-lg px-3 h-8 rounded flex items-center text-sm "> Select Chapter</h3>
+
+                  <div className="">
+
+                    <ul className=" flex justify-center">
+                      {books.map((book, index) => (
+                        <button
+                          key={index}
+                          onClick={() => {
+                            setSelectedBookIndex(index);
+                            goToBook(index);
+                          }}
+                          style={{
+                            cursor: "pointer",
+                            fontWeight:
+                              index === selectedBookIndex ? "bold" : "normal",
+                            background:
+                              index === selectedBookIndex ? "#8b4513" : "",
+                            color: index === selectedBookIndex ? "white" : "black",
+                          }}
+                          className="inline-flex items-center  rounded text-sm  h-8 px-3 font-bold border gap-4  bg-orange-100 py-1 mx-1.5 shadow  text-black"
+                        >
+                          {book.label.replace(/Chapter|- | – | General | Alphabetical /g, '')}
+                        </button>
+                      ))}
+                    </ul>
+                  </div>
+
+                  <div className="hidden bg-gray-200 lg:block">
+                    <div className="flex gap-5 p-2 px- justify-end items-center">
+                      <div className="flex items-center">
+                        {/* Text search input and button commented out */}
+                      </div>
+
+                      <div className="flex gap-4 items-center">
+                        <input
+                          type="number"
+                          placeholder="Enter page number"
+                          value={pageNumberFilter || ""}
+                          onChange={(e) => setPageNumberFilter(e.target.value)}
+                          id="first_name"
+                          className="bg-gray-50 h-9 border border-gray-300 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                        />
+                        <button
+                          onClick={() => goToPage(pageNumberFilter)}
+                          style={{ cursor: "pointer" }}
+                          className="bg-[#8b4513] font-bold text-white h-9 flex items-center px-4  rounded"
+                        >
+                          Search
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
 
               <div
-                className="w-[100%] h-[75vh] lg:h-[80vh] rounded bg-white"
+                className="w-[100%] h-[75vh] lg:h-[76vh] lg:rounded-md bg-orange-300"
                 style={{
                   flex: "1",
                   overflowY: "auto",
@@ -310,22 +296,22 @@ function AstavakraGeetaEnglish() {
                   epubOptions={{ flow: "scrolled" }}
                   ref={renditionRef}
                   getRendition={handleRendition}
-                  style={{ flex: "1", overflowX: "hidden" }}
+                  style={{ flex: "1", overflowX: "hidden"  }}
                 />
               </div>
             </div>
-            <div className="w-[100%] justify-center lg:gap-[30%] lg:ml-40 items-center flex h-[50px] gap-4">
+            <div className=" justify-center lg:gap-[190%] gap-[150px] items-center flex py-1.5  ">
               <button
-                className="bg-gray-700 p-2 font-bold text-white px-4 lg:mb-[130px] rounded"
+                className="bg-gray-700 p-2 font-bold text-white px-4 mt-2  rounded"
                 onClick={prevPage}
               >
-                Previous Page
+                Previous
               </button>
               <button
-                className="bg-[#8b4513] font-bold text-white lg:mb-[130px] px-4 p-2 rounded"
+                className="bg-[#8b4513] font-bold text-white  px-4 p-2 mt-2 rounded"
                 onClick={nextPage}
               >
-                Next Page
+                Next
               </button>
             </div>
           </>

@@ -3,7 +3,7 @@ import Footer from '../Footer/Footer'
 
 function ContactUs() {
   return (
-    <div>
+    <div className='bg-white'>
       <Footer />
 
     </div>
