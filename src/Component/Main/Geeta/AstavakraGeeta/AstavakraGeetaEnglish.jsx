@@ -223,7 +223,7 @@ function AstavakraGeetaEnglish() {
               >
                 <div className="flex items-center justify-between  py-3 px-5 ">
 
-                  <h3 className="font-bold  border-2  bg-gray-100 shadow-lg px-3 h-8 rounded flex items-center text-sm "> Select Chapter</h3>
+                  <h3 className="font-bold  border-2  bg-gray-100 shadow-lg px-3 w-[125px] text-center h-8 rounded flex items-center text-sm "> Select Chapter</h3>
 
                   <div className="">
 
