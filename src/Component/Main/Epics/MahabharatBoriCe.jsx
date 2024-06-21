@@ -71,6 +71,7 @@ function MahabharatBoriCe() {
     const selectedBookLabel = event.target.value;
     const book = books.find((book) => book.label === selectedBookLabel);
     if (book) {
+      selectBook(book);
       setSelectedBook(book);
     }
   };
@@ -425,7 +426,7 @@ function MahabharatBoriCe() {
                     <div>
                       <select
                         className="border-2 px-[20px] py-2 rounded-[7px] h-10 border-gray-400"
-                        value={selectedBook ? selectedBook.label : ""}
+                        value={selectedBook ? selectedBook.href : ""}
                         onChange={handleBookChange}
                         style={{
                           fontSize: "14px",
@@ -447,11 +448,12 @@ function MahabharatBoriCe() {
                       {selectedBook && (
                         <>
                           <select
-                            className="h-10 border-2 px-[20px]  rounded-[5px] border-gray-400"
+                            className="h-10 border-2 rounded border-gray-400"
                             value={selectedParv ? selectedParv.href : ""}
                             onChange={selectParv}
                             style={{
-                              width: "200px",
+                              width: "100%",
+                              padding: "5px",
                               fontSize: "14px",
                             }}
                           >
@@ -472,16 +474,16 @@ function MahabharatBoriCe() {
                       {selectedParv && uparvs.length > 0 && (
                         <>
                           <select
-                            className="border-2 px-[20px] py-2 rounded-[5px] h-10 border-gray-400"
+                            className="border-2 px-[20px] py-2 rounded-[7px] h-10 border-gray-400"
                             value={selectedUparv ? selectedUparv.href : ""}
                             onChange={selectUparv}
                             style={{
+                              padding: "5px",
                               fontSize: "14px",
-                              width:"280px"
                             }}
                           >
                             <option value="" disabled>
-                            Select  Parva and UpParva
+                              Parva and UpParva
                             </option>
                             {uparvs.map((uparv, index) => (
                               <option key={index} value={uparv.href}>
