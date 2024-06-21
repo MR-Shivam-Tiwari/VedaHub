@@ -12,7 +12,8 @@ function MahabharataEnglish() {
   const renditionRef = useRef(null);
   const drawerRef = useRef(null);
   const [pageNumberFilter, setPageNumberFilter] = useState(null);
-
+  const selectedBook = selectedBookIndex !== 0 ? books[selectedBookIndex] : null;
+  
   const toggleDrawer = () => {
     setIsDrawerOpen(!isDrawerOpen);
   };
@@ -120,36 +121,24 @@ function MahabharataEnglish() {
     };
   }, [isDrawerOpen]);
 
+  const [progress, setProgress] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if (progress < 99) {
+        setProgress((prevProgress) => prevProgress + 1);
+      } else {
+        clearInterval(interval);
+        setLoading(false); // Optionally, set loading to false when done
+      }
+    }, 20); // Adjust the interval duration as needed for smoother animation
+
+    return () => clearInterval(interval);
+  }, []);
   return (
     <>
-      <div className="hidden bg-gray-200 lg:block">
-        <div className="flex gap-5 p-2 px- justify-end items-center">
-          <div className="flex items-center">
-            {/* Text search input and button commented out */}
-          </div>
-
-          <div className="flex gap-4 items-center">
-            <input
-              type="number"
-              placeholder="Enter page number"
-              value={pageNumberFilter || ""}
-              onChange={(e) => setPageNumberFilter(e.target.value)}
-              id="first_name"
-              className="bg-gray-50 h-10 border border-gray-300 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-            />
-            <button
-              onClick={() => goToPage(pageNumberFilter)}
-              style={{ cursor: "pointer" }}
-              className="bg-[#8b4513] font-bold text-white px-4 p-2 rounded"
-            >
-              Search
-            </button>
-          </div>
-        </div>
-      </div>
-
       <div
-        className="bg-gray-200 h-[100%] lg:px-[20px]"
+        className="bg-gray-200 h-full"
         style={{
           textAlign: "center",
           display: "flex",
@@ -185,7 +174,7 @@ function MahabharataEnglish() {
 
         <div
           ref={drawerRef}
-          className="z-20 lg:flex lg:static lg:hidden lg:z-auto bg-gray-200"
+          className="z-20  lg:static lg:hidden lg:z-auto bg-gray-200"
           style={drawerStyle}
         >
           <div className="flex pt-2 px-2 justify-end">
@@ -255,68 +244,101 @@ function MahabharataEnglish() {
         {epubFile ? (
           <>
             {loading && (
-              <div className="w-full h-1 bg-gray-200">
-                <div className="h-full bg-blue-500" style={{ width: "100%", transition: "width 1s" }}></div>
+              <div className="w-full h-10 bg-gray-200 px-10">
+                <div
+                  className="h-full"
+                  style={{ width: "100%", transition: "width 2s" }}
+                >
+                  <div className="flex justify-between">
+                    <span className=" text-lg font-medium text-blue-700">
+                      Loading...
+                    </span>
+                    <span className="text-sm font-medium text-orange-700">
+                      {progress}%
+                    </span>
+                  </div>
+
+                  <div className="w-full bg-gray-200 rounded-full h-2.5">
+                    <div
+                      className="bg-orange-900 h-2.5 rounded-full"
+                      style={{ width: `${progress}%` }}
+                    ></div>
+                  </div>
+                </div>
               </div>
             )}
 
-            <div style={{ flex: "1", display: "flex", width: "100%" }}>
+            <div style={{ width: "100%" }}>
               <div
-                className="hidden lg:block"
+                className="hidden lg:block "
                 style={{
-                  flex: "0 0 250px",
-                  padding: "10px",
+                  padding: "5px",
                   textAlign: "left",
-                  maxHeight: "calc(100vh - 100px)",
                   overflowY: "auto",
                 }}
               >
-                <h3 className="font-bold mb-1"> Select Book</h3>
-                <ul className="mb-3">
-                  {books.map((book, index) => (
-                    <button
-                      key={index}
-                      onClick={() => {
-                        setSelectedBookIndex(index);
-                        goToBook(index);
+                <div className="flex items-center justify-between lg:px-10">
+                  <div>
+                    <select
+                      className="border-2 px-[20px] py-2 rounded-[7px] bg-orange-100 border-gray-400"
+                      value={selectedBook ? selectedBook.label : ""}
+                      onChange={(e) => {
+                        const selectedLabel = e.target.value;
+                        const selectedIndex = books.findIndex(
+                          (book) => book.label === selectedLabel
+                        );
+                        setSelectedBookIndex(selectedIndex);
+                        goToBook(selectedIndex);
                       }}
                       style={{
-                        cursor: "pointer",
-                        fontWeight:
-                          index === selectedBookIndex ? "bold" : "normal",
-                        background: index === selectedBookIndex ? "black" : "",
-                        color: index === selectedBookIndex ? "white" : "black",
+                        fontSize: "14px",
+                        width: "220px",
                       }}
-                      className="inline-flex items-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 h-10 px-4 py-2 justify-start gap-2 text-black"
                     >
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="24"
-                        height="24"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        className="w-5 h-5"
-                      >
-                        <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"></path>
-                      </svg>
-                      {book.label}
-                    </button>
-                  ))}
-                </ul>
+                      <option value="" disabled>
+                        Select Parva
+                      </option>
+                      {books &&
+                        books.map((book, index) => (
+                          <option key={index} value={book.label}>
+                            {index + 1}. {book.label}
+                          </option>
+                        ))}
+                    </select>
+                  </div>
+                  <div className="hidden bg-gray-200 lg:block">
+                    <div className="flex gap-5 p-2 px- justify-end items-center">
+                      <div className="flex items-center"></div>
+
+                      <div className="flex gap-4 items-center">
+                        <input
+                          type="number"
+                          placeholder="Search By page number"
+                          value={pageNumberFilter || ""}
+                          onChange={(e) => setPageNumberFilter(e.target.value)}
+                          id="first_name"
+                          className="bg-gray-50 w-[205px] h-10 border border-gray-300 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block  px-2 py-2.5"
+                        />
+                        <button
+                          onClick={() => goToPage(pageNumberFilter)}
+                          style={{ cursor: "pointer" }}
+                          className="bg-[#8b4513] font-bold text-white  px-4  p-2 rounded"
+                        >
+                          Search
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
 
               <div
-                className="w-[100%] h-[75vh] lg:h-[80vh] rounded"
+                className="w-[100%] h-[75vh] lg:h-[76vh] bg-orange-200"
                 style={{
                   flex: "1",
                   overflowY: "auto",
                   overflowX: "hidden",
                   display: "flex",
-                  background: "#f0d1a2",
                 }}
               >
                 <EpubView
@@ -331,20 +353,18 @@ function MahabharataEnglish() {
                 />
               </div>
             </div>
-            <div
-              className="w-[100%] justify-center lg:gap-[30%] lg:ml-40 items-center flex h-[50px] gap-4 lg:mt-[-30px]"
-            >
+            <div className=" justify-center lg:gap-[190%] gap-[150px] items-center flex py-1.5  ">
               <button
-                className="bg-gray-700 p-2 font-bold text-white px-4 lg:mb-4 rounded"
+                className="bg-gray-700 p-2 font-bold text-white px-4 mt-2  rounded"
                 onClick={prevPage}
               >
-                Previous Page
+                Previous
               </button>
               <button
-                className="bg-[#8b4513] font-bold text-white lg:mb-4 px-4 p-2 rounded"
+                className="bg-[#8b4513] font-bold text-white  px-4 p-2 mt-2 rounded"
                 onClick={nextPage}
               >
-                Next Page
+                Next
               </button>
             </div>
           </>

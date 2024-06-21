@@ -17,7 +17,21 @@ function MahabharatBoriCe() {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [pageNumberFilter, setPageNumberFilter] = useState(null);
   // const [textSearchFilter, setTextSearchFilter] = useState("");
+  const [loading, setLoading] = useState(true);
+  const [progress, setProgress] = useState(0);
 
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if (progress < 99) {
+        setProgress((prevProgress) => prevProgress + 1);
+      } else {
+        clearInterval(interval);
+        setLoading(false); // Optionally, set loading to false when done
+      }
+    }, 20);
+
+    return () => clearInterval(interval);
+  }, []);
   const toggleDrawer = () => {
     setIsDrawerOpen(!isDrawerOpen);
   };
@@ -53,7 +67,13 @@ function MahabharatBoriCe() {
     const file = event.target.files[0];
     readFile(file);
   };
-
+  const handleBookChange = (event) => {
+    const selectedBookLabel = event.target.value;
+    const book = books.find((book) => book.label === selectedBookLabel);
+    if (book) {
+      setSelectedBook(book);
+    }
+  };
   const readFile = (file) => {
     const reader = new FileReader();
     reader.onload = (event) => {
@@ -209,51 +229,8 @@ function MahabharatBoriCe() {
 
   return (
     <>
-      <div className="hidden bg-gray-200 lg:block">
-        <div className="flex gap-5  p-2 px-6 justify-end items-center   ">
-          <div className="flex items-center">
-            {" "}
-            {/* Updated: Added items-center class */}
-            {/* <input
-            type="text"
-            placeholder="Search by text"
-            value={textSearchFilter}
-            onChange={(e) => setTextSearchFilter(e.target.value)}
-            id="first_name"
-            className="bg-gray-50 h-10 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-          />
-
-          <button
-            className="bg-blue-500 text-white font-bold px-4 h-10 flex items-center rounded"
-          >
-            Search
-          </button> */}
-          </div>
-
-          <div className="flex gap-4 items-center">
-            {" "}
-            {/* Updated: Added items-center class */}
-            <input
-              type="number"
-              placeholder="Enter page number"
-              value={pageNumberFilter || ""}
-              onChange={(e) => setPageNumberFilter(e.target.value)}
-              id="first_name"
-              className="bg-gray-50 h-10 border border-gray-300 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-            />
-            <button
-              onClick={() => goToPage(pageNumberFilter)}
-              style={{ cursor: "pointer" }}
-              className="bg-[#8b4513] font-bold text-white  px-4  p-2 rounded"
-            >
-              Search
-            </button>
-          </div>
-        </div>
-      </div>
-
       <div
-        className="bg-gray-200 h-[100%] lg:p-[20px]"
+        className="bg-gray-200 h-full"
         style={{
           textAlign: "center",
           display: "flex",
@@ -393,7 +370,7 @@ function MahabharatBoriCe() {
             )}
             <div className="lg:hidden">
               {(selectedUparv || (selectedParv && uparvs.length === 0)) && (
-                <ChapterList  chapters={chapters} />
+                <ChapterList chapters={chapters} />
               )}
             </div>
           </div>
@@ -410,157 +387,197 @@ function MahabharatBoriCe() {
 
         {epubFile ? (
           <>
-            <div
-              className=""
-              style={{ flex: "1", display: "flex", width: "100%" }}
-            >
+            {/* {loading && (
+              <div className="w-full h-10 py-5 mb-5 bg-gray-200 px-10">
+                <div
+                  className="h-full"
+                  style={{ width: "100%", transition: "width 2s" }}
+                >
+                  <div className="flex justify-between">
+                    <span className=" text-lg font-medium text-blue-700">
+                      Loading...
+                    </span>
+                    <span className="text-sm font-medium text-orange-700">
+                      {progress}%
+                    </span>
+                  </div>
+
+                  <div className="w-full bg-gray-200 rounded-full h-2.5">
+                    <div
+                      className="bg-orange-900 h-2.5 rounded-full"
+                      style={{ width: `${progress}%` }}
+                    ></div>
+                  </div>
+                </div>
+              </div>
+            )} */}
+            <div className="" style={{ width: "100%" }}>
               <div
-                className="hidden bg-gray-100 rounded lg:block"
+                className="hidden bg-gray-100  lg:block"
                 style={{
-                  flex: "0 0 250px",
-                  // borderRight: "1px solid gray",
                   padding: "10px",
                   textAlign: "left",
-                  maxHeight: "calc(100vh - 100px)",
                   overflowY: "auto",
                 }}
               >
-                <h3 className="font-bold mb-1"> Select Book</h3>
-                <ul className="mb-3">
-                  {books.map((book, index) => (
-                    <button
-                      key={index}
-                      onClick={() => selectBook(book)}
-                      style={{
-                        cursor: "pointer",
-                        fontWeight: book === selectedBook ? "bold" : "normal",
-                        background: book === selectedBook ? "black" : "",
-                        color: book === selectedBook ? "white" : "black",
-                      }}
-                      className="inline-flex items-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 h-10 px-4 py-2 justify-start gap-2 text-black"
-                    >
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="24"
-                        height="24"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        className="w-5 h-5"
+                <div className="flex items-center justify-between px-5">
+                  <div className="flex items-center gap-5">
+                    <div>
+                      <select
+                        className="border-2 px-[20px] py-2 rounded-[7px] h-10 border-gray-400"
+                        value={selectedBook ? selectedBook.label : ""}
+                        onChange={handleBookChange}
+                        style={{
+                          fontSize: "14px",
+                          width: "220px",
+                        }}
                       >
-                        <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"></path>
-                      </svg>
-                      {book.label}
-                    </button>
-                  ))}
-                </ul>
-                {selectedBook && (
-                  <>
-                    <h3 className="font-bold mb-1">Select Vol</h3>
-                    <select
-                      className="mb-3 border-2 rounded border-gray-400"
-                      value={selectedParv ? selectedParv.href : ""}
-                      onChange={selectParv}
-                      style={{
-                        width: "100%",
-                        padding: "5px",
-                        fontSize: "14px",
-                      }}
-                    >
-                      <option value="" disabled>
-                        Select Vol
-                      </option>
-                      {parvs.map((parv, index) => (
-                        <option key={index} value={parv.href}>
-                          {parv.label}
+                        <option value="" disabled>
+                          Select Mahabharat Book
                         </option>
-                      ))}
-                    </select>
-                  </>
-                )}
-                {selectedParv && uparvs.length > 0 && (
-                  <>
-                    <h3 className="font-bold mb-1">Select Parva and UpParva</h3>
-                    <select
-                      className="mb-2 border-2 rounded border-gray-400"
-                      value={selectedUparv ? selectedUparv.href : ""}
-                      onChange={selectUparv}
-                      style={{
-                        width: "100%",
-                        padding: "5px",
-                        fontSize: "14px",
-                      }}
-                    >
-                      <option value="" disabled>
-                        Parva and UpParva
-                      </option>
-                      {uparvs.map((uparv, index) => (
-                        <option key={index} value={uparv.href}>
-                          {uparv.label}
-                        </option>
-                      ))}
-                    </select>
-                  </>
-                )}
-                {(selectedUparv || (selectedParv && uparvs.length === 0)) && (
-                  <ChapterList chapters={chapters} />
-                )}
-              </div>
+                        {books.map((book, index) => (
+                          <option key={index} value={book.label}>
+                            {book.label}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
 
-              <div
-                className="w-[100%] h-[75vh] lg:h-[80vh] rounded py-20"
-                style={{
-                  position: "relative",
-                  overflow: "hidden", // Hide both horizontal and vertical scrollbars
-                  // background: "#f0d1a2",
-                }}
-              >
-                <div
-                  style={{
-                    position: "absolute",
-                    top: 0,
-                    left: 0,
-                    right: 0,
-                    bottom: 0,
-                    overflowY: "auto",
-                    overflowX: "hidden", // Hide horizontal scrollbar explicitly
-                  }}
-                >
-                  <EpubView
-                    url={epubFile}
-                    location={location}
-                    locationChanged={onLocationChanged}
-                    tocChanged={onTocLoaded}
-                    epubOptions={{ flow: "scrolled" }} // Ensure content is scrollable
-                    ref={renditionRef}
-                    getRendition={handleRendition}
-                    style={{
-                      width: "100%",
-                      height: "100%",
-                      overflowX: "hidden",
-                    }} // Ensure EpubView fills the container and hides horizontal overflow
-                  />
+                    <div>
+                      {selectedBook && (
+                        <>
+                          <select
+                            className="h-10 border-2 px-[20px]  rounded-[5px] border-gray-400"
+                            value={selectedParv ? selectedParv.href : ""}
+                            onChange={selectParv}
+                            style={{
+                              width: "200px",
+                              fontSize: "14px",
+                            }}
+                          >
+                            <option value="" disabled>
+                              Select Vol
+                            </option>
+                            {parvs.map((parv, index) => (
+                              <option key={index} value={parv.href}>
+                                {parv.label}
+                              </option>
+                            ))}
+                          </select>
+                        </>
+                      )}
+                    </div>
+
+                    <div>
+                      {selectedParv && uparvs.length > 0 && (
+                        <>
+                          <select
+                            className="border-2 px-[20px] py-2 rounded-[5px] h-10 border-gray-400"
+                            value={selectedUparv ? selectedUparv.href : ""}
+                            onChange={selectUparv}
+                            style={{
+                              fontSize: "14px",
+                              width:"280px"
+                            }}
+                          >
+                            <option value="" disabled>
+                            Select  Parva and UpParva
+                            </option>
+                            {uparvs.map((uparv, index) => (
+                              <option key={index} value={uparv.href}>
+                                {uparv.label}
+                              </option>
+                            ))}
+                          </select>
+                        </>
+                      )}
+                    </div>
+                    <div>
+                      {(selectedUparv ||
+                        (selectedParv && uparvs.length === 0)) &&
+                        chapters.length > 0 && (
+                          <div>
+                            <select
+                              className="border-2 px-[30px] py-2 rounded-[7px] border-gray-400"
+                              value={
+                                selectedChapter ? selectedChapter.href : ""
+                              }
+                              onChange={selectChapter}
+                              style={{
+                                width: "500px",
+                                fontSize: "14px",
+                              }}
+                            >
+                              <option value="" disabled>
+                                Select Chapter
+                              </option>
+                              {chapters.map((chapter, index) => (
+                                <option
+                                  className=""
+                                  key={index}
+                                  value={chapter.href}
+                                >
+                                  {chapter.label}
+                                </option>
+                              ))}
+                            </select>
+                          </div>
+                        )}
+                    </div>
+                  </div>
+
+                  <div className="flex gap-4 items-center">
+                    <input
+                      type="number"
+                      placeholder="Search By page number"
+                      value={pageNumberFilter || ""}
+                      onChange={(e) => setPageNumberFilter(e.target.value)}
+                      id="first_name"
+                      className="bg-gray-50 w-[205px] h-10 border border-gray-300 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block  px-2 py-2.5"
+                    />
+                    <button
+                      onClick={() => goToPage(pageNumberFilter)}
+                      style={{ cursor: "pointer" }}
+                      className="bg-[#8b4513] font-bold text-white  px-4  p-2 rounded"
+                    >
+                      Search
+                    </button>
+                  </div>
                 </div>
               </div>
+              <div
+                className="w-[100%] h-[75vh] lg:h-[76vh] bg-orange-200"
+                style={{
+                  flex: "1",
+                  overflowY: "auto",
+                  overflowX: "hidden",
+                  display: "flex",
+                }}
+              >
+                <EpubView
+                  url={epubFile}
+                  location={location}
+                  locationChanged={onLocationChanged}
+                  tocChanged={onTocLoaded}
+                  epubOptions={{ flow: "scrolled" }} // Ensure content is scrollable
+                  ref={renditionRef}
+                  getRendition={handleRendition}
+                  style={{ flex: "1", overflowX: "hidden" }}
+                />
+              </div>
             </div>
-            <div
-              className="w-[100%] justify-center lg:gap-[30%] lg:ml-40 items-center flex h-[50px] gap-4   lg:mt-[10px] "
-              style={{}}
-            >
+            <div className=" justify-center lg:gap-[190%] gap-[150px] items-center flex py-1.5  ">
               <button
-                className="bg-gray-700 p-2 font-bold text-white px-4  rounded"
+                className="bg-gray-700 p-2 font-bold text-white px-4 mt-2  rounded"
                 onClick={prevPage}
               >
-                Previous Page
+                Previous
               </button>
               <button
-                className="bg-[#8b4513] font-bold text-white  px-4  p-2 rounded"
+                className="bg-[#8b4513] font-bold text-white  px-4 p-2 mt-2 rounded"
                 onClick={nextPage}
               >
-                Next Page
+                Next
               </button>
             </div>
           </>
