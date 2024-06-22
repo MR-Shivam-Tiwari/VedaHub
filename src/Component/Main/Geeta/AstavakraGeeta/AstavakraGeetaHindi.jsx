@@ -41,7 +41,7 @@ function AstavakraGeetaHindi() {
 
     return (
         <div className="bg-orange-300 min-h-screen flex flex-col items-center">
-            <div className="bg-[#f3f4f6] w-full p-4 flex items-center justify-between">
+            <div className="bg-orange-100 w-full p-4 flex items-center justify-between">
                 <button className="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2 mr-4">
                     Select Chapter
                 </button>
@@ -50,7 +50,7 @@ function AstavakraGeetaHindi() {
                         <button
                             key={index}
                             onClick={() => handleChapterSelect(chapter)}
-                            className={`inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-10 px-4 py-2 ${selectedChapter === chapter ? 'bg-green-500' : ''}`}
+                            className={`inline-flex items-center  justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-10 px-4 py-2 ${selectedChapter === chapter ? 'bg-green-500' : 'bg-orange-200'}`}
                         >
                             {chapter}
                         </button>
@@ -87,7 +87,7 @@ function AstavakraGeetaHindi() {
                     ))}
                 </div>
             </div>
-            <div className="bg-[#f3f4f6] w-full p-4 flex justify-between fixed bottom-0 left-0">
+            <div className="bg-orange-100 w-full p-4 flex justify-between fixed bottom-0 left-0">
                 <button
                     onClick={handlePrevious}
                     className="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-primary/90 h-10 px-4 py-2 bg-[#374151] text-white"
