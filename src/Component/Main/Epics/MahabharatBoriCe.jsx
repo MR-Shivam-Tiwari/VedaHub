@@ -67,6 +67,24 @@ function MahabharatBoriCe() {
     const file = event.target.files[0];
     readFile(file);
   };
+  const onTocLoaded = (toc) => {
+    // Assuming each top-level item in the TOC is a book
+    const books = toc.map((item, index) => ({
+      label: item.label,
+      href: item.href,
+      parvs: item.subitems || [],
+      index: index,
+    }));
+    setBooks(books);
+    setSelectedBook(null);
+    setParvs([]);
+    setSelectedParv(null);
+    setUparvs([]);
+    setSelectedUparv(null);
+    setChapters([]);
+  };
+
+  // Function to handle book selection
   const handleBookChange = (event) => {
     const selectedBookLabel = event.target.value;
     const book = books.find((book) => book.label === selectedBookLabel);
@@ -95,22 +113,7 @@ function MahabharatBoriCe() {
       renditionRef.current.display(pageNumber);
     }
   };
-  const onTocLoaded = (toc) => {
-    // Assuming each top-level item in the TOC is a book
-    const books = toc.map((item, index) => ({
-      label: item.label,
-      href: item.href,
-      parvs: item.subitems || [],
-      index: index,
-    }));
-    setBooks(books);
-    setSelectedBook(null);
-    setParvs([]);
-    setSelectedParv(null);
-    setUparvs([]);
-    setSelectedUparv(null);
-    setChapters([]);
-  };
+
 
   const handleRendition = useCallback((rendition) => {
     renditionRef.current = rendition;
@@ -227,6 +230,23 @@ function MahabharatBoriCe() {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [isDrawerOpen]);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setProgress((prevProgress) => {
+        if (prevProgress < 100) {
+          return Math.min(prevProgress + 0.5, 100); // Increment by 0.5
+        } else {
+          clearInterval(interval);
+          setLoading(false); // Optionally, set loading to false when done
+          return prevProgress;
+        }
+      });
+    }, 200); // 100ms interval for slower progress
+
+    return () => clearInterval(interval);
+  }, []);
+
 
   return (
     <>
@@ -388,7 +408,7 @@ function MahabharatBoriCe() {
 
         {epubFile ? (
           <>
-            {/* {loading && (
+            {loading && (
               <div className="w-full h-10 py-5 mb-5 bg-gray-200 px-10">
                 <div
                   className="h-full"
@@ -411,7 +431,7 @@ function MahabharatBoriCe() {
                   </div>
                 </div>
               </div>
-            )} */}
+            )}
             <div className="" style={{ width: "100%" }}>
               <div
                 className="hidden bg-gray-100  lg:block"
@@ -425,8 +445,8 @@ function MahabharatBoriCe() {
                   <div className="flex items-center gap-5">
                     <div>
                       <select
-                        className="border-2 px-[20px] py-2 rounded-[7px] h-10 border-gray-400"
-                        value={selectedBook ? selectedBook.href : ""}
+                        className="border-2 px-[20px] py-2 rounded-[7px] bg-orange-100 border-gray-400"
+                        value={selectedBook ? selectedBook.label : ""}
                         onChange={handleBookChange}
                         style={{
                           fontSize: "14px",
@@ -448,7 +468,7 @@ function MahabharatBoriCe() {
                       {selectedBook && (
                         <>
                           <select
-                            className="h-10 border-2 rounded border-gray-400"
+                            className="border-2 px-[20px] py-2 rounded-[7px] h-10 bg-orange-100 border-gray-400"
                             value={selectedParv ? selectedParv.href : ""}
                             onChange={selectParv}
                             style={{
@@ -474,7 +494,7 @@ function MahabharatBoriCe() {
                       {selectedParv && uparvs.length > 0 && (
                         <>
                           <select
-                            className="border-2 px-[20px] py-2 rounded-[7px] h-10 border-gray-400"
+                            className="border-2 px-[20px] py-2 rounded-[7px] bg-orange-100 border-gray-400 h-10"
                             value={selectedUparv ? selectedUparv.href : ""}
                             onChange={selectUparv}
                             style={{
@@ -500,7 +520,7 @@ function MahabharatBoriCe() {
                         chapters.length > 0 && (
                           <div>
                             <select
-                              className="border-2 px-[30px] py-2 rounded-[7px] border-gray-400"
+                              className="border-2 px-[20px] py-2 rounded-[7px] bg-orange-100 border-gray-400"
                               value={
                                 selectedChapter ? selectedChapter.href : ""
                               }
@@ -548,7 +568,7 @@ function MahabharatBoriCe() {
                 </div>
               </div>
               <div
-                className="w-[100%] h-[75vh] lg:h-[76vh] bg-orange-200"
+                className="w-[100%] pb-7 h-[75vh] lg:h-[76vh] bg-orange-200"
                 style={{
                   flex: "1",
                   overflowY: "auto",

@@ -127,16 +127,20 @@ function AstavakraGeetaEnglish() {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      if (progress < 99) {
-        setProgress(prevProgress => prevProgress + 1);
-      } else {
-        clearInterval(interval);
-        setLoading(false); // Optionally, set loading to false when done
-      }
-    }, 20);
+      setProgress((prevProgress) => {
+        if (prevProgress < 100) {
+          return Math.min(prevProgress + 0.5, 100); // Increment by 0.5
+        } else {
+          clearInterval(interval);
+          setLoading(false); // Optionally, set loading to false when done
+          return prevProgress;
+        }
+      });
+    }, 100); // 100ms interval for slower progress
 
     return () => clearInterval(interval);
   }, []);
+
   return (
     <div
       className="bg-gray-200 h-full "

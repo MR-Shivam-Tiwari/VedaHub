@@ -17,12 +17,30 @@ function MahabharataHindi() {
   const [pageNumberFilter, setPageNumberFilter] = useState(null);
   const [loading, setLoading] = useState(true);
 
+  const onTocLoaded = (toc) => {
+    // Assuming each top-level item in the TOC is a book
+    const books = toc.map((item, index) => ({
+      label: item.label,
+      href: item.href,
+      parvs: item.subitems || [],
+      index: index,
+    }));
+    setBooks(books);
+    setSelectedBook(null);
+    setParvs([]);
+    setSelectedParv(null);
+    setUparvs([]);
+    setSelectedUparv(null);
+    setChapters([]);
+  };
+
   const handleBookChange = (event) => {
     const selectedBookLabel = event.target.value;
     const book = books.find((book) => book.label === selectedBookLabel);
     if (book) {
-      selectBook(book);
       setSelectedBook(book);
+      // Call selectBook if it's needed
+      selectBook(book);
     }
   };
   const goToPage = (pageNumber) => {
@@ -83,22 +101,7 @@ function MahabharataHindi() {
     setLocation(loc);
   };
 
-  const onTocLoaded = (toc) => {
-    // Assuming each top-level item in the TOC is a book
-    const books = toc.map((item, index) => ({
-      label: item.label,
-      href: item.href,
-      parvs: item.subitems || [],
-      index: index,
-    }));
-    setBooks(books);
-    setSelectedBook(null);
-    setParvs([]);
-    setSelectedParv(null);
-    setUparvs([]);
-    setSelectedUparv(null);
-    setChapters([]);
-  };
+
 
   const handleRendition = useCallback((rendition) => {
     renditionRef.current = rendition;
@@ -217,16 +220,20 @@ function MahabharataHindi() {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      if (progress < 99) {
-        setProgress((prevProgress) => prevProgress + 1);
-      } else {
-        clearInterval(interval);
-        setLoading(false); // Optionally, set loading to false when done
-      }
-    }, 20);
+      setProgress((prevProgress) => {
+        if (prevProgress < 100) {
+          return Math.min(prevProgress + 0.5, 100); // Increment by 0.5
+        } else {
+          clearInterval(interval);
+          setLoading(false); // Optionally, set loading to false when done
+          return prevProgress;
+        }
+      });
+    }, 100); // 100ms interval for slower progress
 
     return () => clearInterval(interval);
   }, []);
+
 
   return (
     <div className="bg-[#f0d1a2]">
@@ -379,7 +386,7 @@ function MahabharataHindi() {
                       value={selectedChapter ? selectedChapter.href : ""}
                       onChange={selectChapter}
                       style={{
-                        width:"230px",
+                        width: "230px",
                         fontSize: "14px",
                       }}
                     >
@@ -446,7 +453,7 @@ function MahabharataHindi() {
                     <div>
                       <select
                         className="border-2 px-[20px] py-2 rounded-[7px] bg-orange-100 border-gray-400"
-                        value={selectedBook ? selectedBook.href : ""}
+                        value={selectedBook ? selectedBook.label : ""}
                         onChange={handleBookChange}
                         style={{
                           fontSize: "14px",
@@ -546,24 +553,7 @@ function MahabharataHindi() {
                   </div>
                   <div className="hidden bg-gray-200 lg:block">
                     <div className="flex gap-5  p-2 px-6 justify-end items-center   ">
-                      <div className="flex items-center">
-                        {" "}
-                        {/* Updated: Added items-center class */}
-                        {/* <input
-    type="text"
-    placeholder="Search by text"
-    value={textSearchFilter}
-    onChange={(e) => setTextSearchFilter(e.target.value)}
-    id="first_name"
-    className="bg-gray-50 h-10 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-  />
 
-  <button
-    className="bg-blue-500 text-white font-bold px-4 h-10 flex items-center rounded"
-  >
-    Search
-  </button> */}
-                      </div>
 
                       <div className="flex gap-4 items-center">
                         {" "}
@@ -590,7 +580,7 @@ function MahabharataHindi() {
               </div>
 
               <div
-                className="w-[100%] h-[75vh] lg:h-[76vh] bg-orange-200"
+                className="w-[100%] lg:py-5 py-3 h-[75vh] lg:h-[76vh] bg-orange-200"
                 style={{
                   flex: "1",
                   overflowY: "auto",
