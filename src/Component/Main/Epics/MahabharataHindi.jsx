@@ -101,8 +101,6 @@ function MahabharataHindi() {
     setLocation(loc);
   };
 
-
-
   const handleRendition = useCallback((rendition) => {
     renditionRef.current = rendition;
     renditionRef.current.on("relocated", (location) => {
@@ -234,47 +232,59 @@ function MahabharataHindi() {
     return () => clearInterval(interval);
   }, []);
 
-
   return (
     <div className="bg-[#f0d1a2]">
       <div
-        className="bg-gray-200 h-full"
+        className="bg-gray-200 min-h-screen"
         style={{
           textAlign: "center",
           display: "flex",
           flexDirection: "column",
-          alignItems: "center",
         }}
       >
-        <div className="flex justify-start items-center gap-2 lg:hidden">
-          <button
-            className="flex w-[340px] bg-gray-400 h-9 my-2 items-center font-bold"
-            onClick={toggleDrawer}
-            style={menuButtonStyle}
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="20"
-              height="20"
-              fill="currentColor"
-              style={{ color: "black", fontWeight: "bold" }}
-              className="bi bi-list-ul"
-              viewBox="0 0 16 16"
+        <div className="flex px-2 items-center justify-between lg:hidden">
+          <div>
+            <button
+              className="flex bg-gray-400 h-9 my-2 items-center font-bold"
+              onClick={toggleDrawer}
+              style={menuButtonStyle}
             >
-              <path
-                fillRule="evenodd"
-                d="M5 11.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5m-3 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2m0 4a1 1 0 1 0 0-2 1 1 0 0 0 0 2m0 4a1 1 0 1 0 0-2 1 1 0 0 0 0 2"
-              />
-            </svg>
-            <span className="mb-1" style={{ marginLeft: "5px" }}>
-              Menu
-            </span>
-          </button>
+              <span className="mb-1" style={{ marginLeft: "5px" }}>
+                Select Parva
+              </span>
+            </button>
+          </div>
+          <div className="flex gap-2 items-center">
+            <input
+              type="number"
+              placeholder="Search By page number"
+              value={pageNumberFilter || ""}
+              onChange={(e) => setPageNumberFilter(e.target.value)}
+              id="first_name"
+              className="bg-gray-50 w-[175px] h-10 border border-gray-300 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block px-2 py-2.5"
+            />
+            <button
+              onClick={() => goToPage(pageNumberFilter)}
+              style={{ cursor: "pointer" }}
+              className="bg-[#8b4513] font-bold text-white p-2 rounded"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                fill="currentColor"
+                className="bi bi-search"
+                viewBox="0 0 16 16"
+              >
+                <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
+              </svg>
+            </button>
+          </div>
         </div>
 
         <div
           ref={drawerRef}
-          className="z-20 lg:flex lg:hidden lg:static lg:z-auto bg-gray-200"
+          className="z-20  lg:hidden lg:static lg:z-auto bg-gray-200"
           style={drawerStyle}
         >
           <div className="flex justify-end pt-2 px-2 ">
@@ -553,8 +563,6 @@ function MahabharataHindi() {
                   </div>
                   <div className="hidden bg-gray-200 lg:block">
                     <div className="flex gap-5  p-2 px-6 justify-end items-center   ">
-
-
                       <div className="flex gap-4 items-center">
                         {" "}
                         {/* Updated: Added items-center class */}
@@ -580,7 +588,7 @@ function MahabharataHindi() {
               </div>
 
               <div
-                className="w-[100%] lg:py-5 py-3 h-[75vh] lg:h-[76vh] bg-orange-200"
+                className="w-[100%] lg:py-5 py-3 pb-10 min-h-screen  bg-orange-200"
                 style={{
                   flex: "1",
                   overflowY: "auto",
@@ -600,15 +608,15 @@ function MahabharataHindi() {
                 />
               </div>
             </div>
-            <div className=" justify-center lg:gap-[190%] gap-[150px] items-center flex py-1.5  ">
+            <div className="bg-orange-100 w-full p-3 lg:py-5 lg:px-80 flex justify-between fixed bottom-0 left-0">
               <button
-                className="bg-gray-700 p-2 font-bold text-white px-4 mt-2  rounded"
+                className="bg-gray-700 w-40 p-2 font-bold text-white px-4   rounded"
                 onClick={prevPage}
               >
                 Previous
               </button>
               <button
-                className="bg-[#8b4513] font-bold text-white  px-4 p-2 mt-2 rounded"
+                className="bg-[#8b4513] w-40 font-bold text-white   p-2  rounded"
                 onClick={nextPage}
               >
                 Next
