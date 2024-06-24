@@ -252,7 +252,7 @@ function MahabharataHindi() {
               <span className="mb-1" style={{ marginLeft: "5px" }}>
                 Select Parva
               </span>
-            </button>
+            </button> 
           </div>
           <div className="flex gap-2 items-center">
             <input
