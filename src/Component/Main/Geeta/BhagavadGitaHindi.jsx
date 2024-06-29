@@ -21,6 +21,25 @@ function BhagavadGitaHindi() {
   const handleShlokaChange = (event) => {
     setSelectedShloka(parseInt(event.target.value, 10));
   };
+  const formatText = (text) => {
+    // Split the text by line breaks first
+    return text.split('\n').map((line, index) => {
+      // Split each line by backticks
+      const parts = line.split(/(`[^`]+`)/g);
+      return (
+        <React.Fragment key={index}>
+          {parts.map((part, i) =>
+            part.startsWith('`') && part.endsWith('`') ? (
+              <span key={i} className='text-gray-500  text-[15px]'>{part.slice(1, -1)}</span>
+            ) : (
+              part
+            )
+          )}
+          <br />
+        </React.Fragment>
+      );
+    });
+  };
 
   const uniqueChapters = [...new Set(gita.map(shloka => shloka.Chapter))];
 
@@ -32,19 +51,19 @@ function BhagavadGitaHindi() {
             <select
               value={selectedChapter}
               onChange={handleChapterChange}
-              className="flex h-10 items-center justify-between rounded-md shadow border border-input bg-white px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 w-40"
+              className="flex font-bold josefin-sans-bold h-10 items-center justify-between rounded-md shadow border border-input bg-white px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 w-40"
             >
               {uniqueChapters.map((chapter, index) => (
-                <option key={index} value={chapter}>Chapter {chapter}</option>
+                <option className='font-bold ' key={index} value={chapter}>Chapter {chapter}</option>
               ))}
             </select>
             <select
               value={selectedShloka}
               onChange={handleShlokaChange}
-              className="flex h-10 items-center justify-between rounded-md shadow border border-input bg-white px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 w-40"
+              className="flex h-10 items-center p-5 josefin-sans-bold justify-between rounded-md shadow border border-input bg-white px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 w-40"
             >
               {chapter.map((shloka, index) => (
-                <option key={index} value={shloka.ShlokaNo}>Shloka {shloka.ShlokaNo}</option>
+                <option className='font-bold ' key={index} value={shloka.ShlokaNo}>Shloka {shloka.ShlokaNo}</option>
               ))}
             </select>
           </div>
@@ -57,14 +76,19 @@ function BhagavadGitaHindi() {
             <h2 className="text-3xl font-bold mb-4 text-center">Sanskrit Shloka</h2>
             <p className="text-2xl mb-7 text-center  yatra-one-regular">{shloka.Shloka}</p>
             <h2 className="text-3xl font-bold mb-4  text-center">Translation (Hindi - English)</h2>
-            <div className="space-y-2 border p-5  shadow rounded">
+            <div className="space-y-2 border p-5 shadow rounded">
               <div className="flex flex-col items-center">
-                <p className="text-lg border p-2 mb-2 bg-gray-300 rounded josefin-sans-bold text-center">{shloka.Hindi}</p>
+                <p className="text-lg border p-2 py-3 mb-2 bg-gray-300 rounded josefin-sans-bold text-center">
+                  {formatText(shloka.Hindi)}
+                </p>
               </div>
               <div className="flex flex-col items-center">
-                <p className="text-lg border p-2 bg-yellow-300 josefin-sans-bold rounded text-center ">{shloka.English}</p>
+                <p className="text-lg border p-2 py-3 bg-yellow-300 josefin-sans-bold rounded text-center">
+                  {formatText(shloka.English)}
+                </p>
               </div>
             </div>
+
           </div>
         )}
         <div className="flex flex-col md:flex-row items-center  justify-center lg:gap-8 gap-4 mt-8">
@@ -88,7 +112,7 @@ function BhagavadGitaHindi() {
           </button>
         </div>
         <div className="my-8 martel-sans-black  p-4 mb-20 bg-orange-400 shadow-lg rounded-md">
-          {selectedCommentary === 'Shankaracharya' && <p>{shloka.Shankaracharya.English}</p>}
+          {selectedCommentary === 'Shankaracharya' && <p>  {formatText(shloka.Shankaracharya.English)}</p>}
           {selectedCommentary === 'Ramanujacharya' && <p>{shloka.Ramanujacharya.English}</p>}
           {selectedCommentary === 'Madhvacharya' && <p>{shloka.Madhvacharya.English}</p>}
           {!selectedCommentary && <p>Select a commentary to view details.</p>}

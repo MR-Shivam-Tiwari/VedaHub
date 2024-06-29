@@ -588,7 +588,7 @@ function MahabharataHindi() {
               </div>
 
               <div
-                className="w-[100%] lg:py-5 py-3 pb-10 min-h-screen  bg-orange-200"
+                className="w-[100%] lg:py-40 py-13 pb-10 min-h-screen  bg-orange-200"
                 style={{
                   flex: "1",
                   overflowY: "auto",
