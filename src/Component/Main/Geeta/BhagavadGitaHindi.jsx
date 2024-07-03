@@ -45,7 +45,7 @@ function BhagavadGitaHindi() {
 
   return (
     <div className='bg-orange-300 min-h-screen'>
-      <div className="w-full max-w-7xl mx-auto py-4 pb-14 lg:py-12 px-4 md:px-6">
+      <div className="w-full max-w-7xl mx-auto py-4 pb-14 lg:py-12 lg:px-4 px-2 md:px-6">
         <div className="flex flex-col md:flex-row items-center justify-between mb-8">
           <div className="flex items-center space-x-4">
             <select
@@ -72,11 +72,11 @@ function BhagavadGitaHindi() {
           </div>
         </div>
         {shloka && (
-          <div className="bg-gray-100 shadow-lg rounded-lg p-8">
+          <div className="bg-gray-100 shadow-lg rounded-lg lg:p-8 p-3">
             <h2 className="text-3xl font-bold mb-4 text-center">Sanskrit Shloka</h2>
             <p className="text-2xl mb-7 text-center  yatra-one-regular">{shloka.Shloka}</p>
             <h2 className="text-3xl font-bold mb-4  text-center">Translation (Hindi - English)</h2>
-            <div className="space-y-2 border p-5 shadow rounded">
+            <div className="space-y-2 lg:border lg:p-5  lg:shadow rounded">
               <div className="flex flex-col items-center">
                 <p className="text-lg border p-2 py-3 mb-2 bg-gray-300 rounded josefin-sans-bold text-center">
                   {formatText(shloka.Hindi)}
