@@ -22,16 +22,42 @@ function AnugitaHindi() {
   };
 
   const formatDescription = (Text) => {
-    if (!Text) return '';
+    if (!Text) return "";
 
-    let formattedDescription = Text.replace(/\n/g, '<br /><br />');
-    formattedDescription = formattedDescription.replace(/'([^']*)'/g, '<b>$1</b>');
-    formattedDescription = formattedDescription.replace(/`([^`]*)`/g, '<div style="text-align: center; font-weight: bold;">$1</div>');
+    let formattedDescription = Text.replace(/\n/g, "<br /><br />");
+    formattedDescription = formattedDescription.replace(
+      /'([^']*)'/g,
+      "<b>$1</b>"
+    );
+    formattedDescription = formattedDescription.replace(
+      /`([^`]*)`/g,
+      '<div style="text-align: center; font-weight: bold;">$1</div>'
+    );
     return formattedDescription;
-};
+  };
 
+  const styles = {
+    scrollbar: {
+      scrollbarWidth: "thin" /* For Firefox */,
+      scrollbarColor: "#c0c0c0 #f0f0f0" /* For Firefox */,
+      overflowX: "auto",
+    },
+    customScrollbar: `
+    .flex::-webkit-scrollbar {
+      height: 8px;
+    }
 
+    .flex::-webkit-scrollbar-track {
+      background: #f0f0f0;
+    }
 
+    .flex::-webkit-scrollbar-thumb {
+      background-color: #c0c0c0;
+      border-radius: 10px;
+      border: 2px solid #f0f0f0;
+    }
+  `,
+  };
 
   const handlePrevious = () => {
     const prevChapter = Math.max(selectedChapter - 1, 1);
@@ -49,8 +75,11 @@ function AnugitaHindi() {
       <div className="bg-orange-300 min-h-screen flex flex-col items-center">
         <div className="bg-orange-100 w-full p-2 lg:p-4  flex items-center justify-between">
           <div></div>
-          <div className="flex items-center space-x-2 overflow-x-auto">
-            <button className="inline-flex items-center justify-center whitespace-nowrap rounded text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground  h-6 bg-orange-600 border px-3 py-1  text-white">
+          <div
+            className="flex container mt-3 items-center space-x-2 overflow-x-auto"
+            style={styles.scrollbar}
+          >
+            <button className="inline-flex items-center justify-center whitespace-nowrap rounded text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground h-6 bg-orange-600 border px-3 py-1 text-white">
               Chapter
             </button>
             {chapters.map((chapter, index) => (
