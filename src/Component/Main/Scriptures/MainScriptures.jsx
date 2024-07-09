@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import Astvakra from '../Geeta/Atavakra.jpg'
+import Astvakra from "../Geeta/Atavakra.jpg";
 const vedas = [
   {
     id: 1,
@@ -127,18 +127,6 @@ const Geeta = {
       src: "https://admin.gitapress.org/assets/uploads/media-uploader/624e84e26cea0.webp",
     },
   ],
-  AstavakraGeeta: [
-    {
-      id: 7,
-      name: "Astavakra Geeta Hindi",
-      src: "https://m.media-amazon.com/images/I/71Ieu2PglwL._AC_UF1000,1000_QL80_.jpg",
-    },
-    {
-      id: 8,
-      name: "Astavakra Geeta English",
-      src: "https://m.media-amazon.com/images/I/71Ieu2PglwL._AC_UF1000,1000_QL80_.jpg",
-    },
-  ],
   AnuGeeta: [
     {
       id: 3,
@@ -149,6 +137,18 @@ const Geeta = {
       id: 4,
       name: "Anu Gita English",
       src: "https://example.com/anu-gita-english.jpg",
+    },
+  ],
+  AstavakraGeeta: [
+    {
+      id: 7,
+      name: "Astavakra Geeta Hindi",
+      src: "https://m.media-amazon.com/images/I/71Ieu2PglwL._AC_UF1000,1000_QL80_.jpg",
+    },
+    {
+      id: 8,
+      name: "Astavakra Geeta English",
+      src: "https://m.media-amazon.com/images/I/71Ieu2PglwL._AC_UF1000,1000_QL80_.jpg",
     },
   ],
   IshvarGeeta: [
@@ -162,8 +162,7 @@ const Geeta = {
       name: "Ishvar Geeta English",
       src: "https://example.com/ishvar-geeta-english.jpg",
     },
-  ]
-  
+  ],
 };
 
 const MainScriptures = () => {
@@ -219,8 +218,9 @@ const MainScriptures = () => {
                 <button
                   key={cat}
                   onClick={() => handleCategoryChange(cat)}
-                  className={`inline-flex items-center mb-4 whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-accent hover:text-accent-foreground h-9 rounded-md px-3 justify-start ${selectedCategory === cat ? "bg-accent" : ""
-                    }`}
+                  className={`inline-flex items-center mb-4 whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-accent hover:text-accent-foreground h-9 rounded-md px-3 justify-start ${
+                    selectedCategory === cat ? "bg-accent" : ""
+                  }`}
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -247,46 +247,67 @@ const MainScriptures = () => {
             <div>
               <h2 className="text-2xl font-bold">{selectedCategory}</h2>
               <div className="mt-4">
-                {selectedCategory === "Epics" || selectedCategory === "Geeta" ? (
-                  Object.keys(categories[selectedCategory]).map((subCategory) => (
-                    <div className="py-1" key={subCategory}>
-                      <div className="flex ">
-                      <h3 className="text-xl mb-3 pt-1 bg-orange-300  px-2 rounded font-bold">{subCategory}</h3>
-                      </div>
-                      <div className="grid border py-10 mb-3 rounded bg-orange-100 grid-cols-2 gap-4 sm:grid-cols-4">
-                        {categories[selectedCategory][subCategory].map((book) => (
-                          <div className="flex items-center justify-center gap-2" key={book.id}>
-                            <div onClick={() => handleBookClick(book)}>
-                              <div className="relative rounded-lg overflow-hidden w-[160px] shadow-xl hover:scale-105 hover:shadow-2xl transform duration-500 cursor-pointer">
-                                <img
-                                  src={book.src}
-                                  alt={book.name}
-                                  className="rounded-md"
-                                  style={{ aspectRatio: "90/140", objectFit: "cover", width: "160px" }}
-                                  loading="lazy"
-                                />
-                                <div className="absolute inset-0 bg-gradient-to-t from-black/100 to-transparent"></div>
-                                <div className="absolute bottom-0 left-0 p-2 text-white text-sm font-semibold">
-                                  {book.name}
+                {selectedCategory === "Epics" ||
+                selectedCategory === "Geeta" ? (
+                  Object.keys(categories[selectedCategory]).map(
+                    (subCategory) => (
+                      <div className="py-1" key={subCategory}>
+                        <div className="flex ">
+                          <h3 className="text-xl mb-3 pt-1 bg-orange-300  px-2 rounded font-bold">
+                            {subCategory}
+                          </h3>
+                        </div>
+                        <div className="grid border py-10 mb-3 rounded bg-orange-100 grid-cols-2 gap-4 sm:grid-cols-4">
+                          {categories[selectedCategory][subCategory].map(
+                            (book) => (
+                              <div
+                                className="flex items-center justify-center gap-2"
+                                key={book.id}
+                              >
+                                <div onClick={() => handleBookClick(book)}>
+                                  <div className="relative rounded-lg overflow-hidden w-[160px] shadow-xl hover:scale-105 hover:shadow-2xl transform duration-500 cursor-pointer">
+                                    <img
+                                      src={book.src}
+                                      alt={book.name}
+                                      className="rounded-md"
+                                      style={{
+                                        aspectRatio: "90/140",
+                                        objectFit: "cover",
+                                        width: "160px",
+                                      }}
+                                      loading="lazy"
+                                    />
+                                    <div className="absolute inset-0 bg-gradient-to-t from-black/100 to-transparent"></div>
+                                    <div className="absolute bottom-0 left-0 p-2 text-white text-sm font-semibold">
+                                      {book.name}
+                                    </div>
+                                  </div>
                                 </div>
                               </div>
-                            </div>
-                          </div>
-                        ))}
+                            )
+                          )}
+                        </div>
                       </div>
-                    </div>
-                  ))
+                    )
+                  )
                 ) : (
                   <div className="grid bg-orange-200 py-10 rounded grid-cols-2 gap-4 sm:grid-cols-4">
                     {categories[selectedCategory].map((book) => (
-                      <div className="flex items-center justify-center gap-2" key={book.id}>
+                      <div
+                        className="flex items-center justify-center gap-2"
+                        key={book.id}
+                      >
                         <div onClick={() => handleBookClick(book)}>
                           <div className="relative rounded-lg overflow-hidden w-[160px] shadow-xl hover:scale-105 hover:shadow-2xl transform duration-500 cursor-pointer">
                             <img
                               src={book.src}
                               alt={book.name}
                               className="rounded-md"
-                              style={{ aspectRatio: "90/140", objectFit: "cover", width: "160px" }}
+                              style={{
+                                aspectRatio: "90/140",
+                                objectFit: "cover",
+                                width: "160px",
+                              }}
                               loading="lazy"
                             />
                             <div className="absolute inset-0 bg-gradient-to-t from-black/100 to-transparent"></div>
