@@ -34,6 +34,7 @@ import MahabharatBoriCe from './Component/Main/Epics/MahabharatBoriCe';
 import AstavakraGeetaEnglish from './Component/Main/Geeta/AstavakraGeeta/AstavakraGeetaEnglish';
 import AstavakraGeetaHindi from './Component/Main/Geeta/AstavakraGeeta/AstavakraGeetaHindi';
 import AnugitaHindi from './Component/Main/Geeta/Anugita/AnugitaHindi';
+import AnugitaEnglish from './Component/Main/Geeta/Anugita/AnugitaEnglish';
 
 function App() {
   return (
@@ -81,7 +82,7 @@ function App() {
             <Route path="/scriptures/:category/:id/Astavakra Geeta English" element={<AstavakraGeetaEnglish />} />
             <Route path="/scriptures/:category/:id/Astavakra Geeta Hindi" element={<AstavakraGeetaHindi />} />
             <Route path="/scriptures/:category/:id/Anu Gita Hindi" element={<AnugitaHindi />} />
-            <Route path="/scriptures/:category/:id/Anu Gita English" element={<AstavakraGeetaHindi />} />
+            <Route path="/scriptures/:category/:id/Anu Gita English" element={<AnugitaEnglish />} />
 
           </Routes>
         </div>

@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import Data from "../GitaData/Anugita.json";
+import Data from "../GitaData/Anugitaenglish.json";
 
-function AnugitaHindi() {
+function AnugitaEnglish() {
   const [selectedChapter, setSelectedChapter] = useState(1);
   const [searchQuery, setSearchQuery] = useState("");
+  const [searchResults, setSearchResults] = useState([]);
 
   // Extract unique chapters from the data
   const chapters = [...new Set(Data.map((item) => item.Chapter))];
@@ -18,18 +19,34 @@ function AnugitaHindi() {
   };
 
   const handleSearch = () => {
-    // Implement search logic here if needed
+    if (searchQuery.trim() === "") {
+      setSearchResults([]);
+      return;
+    }
+
+    const results = Data.filter((item) =>
+      item.Text.toLowerCase().includes(searchQuery.toLowerCase())
+    ).map((item) => item.Chapter);
+
+    const uniqueResults = [...new Set(results)];
+    setSearchResults(uniqueResults);
   };
 
   const formatDescription = (Text) => {
     if (!Text) return '';
 
     let formattedDescription = Text.replace(/\n/g, '<br /><br />');
-    formattedDescription = formattedDescription.replace(/'([^']*)'/g, '<p style="color: #ea580c; font-size:25px;">$1</p> ');
+    formattedDescription = formattedDescription.replace(/'([^']*)'/g, '<b>$1</b>');
     formattedDescription = formattedDescription.replace(/`([^`]*)`/g, '<div style="text-align: center; font-weight: bold;">$1</div>');
+
+    // Highlight search term
+    if (searchQuery) {
+      const regex = new RegExp(`(${searchQuery})`, 'gi');
+      formattedDescription = formattedDescription.replace(regex, '<mark>$1</mark>');
+    }
+
     return formattedDescription;
   };
-
 
   const styles = {
     scrollbar: {
@@ -39,7 +56,7 @@ function AnugitaHindi() {
     },
     customScrollbar: `
       .flex::-webkit-scrollbar {
-        height: 10px;
+        height: 8px;
       }
   
       .flex::-webkit-scrollbar-track {
@@ -65,6 +82,7 @@ function AnugitaHindi() {
     setSelectedChapter(nextChapter);
     window.scrollTo(0, 0); // Scroll to top on chapter change
   };
+
   return (
     <div>
       <div className="bg-orange-300 min-h-screen flex flex-col items-center">
@@ -89,7 +107,7 @@ function AnugitaHindi() {
             <div className="flex  items-center justify-center space-x-2">
               <input
                 className="flex h-10 rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 w-40"
-                placeholder="Search Mantra"
+                placeholder="Search"
                 type="text"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
@@ -107,11 +125,11 @@ function AnugitaHindi() {
           <div className="text-center">
             {chapterData.map((item, index) => (
               <div key={index} className="mb-4">
-                <div className="text-[30px] josefin-sans-regular font-semibold mb-2">
+                <div className="text-[28px] font-semibold mb-2">
                   Chapter {item.Chapter}
                 </div>
                 <div
-                  className="text-lg whitespace-pre-wrap  yatra-one-regular text-start"
+                  className="text-lg whitespace-pre-wrap josefin-sans-regular text-start"
                   dangerouslySetInnerHTML={{
                     __html: formatDescription(item.Text),
                   }}
@@ -120,6 +138,19 @@ function AnugitaHindi() {
             ))}
           </div>
         </div>
+        {searchResults.length > 0 && (
+          <div className="bg-orange-100 w-full p-4 flex flex-wrap justify-center">
+            {searchResults.map((chapter, index) => (
+              <button
+                key={index}
+                onClick={() => handleChapterSelect(chapter)}
+                className="m-2 p-2 bg-orange-600 text-white rounded"
+              >
+                Chapter {chapter}
+              </button>
+            ))}
+          </div>
+        )}
         <div className="bg-orange-100 w-full p-4 flex justify-between fixed bottom-0 left-0">
           <button
             onClick={handlePrevious}
@@ -142,4 +173,4 @@ function AnugitaHindi() {
   );
 }
 
-export default AnugitaHindi;
+export default AnugitaEnglish;

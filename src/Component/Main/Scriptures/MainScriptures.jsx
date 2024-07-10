@@ -131,12 +131,12 @@ const Geeta = {
     {
       id: 3,
       name: "Anu Gita Hindi",
-      src: "https://example.com/anu-gita-hindi.jpg",
+      src: "https://cdn.exoticindia.com/images/products/original/books-2019/nas548.webp",
     },
     {
       id: 4,
       name: "Anu Gita English",
-      src: "https://example.com/anu-gita-english.jpg",
+      src: "https://cdn.exoticindia.com/images/products/original/books-2019/nas548.webp",
     },
   ],
   AstavakraGeeta: [
