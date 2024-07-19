@@ -150,19 +150,7 @@ const Geeta = {
       name: "Astavakra Geeta English",
       src: "https://m.media-amazon.com/images/I/71Ieu2PglwL._AC_UF1000,1000_QL80_.jpg",
     },
-  ],
-  IshvarGeeta: [
-    {
-      id: 5,
-      name: "Ishvar Geeta Hindi",
-      src: "https://example.com/ishvar-geeta-hindi.jpg",
-    },
-    {
-      id: 6,
-      name: "Ishvar Geeta English",
-      src: "https://example.com/ishvar-geeta-english.jpg",
-    },
-  ],
+  ]
 };
 
 const MainScriptures = () => {

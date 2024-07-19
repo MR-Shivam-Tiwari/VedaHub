@@ -71,11 +71,11 @@ function BhagavadGitaHindi() {
           </div>
         </div>
         {shloka && (
-          <div className="bg-gray-100 shadow-lg rounded-lg p-8">
-            <h2 className="text-3xl font-bold mb-4 text-center">Sanskrit Shloka</h2>
-            <p className="text-2xl mb-7 text-center  yatra-one-regular">{shloka.Shloka}</p>
+          <div className="bg-gray-100 lg:shadow-lg rounded-lg lg:p-8">
+            <h2 className="text-3xl font-bold mb-4 py-3 text-center">Sanskrit Shloka</h2>
+            <p className="text-3xl mb-7 text-center text-orange-700  annapurna-sil-bold" >{shloka.Shloka}</p>
             <h2 className="text-3xl font-bold mb-4  text-center">Translation (Hindi - English)</h2>
-            <div className="space-y-2 border p-5 shadow rounded">
+            <div className="space-y-2 lg:border lg:p-5 p-3  shadow rounded">
               <div className="flex flex-col items-center">
                 <p className="text-lg border p-2 py-3 mb-2 bg-gray-300 rounded josefin-sans-bold text-center">
                   {formatText(shloka.Hindi)}
@@ -89,22 +89,22 @@ function BhagavadGitaHindi() {
             </div>
           </div>
         )}
-        <div className="flex flex-col md:flex-row items-center  justify-center lg:gap-8 gap-4 mt-8">
+        <div className="flex flex-col md:flex-row items-center  justify-center lg:px-20 lg:gap-8 gap-4 mt-8">
           <button
             onClick={() => handleCommentaryClick('Shankaracharya')}
-            className={`inline-flex items-center w-[300px] justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border-input shadow h-10 px-4 py-2 ${selectedCommentary === 'Shankaracharya' ? 'bg-orange-500' : 'bg-white hover:bg-accent hover:text-accent-foreground'}`}
+            className={`inline-flex items-center w-full justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border-input shadow h-10 px-4 py-2 ${selectedCommentary === 'Shankaracharya' ? 'bg-orange-500' : 'bg-white hover:bg-accent hover:text-accent-foreground'}`}
           >
             Shankaracharya Commentary
           </button>
           <button
             onClick={() => handleCommentaryClick('Ramanujacharya')}
-            className={`inline-flex items-center w-[300px] justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border-input shadow h-10 px-4 py-2 ${selectedCommentary === 'Ramanujacharya' ? 'bg-orange-500' : 'bg-white hover:bg-accent hover:text-accent-foreground'}`}
+            className={`inline-flex items-center w-full justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border-input shadow h-10 px-4 py-2 ${selectedCommentary === 'Ramanujacharya' ? 'bg-orange-500' : 'bg-white hover:bg-accent hover:text-accent-foreground'}`}
           >
             Ramanujacharya Commentary
           </button>
           <button
             onClick={() => handleCommentaryClick('Madhvacharya')}
-            className={`inline-flex items-center w-[300px] justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border-input shadow h-10 px-4 py-2 ${selectedCommentary === 'Madhvacharya' ? 'bg-orange-500' : 'bg-white hover:bg-accent hover:text-accent-foreground'}`}
+            className={`inline-flex items-center w-full  justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border-input shadow h-10 px-4 py-2 ${selectedCommentary === 'Madhvacharya' ? 'bg-orange-500' : 'bg-white hover:bg-accent hover:text-accent-foreground'}`}
           >
             Madhvacharya Commentary
           </button>
@@ -115,7 +115,7 @@ function BhagavadGitaHindi() {
           {selectedCommentary === 'Madhvacharya' && shloka?.Madhvacharya && <p>{shloka.Madhvacharya.English}</p>}
           {!shloka && <p>Select a commentary to view details.</p>}
         </div>
-        <div className="bg-orange-200 w-full p-4 lg:py-6 lg:px-80 flex justify-between fixed bottom-0 left-0">
+        <div className="bg-orange-200 w-full p-4 lg:py-6 lg:px-20 flex justify-between fixed bottom-0 left-0">
           <button
             onClick={() => setSelectedShloka(selectedShloka > 1 ? selectedShloka - 1 : selectedShloka)}
             className="inline-flex items-center shadow justify-center whitespace-nowrap rounded-md text-sm font-bold ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-primary/90 h-10 px-6 lg:w-[150px] py-2 bg-white hover:bg-gray-200 text-black"

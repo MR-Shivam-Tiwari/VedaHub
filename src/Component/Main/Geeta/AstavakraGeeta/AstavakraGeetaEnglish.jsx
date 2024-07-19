@@ -12,7 +12,7 @@ function AstavakraGeetaEnglish() {
   const renditionRef = useRef(null);
   const drawerRef = useRef(null);
   const [pageNumberFilter, setPageNumberFilter] = useState(null);
-
+ 
   const toggleDrawer = () => {
     setIsDrawerOpen(!isDrawerOpen);
   };
@@ -106,7 +106,12 @@ function AstavakraGeetaEnglish() {
       setSelectedBookIndex(index);
     }
   };
-
+  const formatDescription = (Text) => {
+    let formattedDescription = Text?.replace(/\n/g, '<br /><br />');
+    formattedDescription = formattedDescription?.replace(/'([^']*)'/g, '<b>$1</b>');
+    formattedDescription = formattedDescription?.replace(/`([^`]*)`/g, '<i style="color: #6b7280;">$1</i>');
+    return formattedDescription;
+};
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (
@@ -124,7 +129,28 @@ function AstavakraGeetaEnglish() {
     };
   }, [isDrawerOpen]);
   const [progress, setProgress] = useState(0);
-
+  const styles = {
+    scrollbar: {
+      scrollbarWidth: 'thin', /* For Firefox */
+      scrollbarColor: '#c0c0c0 #f0f0f0', /* For Firefox */
+      overflowX: 'auto',
+    },
+    customScrollbar: `
+      .flex::-webkit-scrollbar {
+        height: 8px;
+      }
+  
+      .flex::-webkit-scrollbar-track {
+        background: #f0f0f0;
+      }
+  
+      .flex::-webkit-scrollbar-thumb {
+        background-color: #c0c0c0;
+        border-radius: 10px;
+        border: 2px solid #f0f0f0;
+      }
+    `,
+  };
   useEffect(() => {
     const interval = setInterval(() => {
       setProgress((prevProgress) => {
@@ -245,9 +271,9 @@ function AstavakraGeetaEnglish() {
                 overflowY: "auto",
               }}
             >
-              <div className="flex items-center justify-between  py-3 px-5 ">
-                <h3 className="font-bold  border-2  bg-gray-100 shadow-lg px-3 w-[125px] text-center h-8 rounded flex items-center text-sm "> Select Chapter</h3>
-                <div className="">
+              <div className="flex items-center   px-5 " >
+                <div className="flex items-center mt-3 py-2 " style={styles.scrollbar}>
+                <h3 className="inline-flex items-center justify-center whitespace-nowrap rounded text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground h-6 bg-orange-600 border px-3 py-1 text-white "> Select Chapter</h3>
                   <ul className=" flex justify-center">
                     {books.map((book, index) => (
                       <button
