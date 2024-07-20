@@ -1,9 +1,15 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import gita from "./GitaData/Bhagvadgita.json";
+import { useLocation, useNavigate } from 'react-router-dom';
 
 function BhagavadGitaHindi() {
-  const [selectedChapter, setSelectedChapter] = useState(1);
-  const [selectedShloka, setSelectedShloka] = useState(1);
+  
+  const navigate = useNavigate();
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
+
+  const [selectedChapter, setSelectedChapter] = useState( searchParams.get('selectedChapter') || 1);
+  const [selectedShloka, setSelectedShloka] = useState( searchParams.get('selectedShloka')|| 1);
   const [selectedCommentary, setSelectedCommentary] = useState('Shankaracharya');
 
   const handleCommentaryClick = (commentary) => {
@@ -18,6 +24,16 @@ function BhagavadGitaHindi() {
     setSelectedShloka(1);
   };
 
+  useEffect(()=>{
+  searchParams.set('selectedChapter', selectedChapter);
+  searchParams.set('selectedShloka', selectedShloka);
+
+  navigate({
+    pathname: location.pathname,
+    search: searchParams.toString(),
+  });
+
+  },[selectedChapter, selectedShloka])
   const handleShlokaChange = (event) => {
     setSelectedShloka(parseInt(event.target.value, 10));
   };

@@ -1,11 +1,27 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Data from "../GitaData/Anugitaenglish.json";
+import { useLocation, useNavigate } from "react-router-dom";
 
 function AnugitaEnglish() {
-  const [selectedChapter, setSelectedChapter] = useState(1);
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const searchParams = new URLSearchParams(location.search);
+  const [selectedChapter, setSelectedChapter] = useState( searchParams.get('selectedChapter') || 1);
   const [searchQuery, setSearchQuery] = useState("");
   const [searchResults, setSearchResults] = useState([]);
 
+
+  
+  useEffect(()=>{
+    searchParams.set('selectedChapter', selectedChapter);
+  
+    navigate({
+      pathname: location.pathname,
+      search: searchParams.toString(),
+    });
+  
+    },[selectedChapter])
   // Extract unique chapters from the data
   const chapters = [...new Set(Data.map((item) => item.Chapter))];
 

@@ -1,18 +1,38 @@
 import React, { useState, useRef, useCallback, useEffect } from "react";
 import { EpubView } from "react-reader";
 import mahabharataEpub from "../GitaData/Astvakra-Gita.epub";
+import { useLocation, useNavigate } from "react-router-dom";
 
 function AstavakraGeetaEnglish() {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
+
   const [epubFile, setEpubFile] = useState(mahabharataEpub);
-  const [location, setLocation] = useState(null);
+  const [locationState, setLocationState] = useState(null);
   const [books, setBooks] = useState([]);
-  const [selectedBookIndex, setSelectedBookIndex] = useState(0);
+  const [selectedBookIndex, setSelectedBookIndex] = useState(
+    parseInt(searchParams.get("selectedBookIndex")) || 0
+  );
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   const renditionRef = useRef(null);
   const drawerRef = useRef(null);
   const [pageNumberFilter, setPageNumberFilter] = useState(null);
- 
+
+  useEffect(() => {
+    searchParams.set("selectedBookIndex", selectedBookIndex);
+
+    navigate({
+      pathname: location.pathname,
+      search: searchParams.toString(),
+    });
+
+    if (books[selectedBookIndex]) {
+      setLocationState(books[selectedBookIndex].href);
+    }
+  }, [selectedBookIndex, books]);
+
   const toggleDrawer = () => {
     setIsDrawerOpen(!isDrawerOpen);
   };
@@ -59,7 +79,7 @@ function AstavakraGeetaEnglish() {
   };
 
   const onLocationChanged = (loc) => {
-    setLocation(loc);
+    setLocationState(loc);
   };
 
   const onTocLoaded = (toc) => {
@@ -69,7 +89,7 @@ function AstavakraGeetaEnglish() {
       index: index,
     }));
     setBooks(books);
-    setSelectedBookIndex(0);
+    setSelectedBookIndex(parseInt(searchParams.get("selectedBookIndex")) || 0);
   };
 
   const handleRendition = useCallback((rendition) => {
@@ -102,16 +122,19 @@ function AstavakraGeetaEnglish() {
   const goToBook = (index) => {
     const book = books[index];
     if (book) {
-      setLocation(book.href);
+      setLocationState(book.href);
+      console.log('book.href', book.href)
       setSelectedBookIndex(index);
     }
   };
+
   const formatDescription = (Text) => {
     let formattedDescription = Text?.replace(/\n/g, '<br /><br />');
     formattedDescription = formattedDescription?.replace(/'([^']*)'/g, '<b>$1</b>');
     formattedDescription = formattedDescription?.replace(/`([^`]*)`/g, '<i style="color: #6b7280;">$1</i>');
     return formattedDescription;
-};
+  };
+
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (
@@ -128,6 +151,7 @@ function AstavakraGeetaEnglish() {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [isDrawerOpen]);
+
   const [progress, setProgress] = useState(0);
   const styles = {
     scrollbar: {
@@ -151,6 +175,7 @@ function AstavakraGeetaEnglish() {
       }
     `,
   };
+  
   useEffect(() => {
     const interval = setInterval(() => {
       setProgress((prevProgress) => {
@@ -273,7 +298,7 @@ function AstavakraGeetaEnglish() {
               }}
             >
               <div className="flex items-center   lg:px-10 " >
-                <div className="flex items-center mt-3 py-2 " style={styles.scrollbar}>
+                <div className="flex items-center  py-2 " style={styles.scrollbar}>
                 <h3 className="inline-flex items-center justify-center whitespace-nowrap rounded text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground h-6 bg-orange-600 border px-3 py-1 text-white "> Select Chapter</h3>
                   <ul className=" flex justify-center">
                     {books.map((book, index) => (
@@ -298,30 +323,6 @@ function AstavakraGeetaEnglish() {
                     ))}
                   </ul>
                 </div>
-                {/* <div className="hidden bg-gray-200 lg:block">
-                  <div className="flex gap-5 p-2 px- justify-end items-center">
-                    <div className="flex items-center">
-                    </div>
-
-                    <div className="flex gap-4 items-center">
-                      <input
-                        type="number"
-                        placeholder="Enter page number"
-                        value={pageNumberFilter || ""}
-                        onChange={(e) => setPageNumberFilter(e.target.value)}
-                        id="first_name"
-                        className="bg-gray-50 h-9 border border-gray-300 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-[200px] p-2.5"
-                      />
-                      <button
-                        onClick={() => goToPage(pageNumberFilter)}
-                        style={{ cursor: "pointer" }}
-                        className="bg-[#8b4513] font-bold text-white h-9 flex items-center px-4  rounded"
-                      >
-                        Search
-                      </button>
-                    </div>
-                  </div>
-                </div> */}
               </div>
             </div>
 
@@ -336,7 +337,7 @@ function AstavakraGeetaEnglish() {
             >
               <EpubView
                 url={epubFile}
-                location={location}
+                location={locationState}
                 locationChanged={onLocationChanged}
                 tocChanged={onTocLoaded}
                 epubOptions={{ flow: "scrolled" }}
@@ -345,20 +346,20 @@ function AstavakraGeetaEnglish() {
                 style={{ flex: "1", overflowX: "hidden" }}
               />
             </div>
-          </div>
-          <div className=" justify-center lg:gap-[190%] gap-[150px] items-center flex py-1.5  ">
+          <div className=" lg:px-20 p-10  justify-between gap-10  items-center flex py-2  ">
             <button
-              className="bg-gray-700 p-2 font-bold text-white px-4 mt-2  rounded"
+              className="bg-gray-700 p-2 font-bold text-white px-4 w-[130px]   rounded"
               onClick={prevChapter}
             >
               Previous
             </button>
             <button
-              className="bg-[#8b4513] font-bold text-white  px-4 p-2 mt-2 rounded"
+              className="bg-[#8b4513] font-bold text-white w-[130px]   px-4 p-2 rounded"
               onClick={nextChapter}
             >
               Next
             </button>
+          </div>
           </div>
         </>
       ) : (
