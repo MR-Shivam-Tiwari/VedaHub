@@ -144,16 +144,16 @@ function BookDetail() {
     Geeta: [
       {
         id: 1,
-        name: "Bhagavad Gita Hindi",
+        name: "Bhagavad Gita",
         src: "https://admin.gitapress.org/assets/uploads/media-uploader/tatavavavacana-vashashhata-sasakaranae1644392839.webp",
         description:"भगवद गीता, जिसे अक्सर गीता के रूप में जाना जाता है, हिंदू धर्म का एक पवित्र शास्त्र है और यह दुनिया के सबसे प्रभावशाली दार्शनिक और आध्यात्मिक पाठों में से एक है। यह महाभारत का हिस्सा है, \n 'भगवद गीता के मुख्य विषय और शिक्षाएं:' \n 'धर्म:' भगवद गीता धर्म की अवधारणा को अध्यात्मिक एवं राजनीतिक संदर्भ में समझाता है। यह जीवन के कर्तव्य और नैतिकता के महत्व को समझाता है, जिसमें कर्मयोग (निःस्वार्थ कर्म की योग), भक्तियोग (भक्ति की योग) और ज्ञानयोग (ज्ञान की योग) के माध्यम से आत्मा का उद्धार बताया गया है। \n 'आत्मा:' भगवद गीता में आत्मा के स्वरूप और उसके ब्रह्म से संबंध को अच्छी तरह से समझाया गया है। यह आत्मा की अनन्तता को प्रमुख धारणा के रूप में उद्घाटित करता है, जो जन्म और मृत्यु से परे है, और मोक्ष के प्राप्ति के लिए आत्मज्ञान की महत्वपूर्णता को उपलब्ध कराता है। \n 'कृष्ण की शिक्षाएं:' भगवद गीता में भगवान कृष्ण और योद्धा अर्जुन के बीच हुई बातचीत को कथात्मक ढंग से प्रस्तुत किया गया है। कृष्ण ने अर्जुन के संदेह और उसकी चिंताओं को धर्म और कर्तव्य के संदर्भ में समझाया है। \n 'विश्वव्यापी संदेश:' भगवद गीता के संदेश का धार्मिक और मानवीय संदेश है जो सभी धर्मों, सम्प्रदायों और विचारधाराओं को प्रेरित करता है। इसकी शिक्षाएं धर्म, भक्ति और आत्म-रियासत के संदेशों के माध्यम से विश्वव्यापी साधना और आध्यात्मिक विकास के लिए प्रेरित करती हैं। "
       },
-      {
-        id: 2,
-        name: "Bhagavad Gita English",
-        src: "https://admin.gitapress.org/assets/uploads/media-uploader/624e84e26cea0.webp",
-        description:"The Bhagavad Gita, often referred to as the Gita, is a revered scripture of Hinduism and stands as one of the most influential philosophical and spiritual texts in the world. \n 'Central Themes and Teachings of the Bhagavad Gita:' \n 'Dharma:' The Bhagavad Gita explores the concept of dharma, often translated as duty or righteousness. It emphasizes the importance of fulfilling one`s duty according to one`s role and station in life, without attachment to the fruits of action. \n 'Yoga:' The Gita elucidates various paths of yoga, including Karma Yoga (the yoga of selfless action), Bhakti Yoga (the yoga of devotion), and Jnana Yoga (the yoga of knowledge). Each path is presented as a means to attain spiritual realization and liberation. \n 'The Self:' At its core, the Bhagavad Gita teaches the nature of the self (Atman) and its relationship to the ultimate reality (Brahman). It emphasizes the eternal nature of the soul, which transcends birth and death, and the importance of self-realization for attaining liberation (moksha). \n 'Krishnas Teachings:' The dialogue between Lord Krishna and the warrior prince Arjuna forms the narrative framework of the Bhagavad Gita. Krishna imparts timeless wisdom and guidance to Arjuna on the battlefield of Kurukshetra, addressing his doubts and dilemmas about righteousness and duty. \n 'Universal Message:' While rooted in the context of a historical battle, the Bhagavad Gita`s teachings transcend time and place, offering profound insights into the human condition and the path to spiritual fulfillment. Its teachings on duty, devotion, and self-realization resonate with people of all backgrounds and beliefs. \n 'Impact and Significance:' The Bhagavad Gita has had a profound influence on philosophy, literature, and spirituality worldwide. Its teachings have inspired countless individuals seeking guidance on life's purpose, moral dilemmas, and spiritual growth. It continues to be studied, revered, and celebrated for its timeless wisdom and universal appeal. "
-      },
+      // {
+      //   id: 2,
+      //   name: "Bhagavad Gita English",
+      //   src: "https://admin.gitapress.org/assets/uploads/media-uploader/624e84e26cea0.webp",
+      //   description:"The Bhagavad Gita, often referred to as the Gita, is a revered scripture of Hinduism and stands as one of the most influential philosophical and spiritual texts in the world. \n 'Central Themes and Teachings of the Bhagavad Gita:' \n 'Dharma:' The Bhagavad Gita explores the concept of dharma, often translated as duty or righteousness. It emphasizes the importance of fulfilling one`s duty according to one`s role and station in life, without attachment to the fruits of action. \n 'Yoga:' The Gita elucidates various paths of yoga, including Karma Yoga (the yoga of selfless action), Bhakti Yoga (the yoga of devotion), and Jnana Yoga (the yoga of knowledge). Each path is presented as a means to attain spiritual realization and liberation. \n 'The Self:' At its core, the Bhagavad Gita teaches the nature of the self (Atman) and its relationship to the ultimate reality (Brahman). It emphasizes the eternal nature of the soul, which transcends birth and death, and the importance of self-realization for attaining liberation (moksha). \n 'Krishnas Teachings:' The dialogue between Lord Krishna and the warrior prince Arjuna forms the narrative framework of the Bhagavad Gita. Krishna imparts timeless wisdom and guidance to Arjuna on the battlefield of Kurukshetra, addressing his doubts and dilemmas about righteousness and duty. \n 'Universal Message:' While rooted in the context of a historical battle, the Bhagavad Gita`s teachings transcend time and place, offering profound insights into the human condition and the path to spiritual fulfillment. Its teachings on duty, devotion, and self-realization resonate with people of all backgrounds and beliefs. \n 'Impact and Significance:' The Bhagavad Gita has had a profound influence on philosophy, literature, and spirituality worldwide. Its teachings have inspired countless individuals seeking guidance on life's purpose, moral dilemmas, and spiritual growth. It continues to be studied, revered, and celebrated for its timeless wisdom and universal appeal. "
+      // },
       {
         id: 3,
         name: "Anu Gita Hindi",
@@ -198,7 +198,7 @@ function BookDetail() {
   };
 
   return (
-    <div className="bg-gray-200">
+    <div className="bg-gray-200" >
       <div className="flex flex-col md:flex-row items-start justify-center gap-8 p-6 md:p-12 bg-gray-200 ">
         <div className="flex-1 max-w-md">
           <img

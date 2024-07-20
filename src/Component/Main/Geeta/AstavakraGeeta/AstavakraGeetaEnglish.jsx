@@ -227,6 +227,7 @@ function AstavakraGeetaEnglish() {
                 onClick={() => {
                   setSelectedBookIndex(index);
                   goToBook(index);
+                  toggleDrawer();
                 }}
                 style={{
                   cursor: "pointer",
@@ -271,7 +272,7 @@ function AstavakraGeetaEnglish() {
                 overflowY: "auto",
               }}
             >
-              <div className="flex items-center   px-5 " >
+              <div className="flex items-center   lg:px-10 " >
                 <div className="flex items-center mt-3 py-2 " style={styles.scrollbar}>
                 <h3 className="inline-flex items-center justify-center whitespace-nowrap rounded text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground h-6 bg-orange-600 border px-3 py-1 text-white "> Select Chapter</h3>
                   <ul className=" flex justify-center">
@@ -297,10 +298,9 @@ function AstavakraGeetaEnglish() {
                     ))}
                   </ul>
                 </div>
-                <div className="hidden bg-gray-200 lg:block">
+                {/* <div className="hidden bg-gray-200 lg:block">
                   <div className="flex gap-5 p-2 px- justify-end items-center">
                     <div className="flex items-center">
-                      {/* Text search input and button commented out */}
                     </div>
 
                     <div className="flex gap-4 items-center">
@@ -321,7 +321,7 @@ function AstavakraGeetaEnglish() {
                       </button>
                     </div>
                   </div>
-                </div>
+                </div> */}
               </div>
             </div>
 

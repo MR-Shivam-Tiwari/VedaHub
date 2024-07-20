@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import Data from "../GitaData/Anugita.json";
-
 function AnugitaHindi() {
   const [selectedChapter, setSelectedChapter] = useState(1);
   const [searchQuery, setSearchQuery] = useState("");
@@ -66,9 +65,11 @@ function AnugitaHindi() {
     window.scrollTo(0, 0); // Scroll to top on chapter change
   };
   return (
-    <div>
-      <div className="bg-orange-300 min-h-screen flex flex-col items-center">
-        <div className="bg-orange-100 w-full p-2 lg:px-4  gap-3 flex items-center justify-between">
+    <div style={{ backgroundImage: 'url("/bgg.png")', backgroundSize: 'cover', backgroundPosition: 'center' }}>
+
+      
+      <div className=" min-h-screen flex flex-col items-center">
+        <div className="bg-orange-100 w-full p-2 lg:px-7  gap-3 flex items-center justify-between">
           <div></div>
           <div className="flex container mt-3 items-center space-x-2 overflow-x-auto" style={styles.scrollbar}>
             <button className="inline-flex items-center justify-center whitespace-nowrap rounded text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground h-6 bg-orange-600 border px-3 py-1 text-white">
@@ -85,7 +86,7 @@ function AnugitaHindi() {
               </button>
             ))}
           </div>
-          <div className="hidden lg:block ">
+          {/* <div className="hidden lg:block ">
             <div className="flex  items-center justify-center space-x-2">
               <input
                 className="flex h-9 rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 w-40"
@@ -101,7 +102,7 @@ function AnugitaHindi() {
                 Search
               </button>
             </div>
-          </div>
+          </div> */}
         </div>
         <div className="flex-1 flex items-center text-start p-4 lg:px-40 pb-20">
           <div className="text-center">

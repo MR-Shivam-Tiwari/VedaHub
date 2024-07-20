@@ -77,8 +77,8 @@ function App() {
             <Route path="/scriptures/:category/:id/Mahabharata Bori-CE" element={<MahabharatBoriCe />} />
 
             {/* Route for Geeta book details */}
-            <Route path="/scriptures/:category/:id/Bhagavad Gita Hindi" element={<BhagavadGitaHindi />} />
-            <Route path="/scriptures/:category/:id/Bhagavad Gita English" element={<BhagavadGitaEnglish />} />
+            <Route path="/scriptures/:category/:id/Bhagavad Gita" element={<BhagavadGitaHindi />} />
+            {/* <Route path="/scriptures/:category/:id/Bhagavad Gita English" element={<BhagavadGitaEnglish />} /> */}
             <Route path="/scriptures/:category/:id/Astavakra Geeta English" element={<AstavakraGeetaEnglish />} />
             <Route path="/scriptures/:category/:id/Astavakra Geeta Hindi" element={<AstavakraGeetaHindi />} />
             <Route path="/scriptures/:category/:id/Anu Gita Hindi" element={<AnugitaHindi />} />

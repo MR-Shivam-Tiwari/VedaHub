@@ -21,7 +21,7 @@ function AstavakraGeetaHindi() {
 
     const formatDescription = (Text) => {
         let formattedDescription = Text?.replace(/\n/g, '<br /><br />');
-        formattedDescription = formattedDescription?.replace(/'([^']*)'/g, '<b style="color: #ea580c; font-weight: bold;">$1</b>');
+        formattedDescription = formattedDescription?.replace(/'([^']*)'/g, '<b style="color: #ea580c; font-weight: bold; font-size:25px;">$1</b>');
         formattedDescription = formattedDescription?.replace(/`([^`]*)`/g, '<i style="color: #6b7280;  ">$1</i>');
         return formattedDescription;
     };
@@ -61,7 +61,7 @@ function AstavakraGeetaHindi() {
       };
     return (
         <div className="bg-orange-300 min-h-screen flex flex-col items-center">
-            <div className="bg-orange-100 w-full p-2  lg:p-2 lg:px-4  flex items-center gap-3 justify-between" >
+            <div className="bg-orange-100 w-full p-2  lg:p-2 lg:px-8  flex items-center gap-3 justify-between" >
                 
                 <div className="flex items-center space-x-2 mt-3 overflow-x-auto" style={styles.scrollbar}>
                     <button className="inline-flex items-center justify-center whitespace-nowrap rounded text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground  h-6 bg-orange-600 border px-3 py-1  text-white">
@@ -77,7 +77,7 @@ function AstavakraGeetaHindi() {
                         </button>
                     ))}
                 </div>
-                <div className='hidden lg:block '>
+                {/* <div className='hidden lg:block '>
 
                 <div className="flex  items-center justify-center space-x-2">
                     <input
@@ -94,7 +94,7 @@ function AstavakraGeetaHindi() {
                         Search
                     </button>
                 </div>
-                </div>
+                </div> */}
             </div>
             <div className="flex-1 flex items-center text-start p-4 lg:px-40 pb-20">
                 <div className="text-center">

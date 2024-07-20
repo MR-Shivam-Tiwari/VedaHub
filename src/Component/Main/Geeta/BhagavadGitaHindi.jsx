@@ -115,16 +115,16 @@ function BhagavadGitaHindi() {
           {selectedCommentary === 'Madhvacharya' && shloka?.Madhvacharya && <p>{shloka.Madhvacharya.English}</p>}
           {!shloka && <p>Select a commentary to view details.</p>}
         </div>
-        <div className="bg-orange-200 w-full p-4 lg:py-6 lg:px-20 flex justify-between fixed bottom-0 left-0">
+        <div className="bg-orange-200 w-full p-2 lg:px-20 flex justify-between fixed bottom-0 left-0">
           <button
             onClick={() => setSelectedShloka(selectedShloka > 1 ? selectedShloka - 1 : selectedShloka)}
-            className="inline-flex items-center shadow justify-center whitespace-nowrap rounded-md text-sm font-bold ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-primary/90 h-10 px-6 lg:w-[150px] py-2 bg-white hover:bg-gray-200 text-black"
+            className="inline-flex items-center shadow justify-center whitespace-nowrap rounded-md text-sm font-bold ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-primary/90 h-10 px-6 w-[150px] py-2 bg-white hover:bg-gray-200 text-black"
           >
             Previous
           </button>
           <button
             onClick={() => setSelectedShloka(selectedShloka < chapter.length ? selectedShloka + 1 : selectedShloka)}
-            className="inline-flex items-center shadow justify-center whitespace-nowrap rounded-md text-sm font-bold ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-primary/90 h-10 px-6 lg:w-[150px] py-2 bg-white hover:bg-gray-200 text-black"
+            className="inline-flex items-center shadow justify-center whitespace-nowrap rounded-md text-sm font-bold hover:bg-orange-400 transition-colors   h-10 px-6 w-[150px] py-2 bg-orange-700  text-white"
           >
             Next
           </button>

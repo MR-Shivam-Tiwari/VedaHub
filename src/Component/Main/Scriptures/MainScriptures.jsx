@@ -118,14 +118,14 @@ const Geeta = {
   BhagavadGita: [
     {
       id: 1,
-      name: "Bhagavad Gita Hindi",
+      name: "Bhagavad Gita",
       src: "https://admin.gitapress.org/assets/uploads/media-uploader/tatavavavacana-vashashhata-sasakaranae1644392839.webp",
     },
-    {
-      id: 2,
-      name: "Bhagavad Gita English",
-      src: "https://admin.gitapress.org/assets/uploads/media-uploader/624e84e26cea0.webp",
-    },
+    // {
+    //   id: 2,
+    //   name: "Bhagavad Gita English",
+    //   src: "https://admin.gitapress.org/assets/uploads/media-uploader/624e84e26cea0.webp",
+    // },
   ],
   AnuGeeta: [
     {

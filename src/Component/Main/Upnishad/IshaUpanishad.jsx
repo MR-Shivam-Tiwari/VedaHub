@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-
-import Vedas from '../Data/UpnishadData/Isha.json';
+import Vedas from "../Data/UpnishadData/Isha.json";
 
 function IshaUpanishad() {
   const [isOpen, setIsOpen] = useState(false);
@@ -35,6 +34,7 @@ function IshaUpanishad() {
       setselectedLanguageCommentry(null);
     }
   };
+
   const handlePrevious = () => {
     if (currentMantraIndex > 0) {
       setCurrentMantraIndex(currentMantraIndex - 1);
@@ -45,87 +45,61 @@ function IshaUpanishad() {
     }
   };
 
-  const currentMantra = Vedas[currentMantraIndex];
+  const handleSelectMantra = (event) => {
+    const index = parseInt(event.target.value, 10);
+    setCurrentMantraIndex(index);
+    setIsOpen(false);
+    setcommentryopen(false);
+    setSelectedLanguage(null);
+    setselectedLanguageCommentry(null);
+  };
 
+  const currentMantra = Vedas[currentMantraIndex];
   return (
-    <div>
+    <div className="container mx-auto lg:px-20">
       <div>
         <div className="flex flex-col sm:flex-row ">
-          <div className="p-6 bg-gray-800 sm:relative sm:top-0 sm:left-0 sm:flex-none lg:h-[90vh] w-full sm:w-[250px]">
-            <div className="space-y-4">
-              <div>
-                <button
-                  type="button"
-                  role="combobox"
-                  aria-controls="radix-:r2b:"
-                  aria-expanded="false"
-                  aria-autocomplete="none"
-                  dir="ltr"
-                  data-state="closed"
-                  className="flex h-10 items-center justify-between bg-gray-300 rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 w-full"
-                >
-                  <span style={{ pointerEvents: "none" }}>
-                    Mantra {currentMantra.mantraNumber}
-                  </span>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    className="h-4 w-4 opacity-50"
-                    aria-hidden="true"
-                  >
-                    <path d="m6 9 6 6 6-6"></path>
-                  </svg>
-                </button>
-              </div>
-            </div>
-          </div>
-          <div className="flex-1 p-6 lg:h-[90vh] overflow-y-auto">
+          <div className="flex-1 lg:p-6 p-3  ">
             <div className="mb-6 flex items-center justify-between">
               <div className="space-y-1">
-                <h2 className="text-2xl font-bold yatra-one-regular">Isha Upanishad</h2>
+                <h2 className="lg:text-2xl font-bold yatra-one-regular">
+                  Isha Upanishad
+                </h2>
               </div>
               <div className="flex items-center space-x-4">
-                <input
-                  className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 max-w-xs"
-                  placeholder="Search mantras..."
-                  type="text"
-                />
-                <button className="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-10 px-4 py-2">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    className="mr-2 h-4 w-4"
-                  >
-                    <circle cx="11" cy="11" r="8"></circle>
-                    <path d="m21 21-4.3-4.3"></path>
-                  </svg>
-                  Search
-                </button>
+                <div className="space-y-4">
+                  <div className="flex items-center  gap-3 text-gray-600 font-bold">
+                    <div className="lg:block hidden">Select Mantra</div>
+                    <select
+                      value={currentMantraIndex}
+                      onChange={handleSelectMantra}
+                      className="flex h-10 items-center gap-1 justify-between bg-gray-800 text-white font-bold rounded-md border border-input bg-background px-3 py-2 text-sm  placeholder:text-muted-foreground   cursor-pointer  disabled:opacity-50 lg:w-[200px]"
+                    >
+                      {Vedas.map((mantra, index) => (
+                        <option key={index} value={index}>
+                          Mantra {mantra.mantraNumber}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                </div>
               </div>
             </div>
-            <div className="space-y-6">
-              <div className="rounded-lg border-2 bg-white p-6 shadow-lg border-gray-300">
+            <div className="space-y-6 overflow-y-auto pb-20">
+              <div className="rounded-lg border-2 bg-white p-3 shadow-lg border-gray-300">
                 <div className="space-y-4">
                   <div>
-                    <div className="mb-2 text-sm font-medium">
-                      Mantra {currentMantra.mantraNumber}
+                    <div className="flex items-center">
+                      <div className="mb-2 p-1 bg-gray-300 flex items-center px-3 h-5 text-xs border rounded-[3px] font-bold">
+                        Mantra {currentMantra.mantraNumber}
+                      </div>
                     </div>
-                    <div className="font-bold martel-black">{currentMantra.shlok.line1}</div>
-                    <div className="font-bold martel-black ">{currentMantra.shlok.line2}</div>
+                    <div className="font-bold martel-black">
+                      {currentMantra.shlok.line1}
+                    </div>
+                    <div className="font-bold martel-black ">
+                      {currentMantra.shlok.line2}
+                    </div>
                   </div>
                 </div>
               </div>
@@ -149,8 +123,9 @@ function IshaUpanishad() {
                     strokeWidth="2"
                     strokeLinecap="round"
                     strokeLinejoin="round"
-                    className={`h-5 w-5 transition-transform ${isOpen ? "rotate-180" : ""
-                      }`}
+                    className={`h-5 w-5 transition-transform ${
+                      isOpen ? "rotate-180" : ""
+                    }`}
                   >
                     <path d="m6 9 6 6 6-6"></path>
                   </svg>
@@ -161,8 +136,6 @@ function IshaUpanishad() {
                       <button
                         className="w-full mb-2 p-2 bg-white text-black border-2 annapurna-sil-regular shadow-sm   rounded-lg hover:bg-gray-200"
                         onClick={() => handleLanguageSelect("hindi")}
-                       
-                        
                       >
                         Hindi
                       </button>
@@ -181,16 +154,16 @@ function IshaUpanishad() {
                             ? "Hindi Translation"
                             : "English Translation"}
                         </h3>
-                        <div className="annapurna-sil-bold " >
+                        <div className="annapurna-sil-bold ">
                           {selectedLanguage === "hindi"
                             ? currentMantra.translationHindi
-                              .split("\n")
-                              .map((line, index) => (
-                                <React.Fragment key={index}>
-                                  {line}
-                                  <br />
-                                </React.Fragment>
-                              ))
+                                .split("\n")
+                                .map((line, index) => (
+                                  <React.Fragment key={index}>
+                                    {line}
+                                    <br />
+                                  </React.Fragment>
+                                ))
                             : currentMantra.translationEnglish}
                         </div>
                       </div>
@@ -218,8 +191,9 @@ function IshaUpanishad() {
                     strokeWidth="2"
                     strokeLinecap="round"
                     strokeLinejoin="round"
-                    className={`h-5 w-5 transition-transform ${commentryopen ? "rotate-180" : ""
-                      }`}
+                    className={`h-5 w-5 transition-transform ${
+                      commentryopen ? "rotate-180" : ""
+                    }`}
                   >
                     <path d="m6 9 6 6 6-6"></path>
                   </svg>
@@ -241,8 +215,6 @@ function IshaUpanishad() {
                       </button>
                     </div>
 
-
-
                     {selectedLanguageCommentry && (
                       <div className="mt-4">
                         <h3 className="text-lg annapurna-sil-regular font-semibold mb-2">
@@ -253,13 +225,13 @@ function IshaUpanishad() {
                         <p className="martel-bold">
                           {selectedLanguageCommentry === "hindi"
                             ? currentMantra.commentaryHindi
-                              .split("\n")
-                              .map((line, index) => (
-                                <React.Fragment key={index}>
-                                  {line}
-                                  <br />
-                                </React.Fragment>
-                              ))
+                                .split("\n")
+                                .map((line, index) => (
+                                  <React.Fragment key={index}>
+                                    {line}
+                                    <br />
+                                  </React.Fragment>
+                                ))
                             : currentMantra.commentaryEnglish}
                         </p>
                       </div>
@@ -267,24 +239,22 @@ function IshaUpanishad() {
                   </div>
                 )}
               </div>
-              <div className="flex justify-between">
+
+              <div className="bg-gray-300 w-full p-2 px-10 lg:px-20 flex justify-between fixed bottom-0 left-0">
                 <button
                   onClick={handlePrevious}
-                  className="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-10 px-4 py-2"
                   disabled={currentMantraIndex === 0}
+                  className="inline-flex items-center justify-center whitespace-nowrap w-[100px] rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-gray-200 h-10 px-4 py-2 bg-gray-100 border shadow  text-black "
                 >
-                  <span style={{ userSelect: 'none' }}>Previous</span>
-
+                  Previous
                 </button>
                 <button
                   onClick={handleNext}
-                  className="inline-flex items-center justify-center bg-black text-white whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-10 px-4 py-2"
                   disabled={currentMantraIndex === Vedas.length - 1}
+                  className={`inline-flex items-center justify-center bg-gray-800 w-[100px] text-white whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-gray-600 h-10 px-4 py-2 `}
                 >
-                  <span style={{ userSelect: 'none' }}>Next</span>
+                  Next
                 </button>
-
-
               </div>
             </div>
           </div>
