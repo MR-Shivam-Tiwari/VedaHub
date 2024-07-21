@@ -19,15 +19,26 @@ function AstavakraGeetaEnglish() {
   const renditionRef = useRef(null);
   const drawerRef = useRef(null);
   const [pageNumberFilter, setPageNumberFilter] = useState(null);
+  const [progress, setProgress] = useState(0);
 
   useEffect(() => {
-    searchParams.set("selectedBookIndex", selectedBookIndex);
+    if (!searchParams.get("selectedBookIndex")) {
+      searchParams.set("selectedBookIndex", selectedBookIndex);
+      navigate({
+        pathname: location.pathname,
+        search: searchParams.toString(),
+      });
+    }
+  }, [selectedBookIndex]);
 
-    navigate({
-      pathname: location.pathname,
-      search: searchParams.toString(),
-    });
+  useEffect(() => {
+    const chapterFromUrl = searchParams.get("selectedBookIndex");
+    if (chapterFromUrl && parseInt(chapterFromUrl) !== selectedBookIndex) {
+      setSelectedBookIndex(parseInt(chapterFromUrl));
+    }
+  }, [location.search]);
 
+  useEffect(() => {
     if (books[selectedBookIndex]) {
       setLocationState(books[selectedBookIndex].href);
     }
@@ -123,8 +134,12 @@ function AstavakraGeetaEnglish() {
     const book = books[index];
     if (book) {
       setLocationState(book.href);
-      console.log('book.href', book.href)
       setSelectedBookIndex(index);
+      searchParams.set("selectedBookIndex", index);
+      navigate({
+        pathname: location.pathname,
+        search: searchParams.toString(),
+      });
     }
   };
 
@@ -152,7 +167,22 @@ function AstavakraGeetaEnglish() {
     };
   }, [isDrawerOpen]);
 
-  const [progress, setProgress] = useState(0);
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setProgress((prevProgress) => {
+        if (prevProgress < 100) {
+          return Math.min(prevProgress + 0.5, 100); // Increment by 0.5
+        } else {
+          clearInterval(interval);
+          setLoading(false); // Optionally, set loading to false when done
+          return prevProgress;
+        }
+      });
+    }, 100); // 100ms interval for slower progress
+
+    return () => clearInterval(interval);
+  }, []);
+
   const styles = {
     scrollbar: {
       scrollbarWidth: 'thin', /* For Firefox */
@@ -175,22 +205,6 @@ function AstavakraGeetaEnglish() {
       }
     `,
   };
-  
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setProgress((prevProgress) => {
-        if (prevProgress < 100) {
-          return Math.min(prevProgress + 0.5, 100); // Increment by 0.5
-        } else {
-          clearInterval(interval);
-          setLoading(false); // Optionally, set loading to false when done
-          return prevProgress;
-        }
-      });
-    }, 100); // 100ms interval for slower progress
-
-    return () => clearInterval(interval);
-  }, []);
 
   return (
     <div
@@ -327,7 +341,7 @@ function AstavakraGeetaEnglish() {
             </div>
 
             <div
-              className="w-[100%] h-[75vh] lg:h-[76vh] lg:rounded-md bg-orange-300"
+              className="w-[100%]  lg:rounded-md bg-orange-300"
               style={{
                 flex: "1",
                 overflowY: "auto",
@@ -346,7 +360,7 @@ function AstavakraGeetaEnglish() {
                 style={{ flex: "1", overflowX: "hidden" }}
               />
             </div>
-          <div className=" lg:px-20 p-10  justify-between gap-10  items-center flex py-2  ">
+          <div className=" bg-orange-100 w-full p-3 lg:px-20 flex justify-between fixed bottom-0 left-0  ">
             <button
               className="bg-gray-700 p-2 font-bold text-white px-4 w-[130px]   rounded"
               onClick={prevChapter}

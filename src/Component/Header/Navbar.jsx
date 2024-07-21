@@ -112,9 +112,9 @@ function Navbar() {
           id="default-modal"
           tabIndex="-1"
           aria-hidden="true"
-          className="fixed inset-0 z-50 flex items-center justify-center w-full h-full bg-black bg-opacity-50"
+          className="fixed inset-0 z-50 flex items-center justify-center w-full   bg-black bg-opacity-50"
         >
-          <div className="relative p-4 w-full max-w-2xl max-h-full">
+          <div className="relative p-4 w-full max-w-2xl ">
             <div className="relative bg-white rounded-lg shadow ">
               <div className="flex items-center justify-between p-4 md:p-5 border-b rounded-t ">
                 <div>
@@ -148,7 +148,7 @@ function Navbar() {
                   <span className="sr-only">Close modal</span>
                 </button>
               </div>
-              <div class="w-full max-w-2xl mx-auto py-5 px-4 sm:px-6 lg:px-8 overflow-y-auto max-h-[500px] sm:max-h-screen">
+              <div class="w-full max-w-2xl mx-auto py-5 px-4 sm:px-6 lg:px-8 overflow-y-auto h-[400px]  sm:max-h-screen">
                 <div class="space-y-6">
                   <form class="space-y-6">
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">

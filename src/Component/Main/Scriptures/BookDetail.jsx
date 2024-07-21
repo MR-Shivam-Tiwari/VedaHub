@@ -214,7 +214,7 @@ function BookDetail() {
           <h1 class="text-3xl md:text-4xl font-bold">{book.name}</h1>
           <div>
             <p
-              class="text-gray-500  text-lg"
+              class="text-gray-500 annapurna-sil-bold text-sm"
               dangerouslySetInnerHTML={{
                 __html: formatDescription(book?.description),
               }}

@@ -16,22 +16,9 @@ function MahabharatBoriCe() {
   const renditionRef = useRef(null);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [pageNumberFilter, setPageNumberFilter] = useState(null);
-  // const [textSearchFilter, setTextSearchFilter] = useState("");
   const [loading, setLoading] = useState(true);
   const [progress, setProgress] = useState(0);
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      if (progress < 99) {
-        setProgress((prevProgress) => prevProgress + 1);
-      } else {
-        clearInterval(interval);
-        setLoading(false); // Optionally, set loading to false when done
-      }
-    }, 20);
-
-    return () => clearInterval(interval);
-  }, []);
   const toggleDrawer = () => {
     setIsDrawerOpen(!isDrawerOpen);
   };
@@ -63,36 +50,12 @@ function MahabharatBoriCe() {
     border: "none",
     cursor: "pointer",
   };
+
   const handleFileUpload = (event) => {
     const file = event.target.files[0];
     readFile(file);
   };
-  const onTocLoaded = (toc) => {
-    // Assuming each top-level item in the TOC is a book
-    const books = toc.map((item, index) => ({
-      label: item.label,
-      href: item.href,
-      parvs: item.subitems || [],
-      index: index,
-    }));
-    setBooks(books);
-    setSelectedBook(null);
-    setParvs([]);
-    setSelectedParv(null);
-    setUparvs([]);
-    setSelectedUparv(null);
-    setChapters([]);
-  };
 
-  // Function to handle book selection
-  const handleBookChange = (event) => {
-    const selectedBookLabel = event.target.value;
-    const book = books.find((book) => book.label === selectedBookLabel);
-    if (book) {
-      selectBook(book);
-      setSelectedBook(book);
-    }
-  };
   const readFile = (file) => {
     const reader = new FileReader();
     reader.onload = (event) => {
@@ -108,6 +71,7 @@ function MahabharatBoriCe() {
   const onLocationChanged = (loc) => {
     setLocation(loc);
   };
+
   const goToPage = (pageNumber) => {
     if (renditionRef.current && pageNumber) {
       renditionRef.current.display(pageNumber);
@@ -122,6 +86,9 @@ function MahabharatBoriCe() {
     renditionRef.current.on("displayError", (error) => {
       console.error("Display Error:", error);
     });
+    renditionRef.current.on("rendered", () => {
+      setLoading(false); // EPUB file is rendered, stop loading
+    });
   }, []);
 
   const nextPage = () => {
@@ -135,12 +102,32 @@ function MahabharatBoriCe() {
       renditionRef.current.prev();
     }
   };
-  const goToBook = (index) => {
-    const book = books[index];
+
+  const onTocLoaded = (toc) => {
+    const books = toc.map((item, index) => ({
+      label: item.label,
+      href: item.href,
+      parvs: item.subitems || [],
+      index: index,
+    }));
+    setBooks(books);
+    setSelectedBook(null);
+    setParvs([]);
+    setSelectedParv(null);
+    setUparvs([]);
+    setSelectedUparv(null);
+    setChapters([]);
+  };
+
+  const handleBookChange = (event) => {
+    const selectedBookLabel = event.target.value;
+    const book = books.find((book) => book.label === selectedBookLabel);
     if (book) {
-      setLocation(book.href);
+      selectBook(book);
+      setSelectedBook(book);
     }
   };
+
   const selectBook = (book) => {
     setSelectedBook(book);
     setParvs(book.parvs);
@@ -211,15 +198,12 @@ function MahabharatBoriCe() {
       </>
     );
   };
+
   const drawerRef = useRef(null);
 
   useEffect(() => {
     const handleClickOutside = (event) => {
-      if (
-        drawerRef.current &&
-        !drawerRef.current.contains(event.target) &&
-        isDrawerOpen
-      ) {
+      if (drawerRef.current && !drawerRef.current.contains(event.target) && isDrawerOpen) {
         setIsDrawerOpen(false);
       }
     };
@@ -234,35 +218,33 @@ function MahabharatBoriCe() {
     const interval = setInterval(() => {
       setProgress((prevProgress) => {
         if (prevProgress < 100) {
-          return Math.min(prevProgress + 0.5, 100); // Increment by 0.5
+          return Math.min(prevProgress + 1, 100); // Increment by 0.5
         } else {
           clearInterval(interval);
           setLoading(false); // Optionally, set loading to false when done
           return prevProgress;
         }
       });
-    }, 200); // 100ms interval for slower progress
+    }, 100); // 100ms interval for slower progress
 
     return () => clearInterval(interval);
   }, []);
 
   return (
     <>
-      <div
-        className="bg-gray-200 min-h-screen"
-        style={{
-          textAlign: "center",
-          display: "flex",
-          flexDirection: "column",
-        }}
-      >
+      {loading && (
+        <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-white z-50">
+          <div className="text-center">
+            <div className="w-16 h-16 border-4 border-dashed rounded-full animate-spin border-orange-500"></div>
+            <div className="mt-4 text-lg font-medium text-blue-700">Loading...</div>
+            <div className="text-sm font-medium text-orange-700">{progress}%</div>
+          </div>
+        </div>
+      )}
+      <div className={`bg-gray-200 min-h-screen ${loading ? 'hidden' : ''}`} style={{ textAlign: "center", display: "flex", flexDirection: "column" }}>
         <div className="flex px-2 items-center justify-between lg:hidden">
           <div>
-            <button
-              className="flex bg-gray-400 h-9 my-2 items-center font-bold"
-              onClick={toggleDrawer}
-              style={menuButtonStyle}
-            >
+            <button className="flex bg-gray-400 h-9 my-2 items-center font-bold" onClick={toggleDrawer} style={menuButtonStyle}>
               <span className="mb-1" style={{ marginLeft: "5px" }}>
                 Select Parva
               </span>
@@ -277,43 +259,18 @@ function MahabharatBoriCe() {
               id="first_name"
               className="bg-gray-50 w-[175px] h-10 border border-gray-300 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block px-2 py-2.5"
             />
-            <button
-              onClick={() => goToPage(pageNumberFilter)}
-              style={{ cursor: "pointer" }}
-              className="bg-[#8b4513] font-bold text-white p-2 rounded"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="16"
-                height="16"
-                fill="currentColor"
-                className="bi bi-search"
-                viewBox="0 0 16 16"
-              >
+            <button onClick={() => goToPage(pageNumberFilter)} style={{ cursor: "pointer" }} className="bg-[#8b4513] font-bold text-white p-2 rounded">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-search" viewBox="0 0 16 16">
                 <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
               </svg>
             </button>
           </div>
         </div>
 
-        <div
-          ref={drawerRef}
-          className="z-20 lg:flex lg-hidden lg:static lg:z-auto bg-gray-200"
-          style={drawerStyle}
-        >
-          <div className="flex justify-end pt-2 px-2 ">
-            <button
-              className="lg:hidden  font-bold p-2 text-white text-lg  bg-gray-400 rounded "
-              onClick={toggleDrawer}
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="16"
-                height="16"
-                fill="currentColor"
-                class="bi bi-x-lg"
-                viewBox="0 0 16 16"
-              >
+        <div ref={drawerRef} className="z-20 lg:hidden lg:static lg:z-auto bg-gray-200" style={drawerStyle}>
+          <div className="flex justify-end pt-2 px-2">
+            <button className="lg:hidden font-bold p-2 text-white text-lg bg-gray-400 rounded" onClick={toggleDrawer}>
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-x-lg" viewBox="0 0 16 16">
                 <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z" />
               </svg>
             </button>
@@ -419,31 +376,7 @@ function MahabharatBoriCe() {
 
         {epubFile ? (
           <>
-            {loading && (
-              <div className="w-full h-10 py-5 mb-5 bg-gray-200 px-10">
-                <div
-                  className="h-full"
-                  style={{ width: "100%", transition: "width 2s" }}
-                >
-                  <div className="flex justify-between">
-                    <span className=" text-lg font-medium text-blue-700">
-                      Loading...
-                    </span>
-                    <span className="text-sm font-medium text-orange-700">
-                      {progress}%
-                    </span>
-                  </div>
-
-                  <div className="w-full bg-gray-200 rounded-full h-2.5">
-                    <div
-                      className="bg-orange-900 h-2.5 rounded-full"
-                      style={{ width: `${progress}%` }}
-                    ></div>
-                  </div>
-                </div>
-              </div>
-            )}
-            <div className="" style={{ width: "100%" }}>
+            <div style={{ width: "100%" }}>
               <div
                 className="hidden bg-gray-100  lg:block"
                 style={{
@@ -579,7 +512,7 @@ function MahabharatBoriCe() {
                 </div>
               </div>
               <div
-                className="w-[100%] pb-[110px] min-h-screen bg-orange-200"
+                className="w-[100%] pb-[210px]  min-h-screen bg-orange-200"
                 style={{
                   flex: "1",
                   overflowY: "auto",
@@ -599,7 +532,7 @@ function MahabharatBoriCe() {
                 />
               </div>
             </div>
-            <div className="bg-orange-100 w-full p-3 lg:py-5 lg:px-80 flex justify-between fixed bottom-0 left-0">
+            <div className="bg-orange-100 w-full p-3 lg:px-20 flex justify-between fixed bottom-0 left-0">
               <button
                 className="bg-gray-700 w-40 p-2 font-bold text-white px-4   rounded"
                 onClick={prevPage}

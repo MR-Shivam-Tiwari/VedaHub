@@ -2,27 +2,34 @@ import React, { useEffect, useState } from "react";
 import Data from "../GitaData/Anugita.json";
 import { useLocation, useNavigate } from "react-router-dom";
 
-
-
 function AnugitaHindi() {
   const navigate = useNavigate();
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
 
-  const [selectedChapter, setSelectedChapter] = useState(searchParams.get('selectedChapter') || 1);
+  const [selectedChapter, setSelectedChapter] = useState(() => {
+    const savedChapter = localStorage.getItem('selectedChapter');
+    return savedChapter ? parseInt(savedChapter) : parseInt(searchParams.get('selectedChapter')) || 1;
+  });
   const [searchQuery, setSearchQuery] = useState("");
 
+  useEffect(() => {
+    if (!searchParams.get('selectedChapter')) {
+      searchParams.set('selectedChapter', selectedChapter);
+      navigate({
+        pathname: location.pathname,
+        search: searchParams.toString(),
+      }, { replace: true });
+    }
+    localStorage.setItem('selectedChapter', selectedChapter);
+  }, [selectedChapter]);
 
-  useEffect(()=>{
-    searchParams.set('selectedChapter', selectedChapter);
-  
-    navigate({
-      pathname: location.pathname,
-      search: searchParams.toString(),
-    });
-  
-    },[selectedChapter])
-
+  useEffect(() => {
+    const chapterFromUrl = parseInt(searchParams.get('selectedChapter'));
+    if (chapterFromUrl && chapterFromUrl !== selectedChapter) {
+      setSelectedChapter(chapterFromUrl);
+    }
+  }, [location.search]);
 
   // Extract unique chapters from the data
   const chapters = [...new Set(Data.map((item) => item.Chapter))];
@@ -32,7 +39,13 @@ function AnugitaHindi() {
   );
 
   const handleChapterSelect = (chapter) => {
-    setSelectedChapter(parseInt(chapter));
+    const chapterNum = parseInt(chapter);
+    setSelectedChapter(chapterNum);
+    searchParams.set('selectedChapter', chapterNum);
+    navigate({
+      pathname: location.pathname,
+      search: searchParams.toString(),
+    });
     window.scrollTo(0, 0); // Scroll to top on chapter change
   };
 
@@ -45,10 +58,9 @@ function AnugitaHindi() {
 
     let formattedDescription = Text.replace(/\n/g, '<br /><br />');
     formattedDescription = formattedDescription.replace(/'([^']*)'/g, '<p style="color: #ea580c; font-size:25px;">$1</p> ');
-    formattedDescription = formattedDescription.replace(/`([^`]*)`/g, '<div style="text-align: center; font-weight: bold;">$1</div>');
+    formattedDescription = formattedDescription.replace(/`([^`]*)`/g, '<div style="text-align: center; font-weight: bold;  font-size:30px; line-height: 1.5;">$1</div>');
     return formattedDescription;
   };
-
 
   const styles = {
     scrollbar: {
@@ -75,23 +87,22 @@ function AnugitaHindi() {
 
   const handlePrevious = () => {
     const prevChapter = Math.max(selectedChapter - 1, 1);
-    setSelectedChapter(prevChapter);
+    handleChapterSelect(prevChapter);
     window.scrollTo(0, 0); // Scroll to top on chapter change
   };
 
   const handleNext = () => {
     const nextChapter = Math.min(selectedChapter + 1, chapters.length);
-    setSelectedChapter(nextChapter);
+    handleChapterSelect(nextChapter);
     window.scrollTo(0, 0); // Scroll to top on chapter change
   };
+
   return (
     <div style={{ backgroundImage: 'url("/bgg.png")', backgroundSize: 'cover', backgroundPosition: 'center' }}>
-
-      
-      <div className=" min-h-screen flex flex-col items-center">
-        <div className="bg-orange-100 w-full p-2 lg:px-7  gap-3 flex items-center justify-between">
+      <div className="min-h-screen flex flex-col items-center">
+        <div className="bg-orange-100 w-full p-2 lg:px-7 gap-3 flex items-center justify-center">
           <div></div>
-          <div className="flex container mt-3 items-center space-x-2 overflow-x-auto" style={styles.scrollbar}>
+          <div className="flex container  items-center space-x-2 overflow-x-auto" style={styles.scrollbar}>
             <button className="inline-flex items-center justify-center whitespace-nowrap rounded text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground h-6 bg-orange-600 border px-3 py-1 text-white">
               Chapter
             </button>
@@ -106,33 +117,16 @@ function AnugitaHindi() {
               </button>
             ))}
           </div>
-          {/* <div className="hidden lg:block ">
-            <div className="flex  items-center justify-center space-x-2">
-              <input
-                className="flex h-9 rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 w-40"
-                placeholder="Search Mantra"
-                type="text"
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-              />
-              <button
-                onClick={handleSearch}
-                className="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-primary/90 h-9 px-4 py-2 bg-[#a0522d] text-white"
-              >
-                Search
-              </button>
-            </div>
-          </div> */}
         </div>
         <div className="flex-1 flex items-center text-start p-4 lg:px-40 pb-20">
           <div className="text-center">
             {chapterData.map((item, index) => (
               <div key={index} className="mb-4">
-                <div className="text-[30px] josefin-sans-regular font-semibold mb-2">
+                <div className="text-[40px] josefin-sans-regular font-semibold mb-2">
                   Chapter {item.Chapter}
                 </div>
                 <div
-                  className="text-lg whitespace-pre-wrap  yatra-one-regular text-start"
+                  className="text-lg whitespace-pre-wrap yatra-one-regular text-start"
                   dangerouslySetInnerHTML={{
                     __html: formatDescription(item.Text),
                   }}
@@ -141,16 +135,16 @@ function AnugitaHindi() {
             ))}
           </div>
         </div>
-        <div className="bg-orange-100 w-full p-4 flex justify-between fixed bottom-0 left-0">
+        <div className="bg-orange-100 w-full p-4 lg:px-20 flex justify-between fixed bottom-0 left-0">
           <button
             onClick={handlePrevious}
-            className="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-primary/90 h-10 px-4 py-2 bg-[#374151] text-white"
+            className="inline-flex items-center justify-center w-[120px] whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-primary/90 h-10 px-4 py-2 bg-[#374151] text-white"
           >
             Previous
           </button>
           <button
             onClick={handleNext}
-            className={`inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-primary/90 h-10 px-4 py-2 ${selectedChapter !== chapters.length
+            className={`inline-flex items-center justify-center w-[120px] whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-primary/90 h-10 px-4 py-2 ${selectedChapter !== chapters.length
                 ? "bg-[#a0522d] text-white"
                 : "bg-[#a0522d] text-white pointer-events-none opacity-50"
               }`}
