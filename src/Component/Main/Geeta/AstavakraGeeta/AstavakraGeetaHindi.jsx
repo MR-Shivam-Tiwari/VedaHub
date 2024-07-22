@@ -51,7 +51,7 @@ function AstavakraGeetaHindi() {
 
   const formatDescription = (Text) => {
     let formattedDescription = Text?.replace(/\n/g, '<br /><br />');
-    formattedDescription = formattedDescription?.replace(/'([^']*)'/g, '<b style="color: #ea580c; font-weight: bold; font-size:25px;">$1</b>');
+    formattedDescription = formattedDescription?.replace(/'([^']*)'/g, '<b style="color: #ea580c; font-weight: bold; font-size:23px;">$1</b>');
     formattedDescription = formattedDescription?.replace(/`([^`]*)`/g, '<i style="color: #6b7280;   ">$1</i>');
     return formattedDescription;
   };
@@ -131,7 +131,7 @@ function AstavakraGeetaHindi() {
         <div className="text-center">
           {chapterData.map((item, index) => (
             <div key={index} className="mb-4">
-              <div className="text-3xl annapurna-sil-bold font-semibold mb-2">Chapter {item.Chapter}</div>
+              <div className="text-2xl annapurna-sil-bold font-semibold mb-2">Chapter {item.Chapter}</div>
               <div
                 className="text-lg whitespace-pre-wrap annapurna-sil-bold text-start"
                 dangerouslySetInnerHTML={{

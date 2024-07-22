@@ -12,7 +12,8 @@ function MahabharataEnglish() {
   const renditionRef = useRef(null);
   const drawerRef = useRef(null);
   const [pageNumberFilter, setPageNumberFilter] = useState(null);
-  const selectedBook = selectedBookIndex !== 0 ? books[selectedBookIndex] : null;
+  const selectedBook =
+    selectedBookIndex !== 0 ? books[selectedBookIndex] : null;
 
   const toggleDrawer = () => {
     setIsDrawerOpen(!isDrawerOpen);
@@ -106,7 +107,11 @@ function MahabharataEnglish() {
 
   useEffect(() => {
     const handleClickOutside = (event) => {
-      if (drawerRef.current && !drawerRef.current.contains(event.target) && isDrawerOpen) {
+      if (
+        drawerRef.current &&
+        !drawerRef.current.contains(event.target) &&
+        isDrawerOpen
+      ) {
         setIsDrawerOpen(false);
       }
     };
@@ -141,15 +146,30 @@ function MahabharataEnglish() {
         <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-white z-50">
           <div className="text-center">
             <div className="w-20 h-20 border-4 border-dashed rounded-full animate-spin border-orange-500"></div>
-            <div className="mt-4 text-lg font-medium text-blue-700">Loading...</div>
-            <div className="text-sm font-medium text-orange-700">{progress}%</div>
+            <div className="mt-4 text-lg font-medium text-blue-700">
+              Loading...
+            </div>
+            <div className="text-sm font-medium text-orange-700">
+              {progress}%
+            </div>
           </div>
         </div>
       )}
-      <div className={`bg-gray-200 min-h-screen ${loading ? 'hidden' : ''}`} style={{ textAlign: "center", display: "flex", flexDirection: "column" }}>
+      <div
+        className={`bg-gray-200 min-h-screen ${loading ? "hidden" : ""}`}
+        style={{
+          textAlign: "center",
+          display: "flex",
+          flexDirection: "column",
+        }}
+      >
         <div className="flex px-2 items-center justify-between lg:hidden">
           <div>
-            <button className="flex bg-gray-400 h-9 my-2 items-center font-bold" onClick={toggleDrawer} style={menuButtonStyle}>
+            <button
+              className="flex bg-gray-400 h-9 my-2 items-center font-bold"
+              onClick={toggleDrawer}
+              style={menuButtonStyle}
+            >
               <span className="mb-1" style={{ marginLeft: "5px" }}>
                 Select Parva
               </span>
@@ -164,18 +184,43 @@ function MahabharataEnglish() {
               id="first_name"
               className="bg-gray-50 w-[175px] h-10 border border-gray-300 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block px-2 py-2.5"
             />
-            <button onClick={() => goToPage(pageNumberFilter)} style={{ cursor: "pointer" }} className="bg-[#8b4513] font-bold text-white p-2 rounded">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-search" viewBox="0 0 16 16">
+            <button
+              onClick={() => goToPage(pageNumberFilter)}
+              style={{ cursor: "pointer" }}
+              className="bg-[#8b4513] font-bold text-white p-2 rounded"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                fill="currentColor"
+                className="bi bi-search"
+                viewBox="0 0 16 16"
+              >
                 <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
               </svg>
             </button>
           </div>
         </div>
 
-        <div ref={drawerRef} className="z-20 lg:hidden lg:static lg:z-auto bg-gray-200" style={drawerStyle}>
+        <div
+          ref={drawerRef}
+          className="z-20 lg:hidden lg:static lg:z-auto bg-gray-200"
+          style={drawerStyle}
+        >
           <div className="flex pt-2 px-2 justify-end">
-            <button className="lg:hidden font-bold p-2 text-white text-lg bg-gray-400 rounded" onClick={toggleDrawer}>
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-x-lg" viewBox="0 0 16 16">
+            <button
+              className="lg:hidden font-bold p-2 text-white text-lg bg-gray-400 rounded"
+              onClick={toggleDrawer}
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                fill="currentColor"
+                className="bi bi-x-lg"
+                viewBox="0 0 16 16"
+              >
                 <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z" />
               </svg>
             </button>
@@ -197,6 +242,7 @@ function MahabharataEnglish() {
                   onClick={() => {
                     setSelectedBookIndex(index);
                     goToBook(index);
+                    toggleDrawer();
                   }}
                   style={{
                     cursor: "pointer",
@@ -206,7 +252,18 @@ function MahabharataEnglish() {
                   }}
                   className="inline-flex items-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 h-10 px-4 py-2 justify-start gap-2 text-black"
                 >
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className="w-5 h-5"
+                  >
                     <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"></path>
                   </svg>
                   {book.label}
@@ -269,7 +326,11 @@ function MahabharataEnglish() {
                           id="first_name"
                           className="bg-gray-50 w-[205px] h-10 border border-gray-300 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block  px-2 py-2.5"
                         />
-                        <button onClick={() => goToPage(pageNumberFilter)} style={{ cursor: "pointer" }} className="bg-[#8b4513] font-bold text-white  px-4  p-2 rounded">
+                        <button
+                          onClick={() => goToPage(pageNumberFilter)}
+                          style={{ cursor: "pointer" }}
+                          className="bg-[#8b4513] font-bold text-white  px-4  p-2 rounded"
+                        >
                           Search
                         </button>
                       </div>
@@ -278,7 +339,15 @@ function MahabharataEnglish() {
                 </div>
               </div>
 
-              <div className="w-[100%] min-h-screen pb-20 bg-orange-200" style={{ flex: "1", overflowY: "auto", overflowX: "hidden", display: "flex" }}>
+              <div
+                className="w-[100%] min-h-screen pb-20 bg-orange-200"
+                style={{
+                  flex: "1",
+                  overflowY: "auto",
+                  overflowX: "hidden",
+                  display: "flex",
+                }}
+              >
                 <EpubView
                   url={epubFile}
                   location={location}
@@ -292,10 +361,16 @@ function MahabharataEnglish() {
               </div>
             </div>
             <div className="bg-orange-100 w-full p-3 lg:px-20 flex justify-between fixed bottom-0 left-0">
-              <button className="bg-gray-700 w-40 p-2 font-bold text-white px-4 rounded" onClick={prevPage}>
+              <button
+                className="bg-gray-700 w-40 p-2 font-bold text-white px-4 rounded"
+                onClick={prevPage}
+              >
                 Previous
               </button>
-              <button className="bg-[#8b4513] w-40 font-bold text-white p-2 rounded" onClick={nextPage}>
+              <button
+                className="bg-[#8b4513] w-40 font-bold text-white p-2 rounded"
+                onClick={nextPage}
+              >
                 Next
               </button>
             </div>
