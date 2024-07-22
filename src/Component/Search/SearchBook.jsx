@@ -174,16 +174,16 @@ function BookCard({ book }) {
         alt={book.name}
         width="400"
         height="600"
-        className="w-full object-cover"
+        className="w-full object-cover "
         style={{ aspectRatio: "300/400", objectFit: "cover" }}
       />
       <div className="p-4">
         <h3 className="text-lg font-bold mb-2">{book.name}</h3>
       </div>
-      <div className="absolute inset-0 flex items-end mb-20 justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+      <div className="absolute inset-0 flex items-end mb-[67px] justify-center opacity-0 group-hover:opacity-100 shadow-xl  transition-opacity">
         <button
           onClick={() => handleClick(book.id)} // Pass book.id to handleClick
-          className="bg-orange-500 text-white w-full py-2 px-4 mx-5  rounded-md shadow-lg hover:bg-orange-600 transition-colors"
+          className="bg-orange-500 text-white w-full py-2 px-4 mb-2 mx-5 hover:shadow-2xl  rounded-md shadow-lg hover:bg-orange-600 transition-colors"
         >
           View
         </button>

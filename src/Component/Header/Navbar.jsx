@@ -103,13 +103,13 @@ function Navbar() {
           <div className="hidden lg:block">
             <button
               onClick={()=> navigate('/search-book')}
-              class="inline-flex items-center   gap-2 bg-orange-500 border-orange-500 shadow font-extrabold  pt-4  justify-center whitespace-nowrap rounded-[4px] md:rounded-md lg:rounded-md  ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-6 lg:h-10 md:h-10  px-2 md:px-4 lg:px-4  py-3 text-md lg:text-lg md:text-lg "
+              class="inline-flex items-center   gap-2 bg-orange-500 border-orange-500 hover:bg-orange-600 shadow font-extrabold  pt-4  justify-center whitespace-nowrap rounded-[4px] md:rounded-md lg:rounded-md  ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-6 lg:h-10 md:h-10  px-2 md:px-4 lg:px-4  py-3 text-md lg:text-lg md:text-lg "
             >
               Search Scripture
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                width="26"
-                height="26"
+                width="20"
+                height="20"
                 fill="currentColor"
                 class="bi bi-search"
                 viewBox="0 0 16 16"
