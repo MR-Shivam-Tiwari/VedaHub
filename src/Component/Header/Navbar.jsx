@@ -94,11 +94,31 @@ function Navbar() {
               >
                 Donation
               </div>
+             
             </ul>
           </div>
           <div class="absolute left-0 top-full flex justify-center"></div>
         </nav>
-        <div class="ml-auto flex items-center">
+        <div class="ml-auto flex items-center gap-3">
+          <div className="hidden lg:block">
+            <button
+              onClick={()=> navigate('/search-book')}
+              class="inline-flex items-center   gap-2 bg-orange-500 border-orange-500 shadow font-extrabold  pt-4  justify-center whitespace-nowrap rounded-[4px] md:rounded-md lg:rounded-md  ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-6 lg:h-10 md:h-10  px-2 md:px-4 lg:px-4  py-3 text-md lg:text-lg md:text-lg "
+            >
+              Search Scripture
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="26"
+                height="26"
+                fill="currentColor"
+                class="bi bi-search"
+                viewBox="0 0 16 16"
+              >
+                <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
+              </svg>
+            </button>
+          </div>
+
           <button
             onClick={toggleModal}
             class="inline-flex items-center bg-white  justify-center whitespace-nowrap rounded-[4px] md:rounded-md lg:rounded-md  ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-6 lg:h-10 md:h-10  px-2 md:px-4 lg:px-4  py-3 text-md lg:text-lg md:text-lg font-semibold"
@@ -148,7 +168,7 @@ function Navbar() {
                   <span className="sr-only">Close modal</span>
                 </button>
               </div>
-              <div class="w-full max-w-2xl mx-auto py-5 px-4 sm:px-6 lg:px-8 overflow-y-auto h-[400px]  sm:max-h-screen">
+              <div class="w-full max-w-2xl mx-auto py-5 px-4 sm:px-6 lg:px-8 overflow-y-auto lg:h-[400px]  sm:max-h-screen">
                 <div class="space-y-6">
                   <form class="space-y-6">
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
@@ -184,6 +204,8 @@ function Navbar() {
                           />
                         </div>
                       </div>
+                    </div>
+                    <div className="grid lg:grid-cols-2  gap-6 ">
                       <div>
                         <label
                           for="phone"
@@ -199,6 +221,29 @@ function Navbar() {
                             required=""
                           />
                         </div>
+                      </div>
+                      <div>
+                        <label
+                          class="block mb-1 text-sm font-medium text-gray-900 dark:text-white"
+                          for="multiple_files"
+                        >
+                          Upload a Screenshot of Bug
+                        </label>
+                        <form class="max-w-sm">
+                          <label for="file-input" class="sr-only">
+                            Choose file
+                          </label>
+                          <input
+                            type="file"
+                            name="file-input"
+                            id="file-input"
+                            class="block w-full border  border-gray-200 shadow-sm rounded-lg text-sm focus:z-10 focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none 
+    file:bg-gray-300 file:border-0
+    file:me-4
+    file:py-2 file:px-4
+    dark:file:bg-neutral-700 dark:file:text-neutral-400"
+                          />
+                        </form>
                       </div>
                     </div>
                     <div>
@@ -217,50 +262,7 @@ function Navbar() {
                         ></textarea>
                       </div>
                     </div>
-                    <div>
-                      <label
-                        for="screenshot"
-                        class="block text-sm font-medium text-gray-700 "
-                      >
-                        Upload a Screenshot (optional)
-                      </label>
-                      <div class="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md">
-                        <div class="space-y-1 text-center">
-                          <svg
-                            class="mx-auto h-12 w-12 text-gray-400"
-                            stroke="currentColor"
-                            fill="none"
-                            viewBox="0 0 48 48"
-                            aria-hidden="true"
-                          >
-                            <path
-                              d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02"
-                              stroke-width="2"
-                              stroke-linecap="round"
-                              stroke-linejoin="round"
-                            ></path>
-                          </svg>
-                          <div class="flex text-sm text-gray-600 ">
-                            <label
-                              for="screenshot"
-                              class="relative cursor-pointer bg-white rounded-md font-medium text-indigo-600 hover:text-indigo-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500"
-                            >
-                              <span>Upload a file</span>
-                              <input
-                                id="screenshot"
-                                class="sr-only"
-                                type="file"
-                                name="screenshot"
-                              />
-                            </label>
-                            <p class="pl-1">or drag and drop</p>
-                          </div>
-                          <p class="text-xs text-gray-500 ">
-                            PNG, JPG, GIF up to 10MB
-                          </p>
-                        </div>
-                      </div>
-                    </div>
+
                     <div class="flex justify-end">
                       <button
                         type="submit"
@@ -280,7 +282,8 @@ function Navbar() {
         <div className="fixed inset-0 z-50  w-full h-full bg-black bg-opacity-500">
           <div className=" p-4 w-full  ">
             <div className="relative bg-white rounded-lg shadow h-[600px] ">
-              <div className="flex items-center justify-end p-4 md:p-5">
+              <div className="flex items-center justify-between p-4 md:p-5">
+             
                 <button
                   type="button"
                   className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 inline-flex justify-center items-center  "
@@ -315,7 +318,10 @@ function Navbar() {
                       className={`group h-9 w-max cursor-pointer rounded-md px-4 py-2 text-lg font-medium transition-colors ${
                         activePage === "/" ? "bg-[#e0e0e0] text-[#8b4513]" : ""
                       } hover:bg-[#e0e0e0] hover:text-[#8b4513] focus:bg-[#e0e0e0] focus:text-[#8b4513] focus:outline-none disabled:pointer-events-none disabled:opacity-50`}
-                      onClick={() => { handleNavigate("/"); togglesidebar(); }}
+                      onClick={() => {
+                        handleNavigate("/");
+                        togglesidebar();
+                      }}
                     >
                       Home
                     </div>
@@ -326,7 +332,10 @@ function Navbar() {
                           ? "bg-[#e0e0e0] text-[#8b4513]"
                           : ""
                       } hover:bg-[#e0e0e0] hover:text-[#8b4513] focus:bg-[#e0e0e0] focus:text-[#8b4513] focus:outline-none disabled:pointer-events-none disabled:opacity-50`}
-                      onClick={() => {handleNavigate("/scriptures/Geeta"); togglesidebar();}}
+                      onClick={() => {
+                        handleNavigate("/scriptures/Geeta");
+                        togglesidebar();
+                      }}
                     >
                       Scriptures
                     </div>
@@ -337,7 +346,10 @@ function Navbar() {
                           ? "bg-[#e0e0e0] text-[#8b4513]"
                           : ""
                       } hover:bg-[#e0e0e0] hover:text-[#8b4513] focus:bg-[#e0e0e0] focus:text-[#8b4513] focus:outline-none disabled:pointer-events-none disabled:opacity-50`}
-                      onClick={() => {handleNavigate("/about"); togglesidebar();}}
+                      onClick={() => {
+                        handleNavigate("/about");
+                        togglesidebar();
+                      }}
                     >
                       About Us
                     </div>
@@ -348,7 +360,10 @@ function Navbar() {
                           ? "bg-[#e0e0e0] text-[#8b4513]"
                           : ""
                       } hover:bg-[#e0e0e0] hover:text-[#8b4513] focus:bg-[#e0e0e0] focus:text-[#8b4513] focus:outline-none disabled:pointer-events-none disabled:opacity-50`}
-                      onClick={() => {handleNavigate("/contact"); togglesidebar();}}
+                      onClick={() => {
+                        handleNavigate("/contact");
+                        togglesidebar();
+                      }}
                     >
                       Contact Us
                     </div>
@@ -359,13 +374,39 @@ function Navbar() {
                           ? "bg-[#e0e0e0] text-[#8b4513]"
                           : ""
                       } hover:bg-[#e0e0e0] hover:text-[#8b4513] focus:bg-[#e0e0e0] focus:text-[#8b4513] focus:outline-none disabled:pointer-events-none disabled:opacity-50`}
-                      onClick={() => {handleNavigate("/donation"); togglesidebar();}}
+                      onClick={() => {
+                        handleNavigate("/donation");
+                        togglesidebar();
+                      }}
                     >
                       Donation
                     </div>
+                    
                   </ul>
                 </div>
+                <button
+                // onClick={toggleModal}
+                onClick={() => {
+                  navigate('/search-book');
+                  togglesidebar();
+                }}
+                
+                class="inline-flex items-center lg:hidden w-full mt-20 text-2xl    gap-12 bg-orange-500 border-orange-500 shadow font-bold    justify-center whitespace-nowrap rounded-[4px] h-10 md:rounded-md lg:rounded-md  ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground  lg:h-10 md:h-10  px-2 md:px-4 lg:px-4  py-3 text-md lg:text-lg md:text-lg "
+              >
+                Search Scripture
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="25"
+                  height="25"
+                  fill="currentColor"
+                  class="bi bi-search"
+                  viewBox="0 0 16 16"
+                >
+                  <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
+                </svg>
+              </button>
               </div>
+              
             </div>
           </div>
         </div>

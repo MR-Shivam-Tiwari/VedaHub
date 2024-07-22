@@ -35,6 +35,7 @@ import AstavakraGeetaEnglish from './Component/Main/Geeta/AstavakraGeeta/Astavak
 import AstavakraGeetaHindi from './Component/Main/Geeta/AstavakraGeeta/AstavakraGeetaHindi';
 import AnugitaHindi from './Component/Main/Geeta/Anugita/AnugitaHindi';
 import AnugitaEnglish from './Component/Main/Geeta/Anugita/AnugitaEnglish';
+import SearchBook from './Component/Search/SearchBook';
 
 function App() {
   return (
@@ -51,6 +52,7 @@ function App() {
             <Route path="/donation/donate" element={<Donate />} />
             <Route path="/epub" element={<EpubReader />} />
             <Route path="/contact" element={<ContactUs />} />
+            <Route path="/search-book" element={<SearchBook />} />
             {/* Route for displaying book details */}
             <Route path="/scriptures/:category/:id" element={<BookDetail />} />
             {/* Route for Upnishad book details */}
