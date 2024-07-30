@@ -36,6 +36,11 @@ const Epics = {
       name: "Ramayana English",
       src: "https://admin.gitapress.org/assets/uploads/media-uploader/624e84e4cbfce.webp",
     },
+    {
+      id: 6,
+      name: "Ramcharitmanas",
+      src: "/cover.jpeg",
+    },
   ],
   Mahabharata: [
     {

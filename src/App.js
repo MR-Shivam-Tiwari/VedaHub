@@ -36,6 +36,7 @@ import AstavakraGeetaHindi from './Component/Main/Geeta/AstavakraGeeta/Astavakra
 import AnugitaHindi from './Component/Main/Geeta/Anugita/AnugitaHindi';
 import AnugitaEnglish from './Component/Main/Geeta/Anugita/AnugitaEnglish';
 import SearchBook from './Component/Search/SearchBook';
+import Ramcharitmanas from './Component/Main/Epics/Ramcharitmanas';
 
 function App() {
   return (
@@ -74,6 +75,7 @@ function App() {
             {/* Route for Epics book details */}
             <Route path="/scriptures/:category/:id/Ramayana Hindi" element={<RamayanaHindi />} />
             <Route path="/scriptures/:category/:id/Ramayana English" element={<RamayanaEnglish />} />
+            <Route path="/scriptures/:category/:id/Ramcharitmanas" element={<Ramcharitmanas />} />
             <Route path="/scriptures/:category/:id/Mahabharata Hindi" element={<MahabharataHindi />} />
             <Route path="/scriptures/:category/:id/Mahabharata English" element={<MahabharataEnglish />} />
             <Route path="/scriptures/:category/:id/Mahabharata Bori-CE" element={<MahabharatBoriCe />} />

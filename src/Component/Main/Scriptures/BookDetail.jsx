@@ -161,6 +161,13 @@ function BookDetail() {
         description:
           "The Mahabharata, often referred to as the 'Great Epic of India,' stands as one of the world`s longest and most revered pieces of literature. Composed in ancient India, it is a sweeping narrative that delves into the complexities of human existence, morality, duty, and the eternal struggle between good and evil. Spanning over 100,000 verses, the Mahabharata is not just a tale of kings and warriors but a reservoir of wisdom and philosophical insights that continue to inspire and captivate readers across generations. \n 'Background:'  The Mahabharata is traditionally attributed to the sage Vyasa, who is said to have dictated the epic to the god Ganesha. It is believed to have been composed between 3000 BCE and 3500 BCE. Set in the ancient kingdom of Kurukshetra, located in present-day Haryana, India, the epic follows the lives of the Kuru dynasty, focusing primarily on the conflict between two groups of cousins—the Pandavas and the Kauravas. \n  'Synopsis:' The Mahabharata begins with the birth of the Kuru princes, who are descendants of the lunar dynasty. The story unfolds with the rivalry between the Pandavas, the five sons of King Pandu, and the Kauravas, the hundred sons of King Dhritarashtra. The central conflict arises over the rightful succession to the throne of Hastinapura, leading to a bitter power struggle between the two factions. \n The Pandavas, led by the righteous Yudhishthira, face numerous trials and tribulations, including exile, deceit, and war, as they strive to reclaim their kingdom. Alongside them is Krishna, the divine charioteer and mentor, who imparts spiritual wisdom and guidance to the Pandavas, particularly through the teachings of the Bhagavad Gita. \n The Kauravas, led by the ambitious Duryodhana, embody greed, jealousy, and treachery, culminating in the infamous game of dice where the Pandavas lose their kingdom and are forced into exile. Despite repeated attempts at reconciliation, diplomacy fails, and the stage is set for the great Kurukshetra War. \n The war, which forms the climax of the epic, is a cataclysmic conflict that engulfs the entire Bharata (India) in its wake. It serves as the backdrop for profound dialogues, fierce battles, and acts of heroism and sacrifice. Ultimately, the Pandavas emerge victorious, but not without heavy losses and moral dilemmas.",
       },
+      {
+        id: 6,
+        name: "Ramcharitmanas",
+        src: "/cover.jpeg",
+        description:
+          "'रामचरितमानस', गोस्वामी तुलसीदास द्वारा रचित एक महाकाव्य, भारतीय साहित्य का एक अनमोल रत्न है। यह महाकाव्य भगवान श्रीराम के जीवन और उनके आदर्शों की गाथा है, जो हमें धर्म, मर्यादा, और नैतिकता के महत्व को सिखाती है। तुलसीदास ने इस महाकाव्य को अवधी भाषा में लिखा, जिससे यह जन-जन तक पहुंचा और हिंदू धर्म की सांस्कृतिक धरोहर का अभिन्न अंग बन गया। \n 'पृष्ठभूमि:' रामचरितमानस की रचना 16वीं शताब्दी में हुई थी। यह महाकाव्य रामायण पर आधारित है, जिसे महर्षि वाल्मीकि ने संस्कृत में लिखा था। तुलसीदास ने इसे लोकभाषा में लिखकर भगवान राम की कथा को सामान्य जन के लिए सुलभ बनाया। यह कथा अयोध्या के राजा दशरथ के पुत्र राम के जीवन की महागाथा है, जिसमें उनके वनवास, सीता का हरण, और रावण के साथ युद्ध शामिल है। \n 'संरचना:' रामचरितमानस को सात कांडों में विभाजित किया गया है, जो भगवान राम के जीवन के विभिन्न चरणों का वर्णन करते हैं: \n 'बालकाण्ड:' राम के जन्म, उनका बाल्यकाल, और जनकपुर में माता सीता के साथ विवाह की कथा। इस कांड में राम, लक्ष्मण, भरत, और शत्रुघ्न के बचपन के आदर्श प्रस्तुत किए गए हैं। \n 'अयोध्याकाण्ड:' राम के राज्याभिषेक की तैयारी, कैकेयी द्वारा वनवास की माँग, और राम, सीता, और लक्ष्मण का वन गमन। यह कांड राजा दशरथ की मृत्यु और भरत की अयोध्या वापसी की घटनाओं का भी वर्णन करता है। \n 'अरण्यकाण्ड:' राम, सीता, और लक्ष्मण के वनवास का वर्णन। इस कांड में शूर्पणखा की घटना, सीता का हरण, और जटायु के साथ राम का मिलन शामिल है। \n 'किष्किंधाकाण्ड:' हनुमान और सुग्रीव से राम का मिलन, बालि वध, और सीता की खोज के लिए वानरों की सेना का संगठन। यह कांड हनुमान की लंका यात्रा का प्रारंभ है। \n 'सुंदरकांड:' हनुमान की लंका यात्रा, सीता का पता लगाना, और लंका में हनुमान के अद्भुत पराक्रम का वर्णन। यह कांड हनुमान की वीरता और भक्ति का उदाहरण प्रस्तुत करता है। \n 'लंकाकाण्ड:' राम और रावण के बीच महान युद्ध, रावण वध, और सीता की मुक्ति। इस कांड में विभीषण की सहायता और लंका विजय का वर्णन है। \n 'उत्तरकाण्ड:' राम की अयोध्या वापसी, राज्याभिषेक, और रामराज्य की स्थापना। इस कांड में सीता की अग्नि परीक्षा, लव-कुश की कथा, और तुलसीदास की भक्ति का वर्णन है। \n",
+      },
     ],
     Geeta: [
       {
@@ -237,7 +244,7 @@ function BookDetail() {
           />
         </div>
         <div class="flex-1 space-y-4 text-start md:text-left">
-        <div className="flex items-center mb-10 justify-between ">
+          <div className="flex items-center mb-10 justify-between ">
             <h1 class="text-3xl md:text-4xl font-bold">{book.name}</h1>
 
             <div className="hidden lg:block">
@@ -272,7 +279,7 @@ function BookDetail() {
               }}
             ></p>
           </div>
-          
+
           <div className="lg:hidden">
             <div class="bg-gray-200 w-full border   p-2 px-5 lg:px-20 flex justify-between fixed bottom-0 left-0">
               {/* <a class="inline-flex items-center justify-center rounded-md bg-blue-500 hover:bg-blue-600 text-white font-medium px-6  transition-colors"  >
