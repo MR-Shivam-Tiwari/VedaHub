@@ -7,20 +7,30 @@ function RamayanaEnglish() {
   const location = useLocation();
 
   const searchParams = new URLSearchParams(location.search);
-  const [selectedChapter, setSelectedChapter] = useState(() => {
-    const chapterFromUrl = searchParams.get("selectedChapter");
-    return chapterFromUrl ? parseInt(chapterFromUrl) : 1;
-  });
+  const initialKand = searchParams.get("selectedKand") || "BalaKanda";
+  const initialSarg = searchParams.get("selectedSarg")
+    ? parseInt(searchParams.get("selectedSarg"))
+    : 1;
+
+  const [selectedKand, setSelectedKand] = useState(initialKand);
+  const [selectedSarg, setSelectedSarg] = useState(initialSarg);
 
   useEffect(() => {
-    const chapterFromUrl = searchParams.get("selectedChapter");
-    if (chapterFromUrl && parseInt(chapterFromUrl) !== selectedChapter) {
-      setSelectedChapter(parseInt(chapterFromUrl));
+    const kandFromUrl = searchParams.get("selectedKand");
+    const sargFromUrl = searchParams.get("selectedSarg");
+
+    if (kandFromUrl && kandFromUrl !== selectedKand) {
+      setSelectedKand(kandFromUrl);
+    }
+
+    if (sargFromUrl && parseInt(sargFromUrl) !== selectedSarg) {
+      setSelectedSarg(parseInt(sargFromUrl));
     }
   }, [location.search]);
 
   useEffect(() => {
-    searchParams.set("selectedChapter", selectedChapter);
+    searchParams.set("selectedKand", selectedKand);
+    searchParams.set("selectedSarg", selectedSarg);
     navigate(
       {
         pathname: location.pathname,
@@ -28,133 +38,155 @@ function RamayanaEnglish() {
       },
       { replace: true }
     );
-  }, [selectedChapter]);
+  }, [selectedKand, selectedSarg]);
 
-  // Extract unique chapters from the data
-  const chapters = [...new Set(Data.map((item) => item.Sarg))];
+  const kands = [...new Set(Data.map((item) => item.Kand))];
+  const sargs = [
+    ...new Set(Data.filter((item) => item.Kand === selectedKand).map((item) => item.Sarg)),
+  ];
 
-  // Filter data for the selected chapter
+  useEffect(() => {
+    if (!searchParams.get("selectedKand")) {
+      searchParams.set("selectedKand", "BalaKanda");
+      navigate(
+        {
+          pathname: location.pathname,
+          search: searchParams.toString(),
+        },
+        { replace: true }
+      );
+    }
+
+    if (!searchParams.get("selectedSarg")) {
+      const firstSarg = Data.find((item) => item.Kand === "BalaKanda").Sarg;
+      searchParams.set("selectedSarg", firstSarg);
+      navigate(
+        {
+          pathname: location.pathname,
+          search: searchParams.toString(),
+        },
+        { replace: true }
+      );
+    }
+  }, [navigate, location.pathname]);
+
   const chapterData = Data.filter(
-    (item) => item.Sarg === String(selectedChapter)
+    (item) => item.Kand === selectedKand && item.Sarg === String(selectedSarg)
   );
 
-  const handleChapterSelect = (chapter) => {
-    const chapterNum = parseInt(chapter);
-    setSelectedChapter(chapterNum);
-    searchParams.set("selectedChapter", chapterNum);
+  const handleKandSelect = (kand) => {
+    setSelectedKand(kand);
+    const firstSarg = Data.find((item) => item.Kand === kand).Sarg;
+    setSelectedSarg(parseInt(firstSarg));
+    searchParams.set("selectedKand", kand);
+    searchParams.set("selectedSarg", firstSarg);
     navigate({
       pathname: location.pathname,
       search: searchParams.toString(),
     });
-    window.scrollTo(0, 0); // Scroll to top on chapter change
+    window.scrollTo(0, 0);
+  };
+
+  const handleSargSelect = (sarg) => {
+    setSelectedSarg(parseInt(sarg));
+    searchParams.set("selectedSarg", sarg);
+    navigate({
+      pathname: location.pathname,
+      search: searchParams.toString(),
+    });
+    window.scrollTo(0, 0);
+  };
+
+  const handlePrevious = () => {
+    if (selectedSarg > 1) {
+      handleSargSelect(selectedSarg - 1);
+    }
+  };
+
+  const handleNext = () => {
+    const nextSarg = selectedSarg + 1;
+    if (sargs.includes(nextSarg.toString())) {
+      handleSargSelect(nextSarg);
+    }
   };
 
   const formatDescription = (text) => {
     let formattedDescription = text?.replace(/\n/g, "<br /><br />");
+
     formattedDescription = formattedDescription?.replace(
       /'([^']*)'/g,
-      '<b style="color: #c2410c; font-weight: bold; font-size:26px;  ">$1</b>'
+      '<b style="color: #c2410c; font-weight: bold; font-size:23px;">$1</b>'
     );
+
     formattedDescription = formattedDescription?.replace(
       /`([^`]*)`/g,
-      '<i style="color: #6b7280; font-size:15px; ">$1</i>'
+      '<i style="color: #6b7280; font-size:15px;">$1</i> <br /> <div style=" display:flex;"><div style=" font-size:25px; color:#c2410c; border-radius:3px;">Translation:</div></div>'
     );
+
+    formattedDescription = formattedDescription?.replace(
+      /\*([^*]+)\*/g,
+      '<span style="color: red;"> <p style=" font-size:25px; color:red; border-radius:3px;">Comment -</p>$1</span>'
+    );
+
     return formattedDescription;
   };
 
-  const handlePrevious = () => {
-    const prevChapter = Math.max(selectedChapter - 1, 1);
-    handleChapterSelect(prevChapter);
-    window.scrollTo(0, 0); // Scroll to top on chapter change
-  };
-
-  const handleNext = () => {
-    const nextChapter = Math.min(selectedChapter + 1, chapters.length);
-    handleChapterSelect(nextChapter);
-    window.scrollTo(0, 0); // Scroll to top on chapter change
-  };
-
-  const styles = {
-    scrollbar: {
-      scrollbarWidth: "thin" /* For Firefox */,
-      scrollbarColor: "#c0c0c0 #f0f0f0" /* For Firefox */,
-      overflowX: "auto",
-    },
-    customScrollbar: `
-      .flex::-webkit-scrollbar {
-        height: 6px;
-      }
-  
-      .flex::-webkit-scrollbar-track {
-        background: #f0f0f0;
-      }
-  
-      .flex::-webkit-scrollbar-thumb {
-        background-color: #c0c0c0;
-        border-radius: 10px;
-        border: 2px solid #f0f0f0;
-      }
-    `,
-  };
-
   return (
-    <div >
-      <div className="bg-orange-300 min-h-screen flex flex-col items-center">
-        <div className="bg-orange-100 w-full p-2 lg:p-2 lg:px-8 flex items-center gap-3 justify-center">
-          <div
-            className="flex items-center space-x-2 overflow-x-auto"
-            style={styles.scrollbar}
-          >
-            <button className="inline-flex items-center justify-center whitespace-nowrap rounded text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground h-6 bg-orange-600 border px-3 py-1 text-white">
-              Chapter
-            </button>
-            {chapters.map((chapter, index) => (
-              <button
-                key={index}
-                onClick={() => handleChapterSelect(chapter)}
-                className={`inline-flex items-center text-lg justify-center whitespace-nowrap rounded-md  font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-8 px-3 py-2 ${
-                  selectedChapter === parseInt(chapter)
-                    ? "bg-orange-600"
-                    : "bg-orange-200"
-                }`}
-              >
-                {chapter}
-              </button>
-            ))}
-          </div>
-        </div>
-        <div className="flex-1 flex items-center text-start p-4 lg:px-40 pb-20">
-          <div className="text-center">
-            {chapterData.map((item, index) => (
-              <div key={index} className="mb-4">
-                <div className="text-2xl flex justify-center items-center gap-1 annapurna-sil-bold font-semibold mb-2">
-                  {item.Kand} -
-                  <span className="bg-gray-300 rounded  pt-1 px-3"> Sarg - ({item.Sarg})</span>
+    <div className="bg-orange-300 min-h-screen flex flex-col items-center">
+      <div className="bg-orange-100 w-full p-2.5 lg:px-5 flex  lg:flex-row items-center gap-3 lg:justify-start">
+        <select
+          value={selectedKand}
+          onChange={(e) => handleKandSelect(e.target.value)}
+          className="p-2 rounded-md bg-orange-400 w-full josefin-sans-bold  lg:w-[250px] px-4 text-lg shadow border border-orange-400"
+        >
+          {kands.map((kand, index) => (
+            <option className="font-bold josefin-sans-bold" key={index} value={kand}>
+              {kand}
+            </option>
+          ))}
+        </select>
+        <select
+          value={selectedSarg}
+          onChange={(e) => handleSargSelect(e.target.value)}
+          className="p-2 rounded-md bg-orange-400 w-full josefin-sans-bold lg:w-[200px] text-lg border shadow border-orange-400"
+        >
+          {sargs.map((sarg, index) => (
+            <option key={index} value={sarg}>
+              Sarg - {sarg}
+            </option>
+          ))}
+        </select>
+      </div>
+      <div className="flex-1 flex flex-col items-center text-start p-4 lg:px-40 pb-20">
+        <div className="text-center">
+          {chapterData.map((item, index) => (
+            <div key={index} className="mb-4">
+              <div className="flex justify-center">
+                <div className="text-2xl bg-orange-400 border-orange-400 shadow-sm h-8 px-4 pt-1 rounded flex border justify-center items-center gap-1 annapurna-sil-bold font-semibold mb-2">
+                  {item.Kand} - <span className=" "> Sarg - ({item.Sarg})</span>
                 </div>
-                <div
-                  className="text-lg whitespace-pre-wrap mt-5  annapurna-sil-bold text-start"
-                  dangerouslySetInnerHTML={{
-                    __html: formatDescription(item.Text),
-                  }}
-                ></div>
               </div>
-            ))}
-          </div>
+              <div
+                className="text-lg whitespace-pre-wrap mt-5 annapurna-sil-bold text-start"
+                dangerouslySetInnerHTML={{
+                  __html: formatDescription(item.Text),
+                }}
+              ></div>
+            </div>
+          ))}
         </div>
-        <div className="bg-orange-100 w-full p-2 lg:px-20 flex justify-between fixed bottom-0 left-0">
+        <div className="bg-orange-100 w-full p-3 lg:px-20 flex justify-between fixed bottom-0 left-0">
           <button
             onClick={handlePrevious}
-            className="inline-flex items-center w-[120px] justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-primary/90 h-10 px-4 py-2 bg-[#374151] text-white"
+            className="bg-gray-700 w-40 p-2 font-bold text-white px-4 rounded"
+            disabled={selectedSarg <= 1}
           >
             Previous
           </button>
           <button
             onClick={handleNext}
-            className={`inline-flex items-center w-[120px] justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-primary/90 h-10 px-4 py-2 ${
-              selectedChapter !== chapters.length
-                ? "bg-[#a0522d] text-white"
-                : "bg-[#a0522d] text-white pointer-events-none opacity-50"
-            }`}
+            className="bg-[#8b4513] w-40 font-bold text-white p-2 rounded"
+            disabled={!sargs.includes((selectedSarg + 1).toString())}
           >
             Next
           </button>
