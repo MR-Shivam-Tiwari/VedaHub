@@ -181,7 +181,7 @@ function RamayanaEnglish() {
             className="bg-gray-700 w-40 p-2 font-bold text-white px-4 rounded"
             disabled={selectedSarg <= 1}
           >
-            Previous
+            Previous 
           </button>
           <button
             onClick={handleNext}
