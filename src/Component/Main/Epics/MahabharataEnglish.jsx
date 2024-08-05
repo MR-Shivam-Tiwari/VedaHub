@@ -1,19 +1,33 @@
 import React, { useState, useRef, useCallback, useEffect } from "react";
 import { EpubView } from "react-reader";
-import mahabharataEpub from "./EpubFile/KMGMB 18  VOL.epub";
+import { useNavigate, useLocation } from "react-router-dom";
 
 function MahabharataEnglish() {
-  const [epubFile, setEpubFile] = useState(mahabharataEpub);
-  const [location, setLocation] = useState(null);
+  const [epubFile, setEpubFile] = useState("https://eventidcard.s3.us-east-1.amazonaws.com/1722853578550-KMGMB+18++VOL.epub");
   const [books, setBooks] = useState([]);
-  const [selectedBookIndex, setSelectedBookIndex] = useState(0);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [loc, setLocation] = useState(null);
+  const [selectedBookIndex, setSelectedBookIndex] = useState(null);
+  const [pageNumberFilter, setPageNumberFilter] = useState(null);
+  const [progress, setProgress] = useState(0);
   const renditionRef = useRef(null);
   const drawerRef = useRef(null);
-  const [pageNumberFilter, setPageNumberFilter] = useState(null);
-  const selectedBook =
-    selectedBookIndex !== 0 ? books[selectedBookIndex] : null;
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const query = new URLSearchParams(location.search);
+  const initialLocation = query.get("loc");
+  const initialBookIndex = query.get("bookIndex");
+
+  useEffect(() => {
+    if (initialLocation) {
+      setLocation(initialLocation);
+    }
+    if (initialBookIndex) {
+      setSelectedBookIndex(parseInt(initialBookIndex));
+    }
+  }, [initialLocation, initialBookIndex]);
 
   const toggleDrawer = () => {
     setIsDrawerOpen(!isDrawerOpen);
@@ -23,24 +37,6 @@ function MahabharataEnglish() {
     if (renditionRef.current && pageNumber) {
       renditionRef.current.display(pageNumber);
     }
-  };
-
-  const drawerStyle = {
-    position: "fixed",
-    top: 0,
-    left: isDrawerOpen ? 0 : "-250px",
-    width: "250px",
-    height: "100%",
-    backgroundColor: "#fff",
-    boxShadow: "2px 0 5px rgba(0, 0, 0, 0.2)",
-    transition: "left 0.3s ease",
-  };
-
-  const menuButtonStyle = {
-    color: "black",
-    padding: "10px",
-    borderRadius: "5px",
-    cursor: "pointer",
   };
 
   const handleFileUpload = (event) => {
@@ -61,6 +57,7 @@ function MahabharataEnglish() {
 
   const onLocationChanged = (loc) => {
     setLocation(loc);
+    navigate(`?loc=${loc}&bookIndex=${selectedBookIndex}`, { replace: true }); // Update the URL with the new location and selected book index without adding a new entry to the history stack
   };
 
   const onTocLoaded = (toc) => {
@@ -70,7 +67,11 @@ function MahabharataEnglish() {
       index: index,
     }));
     setBooks(books);
-    setSelectedBookIndex(0);
+    if (initialBookIndex !== null) {
+      setSelectedBookIndex(parseInt(initialBookIndex));
+    } else {
+      setSelectedBookIndex(0);
+    }
   };
 
   const handleRendition = useCallback((rendition) => {
@@ -102,16 +103,14 @@ function MahabharataEnglish() {
     const book = books[index];
     if (book) {
       setLocation(book.href);
+      setSelectedBookIndex(index);
+      navigate(`?loc=${book.href}&bookIndex=${index}`); // Update the URL with the book's href and index
     }
   };
 
   useEffect(() => {
     const handleClickOutside = (event) => {
-      if (
-        drawerRef.current &&
-        !drawerRef.current.contains(event.target) &&
-        isDrawerOpen
-      ) {
+      if (drawerRef.current && !drawerRef.current.contains(event.target) && isDrawerOpen) {
         setIsDrawerOpen(false);
       }
     };
@@ -121,8 +120,6 @@ function MahabharataEnglish() {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [isDrawerOpen]);
-
-  const [progress, setProgress] = useState(0);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -168,7 +165,12 @@ function MahabharataEnglish() {
             <button
               className="flex bg-gray-400 h-9 my-2 items-center font-bold"
               onClick={toggleDrawer}
-              style={menuButtonStyle}
+              style={{
+                color: "black",
+                padding: "10px",
+                borderRadius: "5px",
+                cursor: "pointer",
+              }}
             >
               <span className="mb-1" style={{ marginLeft: "5px" }}>
                 Select Parva
@@ -206,7 +208,16 @@ function MahabharataEnglish() {
         <div
           ref={drawerRef}
           className="z-20 lg:hidden lg:static lg:z-auto bg-gray-200"
-          style={drawerStyle}
+          style={{
+            position: "fixed",
+            top: 0,
+            left: isDrawerOpen ? 0 : "-250px",
+            width: "250px",
+            height: "100%",
+            backgroundColor: "#fff",
+            boxShadow: "2px 0 5px rgba(0, 0, 0, 0.2)",
+            transition: "left 0.3s ease",
+          }}
         >
           <div className="flex pt-2 px-2 justify-end">
             <button
@@ -221,7 +232,7 @@ function MahabharataEnglish() {
                 className="bi bi-x-lg"
                 viewBox="0 0 16 16"
               >
-                <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z" />
+                <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L7.293 8z" />
               </svg>
             </button>
           </div>
@@ -240,7 +251,6 @@ function MahabharataEnglish() {
                 <button
                   key={index}
                   onClick={() => {
-                    setSelectedBookIndex(index);
                     goToBook(index);
                     toggleDrawer();
                   }}
@@ -288,7 +298,7 @@ function MahabharataEnglish() {
                   <div>
                     <select
                       className="border-2 px-[20px] py-2 rounded-[7px] bg-orange-100 border-gray-400"
-                      value={selectedBook ? selectedBook.label : ""}
+                      value={books[selectedBookIndex]?.label || ""}
                       onChange={(e) => {
                         const selectedLabel = e.target.value;
                         const selectedIndex = books.findIndex(
@@ -350,7 +360,7 @@ function MahabharataEnglish() {
               >
                 <EpubView
                   url={epubFile}
-                  location={location}
+                  location={loc}
                   locationChanged={onLocationChanged}
                   tocChanged={onTocLoaded}
                   epubOptions={{ flow: "scrolled" }}

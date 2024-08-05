@@ -1,9 +1,9 @@
 import React, { useState, useRef, useCallback, useEffect } from "react";
 import { EpubView } from "react-reader";
-import mahabharataEpub from "./EpubFile/Bori ce Mb 10 Vol.epub";
+import { useNavigate, useLocation } from "react-router-dom";
 
 function MahabharatBoriCe() {
-  const [epubFile, setEpubFile] = useState(mahabharataEpub);
+  const [epubFile, setEpubFile] = useState("https://eventidcard.s3.us-east-1.amazonaws.com/1722854163035-Bori+ce+Mb+10+Vol.epub");
   const [location, setLocation] = useState(null);
   const [books, setBooks] = useState([]);
   const [selectedBook, setSelectedBook] = useState(null);
@@ -18,6 +18,60 @@ function MahabharatBoriCe() {
   const [pageNumberFilter, setPageNumberFilter] = useState(null);
   const [loading, setLoading] = useState(true);
   const [progress, setProgress] = useState(0);
+  const navigate = useNavigate();
+  const locationState = useLocation();
+
+  const query = new URLSearchParams(locationState.search);
+  const initialLocation = query.get("loc");
+  const initialBookIndex = query.get("bookIndex");
+  const initialParvHref = query.get("parvHref");
+  const initialUparvHref = query.get("uparvHref");
+  const initialChapterHref = query.get("chapterHref");
+
+  useEffect(() => {
+    if (initialLocation) {
+      setLocation(initialLocation);
+    }
+  }, [initialLocation]);
+
+  useEffect(() => {
+    if (initialBookIndex && books.length > 0) {
+      const book = books[parseInt(initialBookIndex)];
+      if (book) {
+        setSelectedBook(book);
+        setParvs(book.parvs);
+      }
+    }
+  }, [initialBookIndex, books]);
+
+  useEffect(() => {
+    if (initialParvHref && parvs.length > 0) {
+      const parv = parvs.find((p) => p.href === initialParvHref);
+      if (parv) {
+        setSelectedParv(parv);
+        setUparvs(parv.subitems || []);
+      }
+    }
+  }, [initialParvHref, parvs]);
+
+  useEffect(() => {
+    if (initialUparvHref && uparvs.length > 0) {
+      const uparv = uparvs.find((u) => u.href === initialUparvHref);
+      if (uparv) {
+        setSelectedUparv(uparv);
+        setChapters(uparv.subitems || []);
+      }
+    }
+  }, [initialUparvHref, uparvs]);
+
+  useEffect(() => {
+    if (initialChapterHref && chapters.length > 0) {
+      const chapter = chapters.find((c) => c.href === initialChapterHref);
+      if (chapter) {
+        setSelectedChapter(chapter);
+      }
+    }
+  }, [initialChapterHref, chapters]);
 
   const toggleDrawer = () => {
     setIsDrawerOpen(!isDrawerOpen);
@@ -26,7 +80,7 @@ function MahabharatBoriCe() {
   const drawerStyle = {
     position: "fixed",
     top: 0,
-    left: isDrawerOpen ? 0 : "-250px", // Slide in from the left if isOpen is true
+    left: isDrawerOpen ? 0 : "-250px",
     width: "250px",
     height: "100%",
     backgroundColor: "#fff",
@@ -59,7 +113,6 @@ function MahabharatBoriCe() {
   const readFile = (file) => {
     const reader = new FileReader();
     reader.onload = (event) => {
-      console.log("File read successfully", event.target.result);
       setEpubFile(event.target.result);
     };
     reader.onerror = (error) => {
@@ -70,12 +123,7 @@ function MahabharatBoriCe() {
 
   const onLocationChanged = (loc) => {
     setLocation(loc);
-  };
-
-  const goToPage = (pageNumber) => {
-    if (renditionRef.current && pageNumber) {
-      renditionRef.current.display(pageNumber);
-    }
+    navigate(`?loc=${loc}&bookIndex=${selectedBook?.index || ""}&parvHref=${selectedParv?.href || ""}&uparvHref=${selectedUparv?.href || ""}&chapterHref=${selectedChapter?.href || ""}`);
   };
 
   const handleRendition = useCallback((rendition) => {
@@ -119,23 +167,22 @@ function MahabharatBoriCe() {
     setChapters([]);
   };
 
-  const handleBookChange = (event) => {
-    const selectedBookLabel = event.target.value;
-    const book = books.find((book) => book.label === selectedBookLabel);
+  const handleBookChange = (book) => {
     if (book) {
-      selectBook(book);
       setSelectedBook(book);
+      setParvs(book.parvs);
+      setSelectedParv(null);
+      setUparvs([]);
+      setSelectedUparv(null);
+      setChapters([]);
+      goToChapter(book.href);
     }
   };
 
-  const selectBook = (book) => {
-    setSelectedBook(book);
-    setParvs(book.parvs);
-    setSelectedParv(null);
-    setUparvs([]);
-    setSelectedUparv(null);
-    setChapters([]);
-    goToChapter(book.href);
+  const selectBook = (event) => {
+    const selectedBookLabel = event.target.value;
+    const book = books.find((book) => book.label === selectedBookLabel);
+    handleBookChange(book);
   };
 
   const selectParv = (event) => {
@@ -151,7 +198,7 @@ function MahabharatBoriCe() {
       setSelectedUparv(null);
       setChapters(parv ? parv.subitems || [] : []);
     }
-    goToChapter(href);
+    navigate(`?loc=${href}&bookIndex=${selectedBook?.index || ""}&parvHref=${href}`);
   };
 
   const selectUparv = (event) => {
@@ -159,18 +206,23 @@ function MahabharatBoriCe() {
     const uparv = uparvs.find((up) => up.href === href);
     setSelectedUparv(uparv);
     setChapters(uparv ? uparv.subitems || [] : []);
-    goToChapter(href);
+    navigate(`?loc=${href}&bookIndex=${selectedBook?.index || ""}&parvHref=${selectedParv?.href || ""}&uparvHref=${href}`);
   };
 
   const selectChapter = (event) => {
     const href = event.target.value;
     setSelectedChapter(href);
-    goToChapter(href);
+    navigate(`?loc=${href}&bookIndex=${selectedBook?.index || ""}&parvHref=${selectedParv?.href || ""}&uparvHref=${selectedUparv?.href || ""}&chapterHref=${href}`);
   };
 
   const goToChapter = (href) => {
-    console.log("Navigating to chapter:", href);
     setLocation(href);
+  };
+
+  const goToPage = (pageNumber) => {
+    if (renditionRef.current && pageNumber) {
+      renditionRef.current.display(pageNumber);
+    }
   };
 
   const ChapterList = ({ chapters }) => {
@@ -218,7 +270,7 @@ function MahabharatBoriCe() {
     const interval = setInterval(() => {
       setProgress((prevProgress) => {
         if (prevProgress < 100) {
-          return Math.min(prevProgress + 1, 100); // Increment by 0.5
+          return Math.min(prevProgress + 1, 100); // Increment by 1
         } else {
           clearInterval(interval);
           setLoading(false); // Optionally, set loading to false when done
@@ -271,12 +323,12 @@ function MahabharatBoriCe() {
           <div className="flex justify-end pt-2 px-2">
             <button className="lg:hidden font-bold p-2 text-white text-lg bg-gray-400 rounded" onClick={toggleDrawer}>
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-x-lg" viewBox="0 0 16 16">
-                <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z" />
+                <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L7.293 8z" />
               </svg>
             </button>
           </div>
           <div
-            className="flex-shrink-0   lg:block"
+            className="flex-shrink-0 lg:block"
             style={{
               flex: "0 0 250px",
               padding: "10px",
@@ -391,7 +443,11 @@ function MahabharatBoriCe() {
                       <select
                         className="border-2 px-[20px] py-2 rounded-[7px] bg-orange-100 border-gray-400"
                         value={selectedBook ? selectedBook.label : ""}
-                        onChange={handleBookChange}
+                        onChange={(e) => {
+                          const selectedLabel = e.target.value;
+                          const selectedBook = books.find((book) => book.label === selectedLabel);
+                          handleBookChange(selectedBook);
+                        }}
                         style={{
                           fontSize: "14px",
                           width: "220px",

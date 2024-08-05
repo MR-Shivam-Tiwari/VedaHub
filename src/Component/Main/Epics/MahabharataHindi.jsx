@@ -1,25 +1,78 @@
 import React, { useState, useRef, useCallback, useEffect } from "react";
 import { EpubView } from "react-reader";
-import mahabharataEpub from "./EpubFile/MB.epub";
+import { useNavigate, useLocation } from "react-router-dom";
 
 function MahabharataHindi() {
-  const [epubFile, setEpubFile] = useState(mahabharataEpub);
+  const [epubFile, setEpubFile] = useState("https://eventidcard.s3.us-east-1.amazonaws.com/1722854056413-MB.epub");
   const [location, setLocation] = useState(null);
   const [books, setBooks] = useState([]);
-  const [selectedBook, setSelectedBook] = useState(null);
   const [parvs, setParvs] = useState([]);
-  const [selectedParv, setSelectedParv] = useState(null);
   const [uparvs, setUparvs] = useState([]);
-  const [selectedUparv, setSelectedUparv] = useState(null);
   const [chapters, setChapters] = useState([]);
+  const [selectedBook, setSelectedBook] = useState(null);
+  const [selectedParv, setSelectedParv] = useState(null);
+  const [selectedUparv, setSelectedUparv] = useState(null);
   const [selectedChapter, setSelectedChapter] = useState(null);
   const renditionRef = useRef(null);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [pageNumberFilter, setPageNumberFilter] = useState(null);
   const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
+  const locationState = useLocation();
+
+  const query = new URLSearchParams(locationState.search);
+  const initialLocation = query.get("loc");
+  const initialBookIndex = query.get("bookIndex");
+  const initialParvHref = query.get("parvHref");
+  const initialUparvHref = query.get("uparvHref");
+  const initialChapterHref = query.get("chapterHref");
+
+  useEffect(() => {
+    if (initialLocation) {
+      setLocation(initialLocation);
+    }
+  }, [initialLocation]);
+
+  useEffect(() => {
+    if (initialBookIndex && books.length > 0) {
+      const book = books[parseInt(initialBookIndex)];
+      if (book) {
+        setSelectedBook(book);
+        setParvs(book.parvs);
+      }
+    }
+  }, [initialBookIndex, books]);
+
+  useEffect(() => {
+    if (initialParvHref && parvs.length > 0) {
+      const parv = parvs.find((p) => p.href === initialParvHref);
+      if (parv) {
+        setSelectedParv(parv);
+        setUparvs(parv.subitems || []);
+      }
+    }
+  }, [initialParvHref, parvs]);
+
+  useEffect(() => {
+    if (initialUparvHref && uparvs.length > 0) {
+      const uparv = uparvs.find((u) => u.href === initialUparvHref);
+      if (uparv) {
+        setSelectedUparv(uparv);
+        setChapters(uparv.subitems || []);
+      }
+    }
+  }, [initialUparvHref, uparvs]);
+
+  useEffect(() => {
+    if (initialChapterHref && chapters.length > 0) {
+      const chapter = chapters.find((c) => c.href === initialChapterHref);
+      if (chapter) {
+        setSelectedChapter(chapter);
+      }
+    }
+  }, [initialChapterHref, chapters]);
 
   const onTocLoaded = (toc) => {
-    // Assuming each top-level item in the TOC is a book
     const books = toc.map((item, index) => ({
       label: item.label,
       href: item.href,
@@ -27,22 +80,16 @@ function MahabharataHindi() {
       index: index,
     }));
     setBooks(books);
-    setSelectedBook(null);
-    setParvs([]);
+  };
+
+  const handleBookChange = (book) => {
+    setSelectedBook(book);
+    setParvs(book.parvs);
     setSelectedParv(null);
     setUparvs([]);
     setSelectedUparv(null);
     setChapters([]);
-  };
-
-  const handleBookChange = (event) => {
-    const selectedBookLabel = event.target.value;
-    const book = books.find((book) => book.label === selectedBookLabel);
-    if (book) {
-      setSelectedBook(book);
-      // Call selectBook if it's needed
-      selectBook(book);
-    }
+    navigate(`?loc=${book.href}&bookIndex=${book.index}`);
   };
 
   const goToPage = (pageNumber) => {
@@ -58,7 +105,7 @@ function MahabharataHindi() {
   const drawerStyle = {
     position: "fixed",
     top: 0,
-    left: isDrawerOpen ? 0 : "-250px", // Slide in from the left if isOpen is true
+    left: isDrawerOpen ? 0 : "-250px",
     width: "250px",
     height: "100%",
     backgroundColor: "#fff",
@@ -91,7 +138,6 @@ function MahabharataHindi() {
   const readFile = (file) => {
     const reader = new FileReader();
     reader.onload = (event) => {
-      console.log("File read successfully", event.target.result);
       setEpubFile(event.target.result);
     };
     reader.onerror = (error) => {
@@ -102,6 +148,7 @@ function MahabharataHindi() {
 
   const onLocationChanged = (loc) => {
     setLocation(loc);
+    navigate(`?loc=${loc}&bookIndex=${selectedBook?.index || ""}&parvHref=${selectedParv?.href || ""}&uparvHref=${selectedUparv?.href || ""}&chapterHref=${selectedChapter?.href || ""}`);
   };
 
   const handleRendition = useCallback((rendition) => {
@@ -129,16 +176,6 @@ function MahabharataHindi() {
     }
   };
 
-  const selectBook = (book) => {
-    setSelectedBook(book);
-    setParvs(book.parvs);
-    setSelectedParv(null);
-    setUparvs([]);
-    setSelectedUparv(null);
-    setChapters([]);
-    goToChapter(book.href);
-  };
-
   const selectParv = (event) => {
     const href = event.target.value;
     const parv = parvs.find((p) => p.href === href);
@@ -152,7 +189,7 @@ function MahabharataHindi() {
       setSelectedUparv(null);
       setChapters(parv ? parv.subitems || [] : []);
     }
-    goToChapter(href);
+    navigate(`?loc=${href}&bookIndex=${selectedBook?.index || ""}&parvHref=${href}`);
   };
 
   const selectUparv = (event) => {
@@ -160,21 +197,14 @@ function MahabharataHindi() {
     const uparv = uparvs.find((up) => up.href === href);
     setSelectedUparv(uparv);
     setChapters(uparv ? uparv.subitems || [] : []);
-    goToChapter(href);
+    navigate(`?loc=${href}&bookIndex=${selectedBook?.index || ""}&parvHref=${selectedParv?.href || ""}&uparvHref=${href}`);
   };
 
   const selectChapter = (event) => {
     const href = event.target.value;
     setSelectedChapter(href);
-    goToChapter(href);
+    navigate(`?loc=${href}&bookIndex=${selectedBook?.index || ""}&parvHref=${selectedParv?.href || ""}&uparvHref=${selectedUparv?.href || ""}&chapterHref=${href}`);
   };
-
-  const goToChapter = (href) => {
-    console.log("Navigating to chapter:", href);
-    setLocation(href);
-  };
-
-  const drawerRef = useRef(null);
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -189,13 +219,15 @@ function MahabharataHindi() {
     };
   }, [isDrawerOpen]);
 
+  const drawerRef = useRef(null);
+
   const [progress, setProgress] = useState(0);
 
   useEffect(() => {
     const interval = setInterval(() => {
       setProgress((prevProgress) => {
         if (prevProgress < 100) {
-          return Math.min(prevProgress + 1, 100); // Increment by 0.5
+          return Math.min(prevProgress + 1, 100); // Increment by 1
         } else {
           clearInterval(interval);
           setLoading(false); // Optionally, set loading to false when done
@@ -267,7 +299,7 @@ function MahabharataHindi() {
               {books.map((book, index) => (
                 <button
                   key={index}
-                  onClick={() => selectBook(book)}
+                  onClick={() => handleBookChange(book)}
                   style={{
                     cursor: "pointer",
                     fontWeight: book === selectedBook ? "bold" : "normal",
@@ -375,7 +407,11 @@ function MahabharataHindi() {
                       <select
                         className="border-2 px-[20px] py-2 rounded-[7px] bg-orange-100 border-gray-400"
                         value={selectedBook ? selectedBook.label : ""}
-                        onChange={handleBookChange}
+                        onChange={(e) => {
+                          const selectedLabel = e.target.value;
+                          const selectedBook = books.find((book) => book.label === selectedLabel);
+                          handleBookChange(selectedBook);
+                        }}
                         style={{
                           fontSize: "14px",
                           width: "220px",

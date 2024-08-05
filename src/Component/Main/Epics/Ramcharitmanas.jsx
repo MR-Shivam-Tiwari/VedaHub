@@ -1,211 +1,239 @@
 import React, { useState, useRef, useCallback, useEffect } from "react";
 import { EpubView } from "react-reader";
-import mahabharataEpub from "./EpubFile/Ramcharitr.epub";
+import { useNavigate, useLocation } from "react-router-dom";
 
 function Ramcharitmanas() {
-    const [epubFile, setEpubFile] = useState(mahabharataEpub);
-    const [location, setLocation] = useState(null);
-    const [books, setBooks] = useState([]);
-    const [selectedBook, setSelectedBook] = useState(null);
-    const [parvs, setParvs] = useState([]);
-    const [selectedParv, setSelectedParv] = useState(null);
-    const [uparvs, setUparvs] = useState([]);
-    const [selectedUparv, setSelectedUparv] = useState(null);
-    const [chapters, setChapters] = useState([]);
-    const [selectedChapter, setSelectedChapter] = useState(null);
-    const renditionRef = useRef(null);
-    const [isDrawerOpen, setIsDrawerOpen] = useState(false);
-    const [pageNumberFilter, setPageNumberFilter] = useState(null);
-    const [loading, setLoading] = useState(true);
-  
-    const onTocLoaded = (toc) => {
-      // Assuming each top-level item in the TOC is a book
-      const books = toc.map((item, index) => ({
-        label: item.label,
-        href: item.href,
-        parvs: item.subitems || [],
-        index: index,
-      }));
-      setBooks(books);
-      setSelectedBook(null);
-      setParvs([]);
-      setSelectedParv(null);
-      setUparvs([]);
-      setSelectedUparv(null);
-      setChapters([]);
-    };
-  
-    const handleBookChange = (event) => {
-      const selectedBookLabel = event.target.value;
-      const book = books.find((book) => book.label === selectedBookLabel);
+  const [epubFile, setEpubFile] = useState("https://eventidcard.s3.us-east-1.amazonaws.com/1722854123778-Ramcharitr.epub");
+  const [location, setLocation] = useState(null);
+  const [books, setBooks] = useState([]);
+  const [parvs, setParvs] = useState([]);
+  const [uparvs, setUparvs] = useState([]);
+  const [chapters, setChapters] = useState([]);
+  const [selectedBook, setSelectedBook] = useState(null);
+  const [selectedParv, setSelectedParv] = useState(null);
+  const [selectedUparv, setSelectedUparv] = useState(null);
+  const [selectedChapter, setSelectedChapter] = useState(null);
+  const renditionRef = useRef(null);
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+  const [pageNumberFilter, setPageNumberFilter] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
+  const locationState = useLocation();
+
+  const query = new URLSearchParams(locationState.search);
+  const initialLocation = query.get("loc");
+  const initialBookIndex = query.get("bookIndex");
+  const initialParvHref = query.get("parvHref");
+  const initialUparvHref = query.get("uparvHref");
+  const initialChapterHref = query.get("chapterHref");
+
+  useEffect(() => {
+    if (initialLocation) {
+      setLocation(initialLocation);
+    }
+    if (initialBookIndex) {
+      const book = books[parseInt(initialBookIndex)];
       if (book) {
         setSelectedBook(book);
-        // Call selectBook if it's needed
-        selectBook(book);
+        setParvs(book.parvs);
       }
-    };
-  
-    const goToPage = (pageNumber) => {
-      if (renditionRef.current && pageNumber) {
-        renditionRef.current.display(pageNumber);
+    }
+    if (initialParvHref && parvs.length > 0) {
+      const parv = parvs.find((p) => p.href === initialParvHref);
+      if (parv) {
+        setSelectedParv(parv);
+        setUparvs(parv.subitems || []);
       }
-    };
-  
-    const toggleDrawer = () => {
-      setIsDrawerOpen(!isDrawerOpen);
-    };
-  
-    const drawerStyle = {
-      position: "fixed",
-      top: 0,
-      left: isDrawerOpen ? 0 : "-250px", // Slide in from the left if isOpen is true
-      width: "250px",
-      height: "100%",
-      backgroundColor: "#fff",
-      boxShadow: "2px 0 5px rgba(0, 0, 0, 0.2)",
-      transition: "left 0.3s ease",
-    };
-  
-    const menuButtonStyle = {
-      color: "black",
-      padding: "10px",
-      borderRadius: "5px",
-      cursor: "pointer",
-    };
-  
-    const closeButtonStyle = {
-      bottom: "20px",
-      width: "100%",
-      marginTop: "10px",
-      left: "20px",
-      padding: "10px",
-      border: "none",
-      cursor: "pointer",
-    };
-  
-    const handleFileUpload = (event) => {
-      const file = event.target.files[0];
-      readFile(file);
-    };
-  
-    const readFile = (file) => {
-      const reader = new FileReader();
-      reader.onload = (event) => {
-        console.log("File read successfully", event.target.result);
-        setEpubFile(event.target.result);
-      };
-      reader.onerror = (error) => {
-        console.error("Error reading file", error);
-      };
-      reader.readAsArrayBuffer(file);
-    };
-  
-    const onLocationChanged = (loc) => {
-      setLocation(loc);
-    };
-  
-    const handleRendition = useCallback((rendition) => {
-      renditionRef.current = rendition;
-      renditionRef.current.on("relocated", (location) => {
-        console.log("Relocated to:", location);
-      });
-      renditionRef.current.on("displayError", (error) => {
-        console.error("Display Error:", error);
-      });
-      renditionRef.current.on("rendered", () => {
-        setLoading(false); // EPUB file is rendered, stop loading
-      });
-    }, []);
-  
-    const nextPage = () => {
-      if (renditionRef.current) {
-        renditionRef.current.next();
+    }
+    if (initialUparvHref && uparvs.length > 0) {
+      const uparv = uparvs.find((u) => u.href === initialUparvHref);
+      if (uparv) {
+        setSelectedUparv(uparv);
+        setChapters(uparv.subitems || []);
       }
-    };
-  
-    const prevPage = () => {
-      if (renditionRef.current) {
-        renditionRef.current.prev();
+    }
+    if (initialChapterHref && chapters.length > 0) {
+      const chapter = chapters.find((c) => c.href === initialChapterHref);
+      if (chapter) {
+        setSelectedChapter(chapter);
       }
+    }
+  }, [initialLocation, initialBookIndex, initialParvHref, initialUparvHref, initialChapterHref, books, parvs, uparvs, chapters]);
+
+  const onTocLoaded = (toc) => {
+    const books = toc.map((item, index) => ({
+      label: item.label,
+      href: item.href,
+      parvs: item.subitems || [],
+      index: index,
+    }));
+    setBooks(books);
+    if (initialBookIndex) {
+      const book = books[parseInt(initialBookIndex)];
+      if (book) {
+        setSelectedBook(book);
+        setParvs(book.parvs);
+      }
+    }
+  };
+
+  const handleBookChange = (book) => {
+    setSelectedBook(book);
+    setParvs(book.parvs);
+    setSelectedParv(null);
+    setUparvs([]);
+    setSelectedUparv(null);
+    setChapters([]);
+    navigate(`?loc=${book.href}&bookIndex=${book.index}`);
+  };
+
+  const goToPage = (pageNumber) => {
+    if (renditionRef.current && pageNumber) {
+      renditionRef.current.display(pageNumber);
+    }
+  };
+
+  const toggleDrawer = () => {
+    setIsDrawerOpen(!isDrawerOpen);
+  };
+
+  const drawerStyle = {
+    position: "fixed",
+    top: 0,
+    left: isDrawerOpen ? 0 : "-250px",
+    width: "250px",
+    height: "100%",
+    backgroundColor: "#fff",
+    boxShadow: "2px 0 5px rgba(0, 0, 0, 0.2)",
+    transition: "left 0.3s ease",
+  };
+
+  const menuButtonStyle = {
+    color: "black",
+    padding: "10px",
+    borderRadius: "5px",
+    cursor: "pointer",
+  };
+
+  const closeButtonStyle = {
+    bottom: "20px",
+    width: "100%",
+    marginTop: "10px",
+    left: "20px",
+    padding: "10px",
+    border: "none",
+    cursor: "pointer",
+  };
+
+  const handleFileUpload = (event) => {
+    const file = event.target.files[0];
+    readFile(file);
+  };
+
+  const readFile = (file) => {
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      setEpubFile(event.target.result);
     };
-  
-    const selectBook = (book) => {
-      setSelectedBook(book);
-      setParvs(book.parvs);
-      setSelectedParv(null);
-      setUparvs([]);
+    reader.onerror = (error) => {
+      console.error("Error reading file", error);
+    };
+    reader.readAsArrayBuffer(file);
+  };
+
+  const onLocationChanged = (loc) => {
+    setLocation(loc);
+    navigate(`?loc=${loc}&bookIndex=${selectedBook?.index || ""}&parvHref=${selectedParv?.href || ""}&uparvHref=${selectedUparv?.href || ""}&chapterHref=${selectedChapter?.href || ""}`);
+  };
+
+  const handleRendition = useCallback((rendition) => {
+    renditionRef.current = rendition;
+    renditionRef.current.on("relocated", (location) => {
+      console.log("Relocated to:", location);
+    });
+    renditionRef.current.on("displayError", (error) => {
+      console.error("Display Error:", error);
+    });
+    renditionRef.current.on("rendered", () => {
+      setLoading(false); // EPUB file is rendered, stop loading
+    });
+  }, []);
+
+  const nextPage = () => {
+    if (renditionRef.current) {
+      renditionRef.current.next();
+    }
+  };
+
+  const prevPage = () => {
+    if (renditionRef.current) {
+      renditionRef.current.prev();
+    }
+  };
+
+  const selectParv = (event) => {
+    const href = event.target.value;
+    const parv = parvs.find((p) => p.href === href);
+    setSelectedParv(parv);
+    if (parv && parv.subitems && parv.subitems.length > 0) {
+      setUparvs(parv.subitems);
       setSelectedUparv(null);
       setChapters([]);
-      goToChapter(book.href);
-    };
-  
-    const selectParv = (event) => {
-      const href = event.target.value;
-      const parv = parvs.find((p) => p.href === href);
-      setSelectedParv(parv);
-      if (parv && parv.subitems && parv.subitems.length > 0) {
-        setUparvs(parv.subitems);
-        setSelectedUparv(null);
-        setChapters([]);
-      } else {
-        setUparvs([]);
-        setSelectedUparv(null);
-        setChapters(parv ? parv.subitems || [] : []);
+    } else {
+      setUparvs([]);
+      setSelectedUparv(null);
+      setChapters(parv ? parv.subitems || [] : []);
+    }
+    navigate(`?loc=${href}&bookIndex=${selectedBook?.index || ""}&parvHref=${href}`);
+  };
+
+  const selectUparv = (event) => {
+    const href = event.target.value;
+    const uparv = uparvs.find((up) => up.href === href);
+    setSelectedUparv(uparv);
+    setChapters(uparv ? uparv.subitems || [] : []);
+    navigate(`?loc=${href}&bookIndex=${selectedBook?.index || ""}&parvHref=${selectedParv?.href || ""}&uparvHref=${href}`);
+  };
+
+  const selectChapter = (event) => {
+    const href = event.target.value;
+    setSelectedChapter(href);
+    navigate(`?loc=${href}&bookIndex=${selectedBook?.index || ""}&parvHref=${selectedParv?.href || ""}&uparvHref=${selectedUparv?.href || ""}&chapterHref=${href}`);
+  };
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (drawerRef.current && !drawerRef.current.contains(event.target) && isDrawerOpen) {
+        setIsDrawerOpen(false);
       }
-      goToChapter(href);
     };
-  
-    const selectUparv = (event) => {
-      const href = event.target.value;
-      const uparv = uparvs.find((up) => up.href === href);
-      setSelectedUparv(uparv);
-      setChapters(uparv ? uparv.subitems || [] : []);
-      goToChapter(href);
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
     };
-  
-    const selectChapter = (event) => {
-      const href = event.target.value;
-      setSelectedChapter(href);
-      goToChapter(href);
-    };
-  
-    const goToChapter = (href) => {
-      console.log("Navigating to chapter:", href);
-      setLocation(href);
-    };
-  
-    const drawerRef = useRef(null);
-  
-    useEffect(() => {
-      const handleClickOutside = (event) => {
-        if (drawerRef.current && !drawerRef.current.contains(event.target) && isDrawerOpen) {
-          setIsDrawerOpen(false);
+  }, [isDrawerOpen]);
+
+  const drawerRef = useRef(null);
+
+  const [progress, setProgress] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setProgress((prevProgress) => {
+        if (prevProgress < 100) {
+          return Math.min(prevProgress + 1, 100); // Increment by 0.5
+        } else {
+          clearInterval(interval);
+          setLoading(false); // Optionally, set loading to false when done
+          return prevProgress;
         }
-      };
-  
-      document.addEventListener("mousedown", handleClickOutside);
-      return () => {
-        document.removeEventListener("mousedown", handleClickOutside);
-      };
-    }, [isDrawerOpen]);
-  
-    const [progress, setProgress] = useState(0);
-  
-    useEffect(() => {
-      const interval = setInterval(() => {
-        setProgress((prevProgress) => {
-          if (prevProgress < 100) {
-            return Math.min(prevProgress + 1, 100); // Increment by 0.5
-          } else {
-            clearInterval(interval);
-            setLoading(false); // Optionally, set loading to false when done
-            return prevProgress;
-          }
-        });
-      }, 100); // 100ms interval for slower progress
-  
-      return () => clearInterval(interval);
-    }, []);
+      });
+    }, 100); // 100ms interval for slower progress
+
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <div>
       <div className="bg-[#f0d1a2]">
@@ -307,7 +335,7 @@ function Ramcharitmanas() {
                 {books.map((book, index) => (
                   <button
                     key={index}
-                    onClick={() => selectBook(book)}
+                    onClick={() => handleBookChange(book)}
                     style={{
                       cursor: "pointer",
                       fontWeight: book === selectedBook ? "bold" : "normal",
@@ -427,7 +455,11 @@ function Ramcharitmanas() {
                         <select
                           className="border-2 px-[10px] py-2 rounded-[7px] bg-orange-100 border-gray-400"
                           value={selectedBook ? selectedBook.label : ""}
-                          onChange={handleBookChange}
+                          onChange={(e) => {
+                            const selectedLabel = e.target.value;
+                            const selectedBook = books.find((book) => book.label === selectedLabel);
+                            handleBookChange(selectedBook);
+                          }}
                           style={{
                             fontSize: "14px",
                             width: "250px",
