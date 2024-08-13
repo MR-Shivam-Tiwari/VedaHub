@@ -165,7 +165,7 @@ function RamayanaHindi() {
                 <div className="text-2xl bg-orange-400 border-orange-400 shadow-sm h-8 px-4 pt-1 rounded flex border justify-center items-center gap-1 annapurna-sil-bold font-semibold mb-2">
                   {item.Kand} - <span className=" "> Sarg - ({item.Sarg})</span>
                 </div>
-              </div>
+              </div>        
               <div
                 className="text-lg whitespace-pre-wrap mt-5 text-gray-700 font-bold annapurna-sil-bold text-center"
                 dangerouslySetInnerHTML={{
